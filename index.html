@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الدرع السيبراني - حماية متكاملة من الاختراقات</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap');
+        
+        :root {
+            --primary: #00ff00;
+            --secondary: #0066ff;
+            --dark: #000000;
+            --light: #ffffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark);
+            color: var(--primary);
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 255, 0, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(0, 102, 255, 0.05) 0%, transparent 20%);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* شاشة الهكر المتحركة */
+        .hacker-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.15;
+            pointer-events: none;
+        }
+        
+        /* التنقل */
+        header {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--primary);
+            position: relative;
+            z-index: 10;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo::before {
+            content: ">>_";
+            margin-left: 5px;
+            animation: blink 1s infinite;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-right: 20px;
+        }
+        
+        .nav-links a {
+            color: var(--primary);
+            text-decoration: none;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* الأقسام */
+        section {
+            padding: 60px 0;
+            border-bottom: 1px solid rgba(0, 255, 0, 0.2);
+        }
+        
+        .section-title {
+            font-size: 32px;
+            margin-bottom: 30px;
+            color: var(--secondary);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+        
+        /* بطاقات التطبيقات */
+        .apps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .app-card {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--primary);
+            border-radius: 5px;
+            padding: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .app-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 255, 0, 0.3);
+        }
+        
+        .app-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 255, 0, 0.1), rgba(0, 102, 255, 0.1));
+            z-index: -1;
+        }
+        
+        .app-card h3 {
+            color: var(--secondary);
+            margin-bottom: 10px;
+        }
+        
+        .app-card p {
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        
+        .download-btn {
+            display: inline-block;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: var(--dark);
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: opacity 0.3s;
+        }
+        
+        .download-btn:hover {
+            opacity: 0.8;
+        }
+        
+        /* قسم التعليمات */
+        .tutorial {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--secondary);
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        
+        .tutorial h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .tutorial ol, .tutorial ul {
+            margin-right: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .tutorial li {
+            margin-bottom: 10px;
+        }
+        
+        .code-block {
+            background: rgba(0, 0, 0, 0.7);
+            border-left: 3px solid var(--primary);
+            padding: 15px;
+            margin: 15px 0;
+            overflow-x: auto;
+            font-family: monospace;
+        }
+        
+        /* نموذج التواصل */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--secondary);
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--primary);
+            color: var(--light);
+            border-radius: 5px;
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: var(--dark);
+            border: none;
+            padding: 12px 25px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: opacity 0.3s;
+        }
+        
+        .submit-btn:hover {
+            opacity: 0.8;
+        }
+        
+        /* التذييل */
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            color: var(--secondary);
+            font-size: 14px;
+        }
+        
+        .warning {
+            background: rgba(255, 0, 0, 0.1);
+            border: 1px solid rgba(255, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 5px;
+            margin: 30px 0;
+        }
+        
+        .warning h3 {
+            color: #ff0000;
+            margin-bottom: 10px;
+        }
+        
+        /* الرسوم المتحركة */
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
+        @keyframes scanline {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+        
+        /* التكيف مع الأجهزة المحمولة */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            section {
+                padding: 40px 0;
+            }
+            
+            .section-title {
+                font-size: 28px;
+            }
+            
+            .apps-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- شاشة الهكر المتحركة -->
+    <div class="hacker-screen" id="hackerScreen"></div>
+    
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">الدرع السيبراني</a>
+                <ul class="nav-links">
+                    <li><a href="#apps">التطبيقات</a></li>
+                    <li><a href="#firewall">جدار الحماية</a></li>
+                    <li><a href="#protection">نصائح الحماية</a></li>
+                    <li><a href="#contact">التواصل</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <main class="container">
+        <section id="apps">
+            <h2 class="section-title">تطبيقات الحماية</h2>
+            <p>قم بتنزيل أفضل تطبيقات الحماية السيبرانية لتأمين جهازك ضد الاختراقات والبرمجيات الخبيثة.</p>
+            
+            <div class="apps-grid">
+                <div class="app-card">
+                    <h3>Malwarebytes</h3>
+                    <p>برنامج متخصص في اكتشاف وإزالة البرمجيات الخبيثة والفيروسات.</p>
+                    <a href="#" class="download-btn">تحميل</a>
+                </div>
+                
+                <div class="app-card">
+                    <h3>Bitdefender</h3>
+                    <p>أحد أقوى مضادات الفيروسات مع حماية في الوقت الحقيقي.</p>
+                    <a href="#" class="download-btn">تحميل</a>
+                </div>
+                
+                <div class="app-card">
+                    <h3>NordVPN</h3>
+                    <p>خدمة VPN قوية لحماية خصوصيتك على الإنترنت.</p>
+                    <a href="#" class="download-btn">تحميل</a>
+                </div>
+                
+                <div class="app-card">
+                    <h3>Wireshark</h3>
+                    <p>أداة تحليل حركة الشبكة لاكتشاف الاختراقات.</p>
+                    <a href="#" class="download-btn">تحميل</a>
+                </div>
+                
+                <div class="app-card">
+                    <h3>KeePass</h3>
+                    <p>مدير كلمات مرور آمن لتخزين بيانات الاعتماد الخاصة بك.</p>
+                    <a href="#" class="download-btn">تحميل</a>
+                </div>
+                
+                <div class="app-card">
+                    <h3>GlassWire</h3>
+                    <p>مراقبة نشاط الشبكة وكشف التطبيقات المشبوهة.</p>
+                    <a href="#" class="download-btn">تحميل</a>
+                </div>
+            </div>
+        </section>
+        
+        <section id="firewall">
+            <h2 class="section-title">برمجة جدار ناري</h2>
+            <p>تعلم كيفية إنشاء جدار حماية بسيط باستخدام لغة Python لحماية جهازك.</p>
+            
+            <div class="tutorial">
+                <h3>جدار الحماية الأساسي باستخدام Python</h3>
+                <ol>
+                    <li>قم بتثبيت Python على جهازك إذا لم يكن مثبتاً</li>
+                    <li>افتح محرر النصوص أو بيئة التطوير المفضلة لديك</li>
+                    <li>انسخ الكود التالي:</li>
+                </ol>
+                
+                <div class="code-block">
+                    <pre>
+import socket
+import sys
+from datetime import datetime
+
+# إعداد جدار الحماية البسيط
+class SimpleFirewall:
+    def __init__(self):
+        self.allowed_ports = [80, 443]  # المنافذ المسموحة (HTTP, HTTPS)
+        self.blocked_ips = []  # عناوين IP المحظورة
+        
+    def check_packet(self, ip, port):
+        if ip in self.blocked_ips:
+            return False
+        if port not in self.allowed_ports:
+            return False
+        return True
+
+# استخدام الجدار الناري
+if __name__ == "__main__":
+    firewall = SimpleFirewall()
+    
+    # إضافة عنوان IP إلى القائمة السوداء (مثال)
+    firewall.blocked_ips.append("192.168.1.100")
+    
+    # محاكاة حركة مرور
+    test_ip = "192.168.1.101"
+    test_port = 80
+    
+    if firewall.check_packet(test_ip, test_port):
+        print(f"السماح بالاتصال من {test_ip} عبر المنفذ {test_port}")
+    else:
+        print(f"حظر الاتصال من {test_ip} عبر المنفذ {test_port}")
+                    </pre>
+                </div>
+                
+                <p>هذا مثال بسيط لجدار حماية يمكنك تطويره بإضافة المزيد من الميزات مثل:</p>
+                <ul>
+                    <li>تسجيل محاولات الاتصال المشبوهة</li>
+                    <li>كشف هجمات DDoS الأساسية</li>
+                    <li>حظر نطاقات عناوين IP كاملة</li>
+                </ul>
+            </div>
+        </section>
+        
+        <section id="protection">
+            <h2 class="section-title">نصائح للحماية من الاختراقات</h2>
+            
+            <div class="tutorial">
+                <h3>10 نصائح أساسية لأمانك السيبراني</h3>
+                <ol>
+                    <li>استخدم كلمات مرور قوية وفريدة لكل حساب</li>
+                    <li>فعّل المصادقة الثنائية (2FA) حيثما أمكن</li>
+                    <li>حافظ على تحديث نظام التشغيل والتطبيقات</li>
+                    <li>تجنب استخدام شبكات Wi-Fi العامة للعمليات الحساسة</li>
+                    <li>احذر من رسائل البريد الإلكتروني والروابط المشبوهة</li>
+                    <li>استخدم برنامج مكافحة فيروسات موثوق به</li>
+                    <li>قم بعمل نسخ احتياطية منتظمة لبياناتك المهمة</li>
+                    <li>قلل من مشاركة المعلومات الشخصية على الإنترنت</li>
+                    <li>استخدم اتصال VPN عند التعامل مع بيانات حساسة</li>
+                    <li>تعلم أساسيات الأمن السيبراني لزيادة وعيك</li>
+                </ol>
+            </div>
+            
+            <div class="warning">
+                <h3>تحذير قانوني</h3>
+                <p>أي محاولة لاختراق أو ابتزاز الأفراد تعتبر جريمة يعاقب عليها القانون. قد تتعرض لعقوبات مالية وسجن حسب التشريعات المحلية والدولية. نحن لا نتحمل أي مسؤولية عن أي استخدام غير قانوني للمعلومات المقدمة على هذا الموقع.</p>
+            </div>
+        </section>
+        
+        <section id="contact">
+            <h2 class="section-title">التواصل مع محمد</h2>
+            
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">الاسم الكامل</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">البريد الإلكتروني</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">الموضوع</label>
+                        <input type="text" id="subject" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">الرسالة</label>
+                        <textarea id="message" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">إرسال الرسالة</button>
+                </form>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>© 2023 الدرع السيبراني. جميع الحقوق محفوظة.</p>
+            <p>هذا الموقع لأغراض تعليمية وتوعوية فقط.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // شاشة الهكر المتحركة
+        const hackerScreen = document.getElementById('hackerScreen');
+        const chars = "01ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?/";
+        
+        function createMatrix() {
+            hackerScreen.innerHTML = '';
+            const width = hackerScreen.offsetWidth;
+            const height = hackerScreen.offsetHeight;
+            const fontSize = 14;
+            const columns = Math.floor(width / fontSize);
+            
+            for (let i = 0; i < columns; i++) {
+                const column = document.createElement('div');
+                column.style.position = 'absolute';
+                column.style.top = '-50px';
+                column.style.left = (i * fontSize) + 'px';
+                column.style.width = fontSize + 'px';
+                column.style.fontFamily = 'monospace';
+                column.style.fontSize = fontSize + 'px';
+                column.style.color = 'rgba(0, 255, 0, 0.8)';
+                column.style.textAlign = 'center';
+                column.style.whiteSpace = 'nowrap';
+                column.style.writingMode = 'vertical-rl';
+                column.style.textOrientation = 'mixed';
+                
+                hackerScreen.appendChild(column);
+                animateColumn(column, height);
+            }
+        }
+        
+        function animateColumn(column, maxHeight) {
+            let position = 0;
+            const delay = Math.random() * 2000;
+            const speed = 50 + Math.random() * 100;
+            const length = 5 + Math.floor(Math.random() * 15);
+            
+            setTimeout(() => {
+                const interval = setInterval(() => {
+                    position += 1;
+                    
+                    if (position > maxHeight / 14 + length) {
+                        clearInterval(interval);
+                        column.remove();
+                        return;
+                    }
+                    
+                    let text = '';
+                    for (let i = 0; i < length; i++) {
+                        const charPos = Math.floor(Math.random() * chars.length);
+                        text += chars[charPos] + '<br>';
+                    }
+                    
+                    column.style.top = (position * 14) + 'px';
+                    column.innerHTML = text;
+                    
+                    // تدرج اللون للأحرف
+                    const opacity = 1 - (position / (maxHeight / 14 + length));
+                    column.style.color = `rgba(0, 255, 0, ${opacity})`;
+                }, speed);
+            }, delay);
+        }
+        
+        // إعادة إنشاء المصفوفة عند تغيير حجم النافذة
+        window.addEventListener('resize', createMatrix);
+        
+        // بدء المصفوفة عند تحميل الصفحة
+        window.addEventListener('load', () => {
+            createMatrix();
+            setInterval(createMatrix, 10000);
+        });
+        
+        // معالجة نموذج التواصل
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('تم إرسال رسالتك بنجاح. سيتواصل معك محمد قريباً.');
+            this.reset();
+        });
+    </script>
+</body>
+<!-- وضع الصيانة المتقدم -->
+<div id="cyber-maintenance" style="display:none;">
+  <div class="maintenance-overlay">
+    <div class="cyber-container">
+      <h1 class="cyber-title" data-text="الموقع_تحت_الصيانة">الموقع تحت الصيانة</h1>
+      
+      <div class="cyber-progress">
+        <div class="progress-bar"></div>
+      </div>
+      
+      <div class="cyber-message">
+        <p>نقوم بتنفيذ تحديثات أمنية لتحسين أداء الموقع</p>
+        <p>العودة المتوقعة خلال <span class="countdown">24:00:00</span></p>
+      </div>
+      
+      <div class="cyber-contacts">
+        <a href="mailto:support@example.com" class="cyber-btn">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          تواصل معنا
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+/* تصميم الصيانة السيبراني */
+#cyber-maintenance {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 99999;
+  font-family: 'Tajawal', sans-serif;
+}
+
+.maintenance-overlay {
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cyber-container {
+  text-align: center;
+  max-width: 800px;
+  padding: 30px;
+  position: relative;
+}
+
+.cyber-title {
+  color: transparent;
+  font-size: 4em;
+  margin-bottom: 30px;
+  position: relative;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  background: linear-gradient(90deg, #000, #0ff, #000);
+  background-size: 80% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: shine 3s linear infinite;
+}
+
+.cyber-title::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  color: rgba(0,255,255,0.1);
+  z-index: -1;
+}
+
+.cyber-progress {
+  width: 100%;
+  height: 10px;
+  background: rgba(0,255,255,0.1);
+  margin: 40px 0;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, #0f0, #0ff);
+  animation: progress 5s infinite alternate;
+}
+
+.cyber-message {
+  color: #0ff;
+  font-size: 1.5em;
+  line-height: 1.6;
+  margin: 30px 0;
+  text-shadow: 0 0 10px rgba(0,255,255,0.3);
+}
+
+.countdown {
+  color: #0f0;
+  font-weight: bold;
+}
+
+.cyber-btn {
+  position: relative;
+  display: inline-block;
+  padding: 15px 30px;
+  margin: 20px 0;
+  color: #0ff;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 1.2em;
+  overflow: hidden;
+  transition: 0.5s;
+  border: 1px solid rgba(0,255,255,0.5);
+}
+
+.cyber-btn:hover {
+  background: #0ff;
+  color: #000;
+  box-shadow: 0 0 10px #0ff,
+              0 0 20px #0ff,
+              0 0 40px #0ff;
+}
+
+.cyber-btn span {
+  position: absolute;
+  display: block;
+}
+
+.cyber-btn span:nth-child(1) {
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #0ff);
+  animation: btn-anim1 2s linear infinite;
+}
+
+@keyframes shine {
+  0% { background-position: -500% 0; }
+  100% { background-position: 500% 0; }
+}
+
+@keyframes progress {
+  0% { width: 0%; }
+  50% { width: 70%; }
+  100% { width: 100%; }
+}
+
+@keyframes btn-anim1 {
+  0% { left: -100%; }
+  50%,100% { left: 100%; }
+}
+</style>
+
+<script>
+// تفعيل وضع الصيانة تلقائياً
+document.getElementById('cyber-maintenance').style.display = 'block';
+
+// عدّاد تنازلي (24 ساعة)
+function startCountdown() {
+  let countdown = 24 * 60 * 60; // 24 ساعة بالثواني
+  const element = document.querySelector('.countdown');
+  
+  const timer = setInterval(() => {
+    const hours = Math.floor(countdown / 3600);
+    const minutes = Math.floor((countdown % 3600) / 60);
+    const seconds = countdown % 60;
+    
+    element.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    
+    if (countdown <= 0) {
+      clearInterval(timer);
+      element.textContent = "تم الانتهاء من الصيانة!";
+    } else {
+      countdown--;
+    }
+  }, 1000);
+}
+
+startCountdown();
+</script>
+</html>
