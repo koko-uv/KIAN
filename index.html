@@ -36,15 +36,13 @@
             text-align: center;
             overflow: hidden;
             position: relative;
-            /* Cyberpunk city background (simulated or via image if available) */
             background-image:
                 radial-gradient(circle at 10% 20%, rgba(0, 255, 0, 0.08) 0%, transparent 25%),
                 radial-gradient(circle at 90% 80%, rgba(0, 102, 255, 0.08) 0%, transparent 25%),
                 linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)),
-                url('https://source.unsplash.com/random/1920x1080/?cyberpunk,city,night,futuristic') no-repeat center center / cover; /* Placeholder for cyberpunk city image */
+                url('https://source.unsplash.com/random/1920x1080/?cyberpunk,city,night,futuristic') no-repeat center center / cover;
         }
 
-        /* Overlay for darkness and grid effect */
         body::before {
             content: '';
             position: absolute;
@@ -64,16 +62,15 @@
             border: 2px solid var(--primary-neon);
             border-radius: 20px;
             padding: 50px;
-            box-shadow: 0 0 50px var(--primary-neon); /* Glow effect */
+            box-shadow: 0 0 50px var(--primary-neon);
             max-width: 700px;
             width: 90%;
-            z-index: 1; /* Above background */
+            z-index: 1;
             animation: fadeIn 1.5s ease-out, glow-pulse 3s infinite alternate;
             position: relative;
-            overflow: hidden; /* For inner glow/lines */
+            overflow: hidden;
         }
 
-        /* Animated lines/circuitry inside the container */
         .maintenance-container::before, .maintenance-container::after {
             content: '';
             position: absolute;
@@ -158,52 +155,13 @@
             margin-right: auto;
         }
 
-        .contact-info {
-            margin-top: 40px;
-            border-top: 1px dashed var(--secondary-blue);
-            padding-top: 30px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .contact-info span {
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 1.6em;
-            color: var(--secondary-blue);
-            margin-bottom: 15px;
-            text-shadow: 0 0 10px var(--secondary-blue);
-        }
-
-        .contact-link {
-            display: inline-block;
-            background: linear-gradient(90deg, var(--primary-neon), var(--accent-purple));
-            color: var(--dark-background);
-            padding: 15px 35px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.2em;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 20px rgba(0, 255, 0, 0.7);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border: 1px solid var(--primary-neon);
-        }
-
-        .contact-link:hover {
-            transform: translateY(-8px) scale(1.05);
-            box-shadow: 0 5px 35px rgba(0, 255, 255, 1);
-            background: linear-gradient(90deg, var(--secondary-blue), var(--primary-neon));
-            border-color: var(--secondary-blue);
-        }
-
         .note-text {
             margin-top: 30px;
-            font-size: 1em;
+            font-size: 1.1em; /* Increased font size slightly */
             color: var(--accent-purple);
-            opacity: 0.7;
+            opacity: 0.8; /* Increased opacity slightly */
             font-family: 'Share Tech Mono', monospace;
+            text-shadow: 0 0 8px var(--accent-purple); /* Added a subtle glow */
         }
 
         /* Mobile Responsiveness */
@@ -218,12 +176,8 @@
             p {
                 font-size: 1.1em;
             }
-            .contact-info span {
-                font-size: 1.3em;
-            }
-            .contact-link {
-                padding: 12px 25px;
-                font-size: 1em;
+            .note-text {
+                font-size: 0.9em;
             }
         }
 
@@ -234,12 +188,8 @@
             p {
                 font-size: 0.9em;
             }
-            .contact-info span {
-                font-size: 1.1em;
-            }
-            .contact-link {
-                padding: 10px 20px;
-                font-size: 0.9em;
+            .note-text {
+                font-size: 0.8em;
             }
         }
     </style>
@@ -249,12 +199,7 @@
         <h1>[SYSTEM OFFLINE]</h1>
         <p>عذراً، نظام "هجمة" يخضع حالياً لأعمال صيانة مكثفة وتحديثات أمنية حرجة.</p>
         <p>نعمل بجد لضمان أقصى درجات الحماية والأداء عند عودتنا للخدمة.</p>
-        <div class="contact-info">
-            <span>للدعم الفني العاجل أو الاستفسارات:</span>
-            <span style="color: var(--primary-neon); font-size: 2em; text-shadow: 0 0 15px var(--primary-neon);">📞 0795375696</span>
-            <a href="tel:+962795375696" class="contact-link" style="margin-top: 20px;">اتصل بمحمد الآن</a>
-        </div>
-        <p class="note-text">شكرًا لتفهمكم. سيعود الدرع السيبراني أقوى من ذي قبل.</p>
+        <p class="note-text">شكرًا لتفهمكم وصبركم. سيعود الدرع السيبراني أقوى من ذي قبل.</p>
     </div>
 </body>
 </html>
