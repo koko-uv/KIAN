@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الموقع تحت الصيانة | نظام سيبيراني</title>
+    <title>الموقع تحت الصيانة</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap');
         
         :root {
-            --neon-blue: #0ff0fc;
-            --neon-purple: #9600ff;
-            --dark-bg: #0a0a20;
+            --neon-green: #00ff9d;
+            --neon-blue: #00a1ff;
+            --dark-bg: #0a0a12;
         }
         
         * {
@@ -29,8 +29,8 @@
             justify-content: center;
             align-items: center;
             background-image: 
-                radial-gradient(circle at 25% 25%, rgba(150, 0, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 75% 75%, rgba(0, 255, 252, 0.1) 0%, transparent 50%);
+                radial-gradient(circle at 25% 25%, rgba(0, 255, 157, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(0, 161, 255, 0.05) 0%, transparent 50%);
             overflow: hidden;
         }
         
@@ -38,222 +38,238 @@
             text-align: center;
             position: relative;
             z-index: 10;
-            padding: 2rem;
-            border: 2px solid var(--neon-blue);
-            border-radius: 10px;
-            box-shadow: 0 0 20px var(--neon-blue), 
-                        inset 0 0 20px var(--neon-blue);
-            background-color: rgba(10, 10, 32, 0.8);
+            padding: 3rem;
+            border: 1px solid var(--neon-green);
+            border-radius: 5px;
+            box-shadow: 0 0 30px var(--neon-green), 
+                        inset 0 0 20px var(--neon-green);
+            background-color: rgba(10, 10, 18, 0.9);
             max-width: 800px;
             margin: 0 auto;
+            animation: border-pulse 3s infinite alternate;
+        }
+        
+        @keyframes border-pulse {
+            0% { box-shadow: 0 0 30px var(--neon-green), inset 0 0 20px var(--neon-green); }
+            100% { box-shadow: 0 0 50px var(--neon-blue), inset 0 0 30px var(--neon-blue); }
         }
         
         h1 {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
-            color: var(--neon-blue);
-            text-shadow: 0 0 10px var(--neon-blue);
+            font-size: 4rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(90deg, var(--neon-green), var(--neon-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             font-weight: 900;
+            letter-spacing: 2px;
         }
         
         p {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             margin-bottom: 2rem;
-            line-height: 1.6;
+            line-height: 1.8;
+            color: #ccc;
         }
         
         .progress-container {
             width: 100%;
-            height: 20px;
+            height: 10px;
             background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            margin: 2rem 0;
+            border-radius: 5px;
+            margin: 3rem 0;
             overflow: hidden;
         }
         
         .progress-bar {
             height: 100%;
-            width: 65%;
-            background: linear-gradient(90deg, var(--neon-purple), var(--neon-blue));
-            border-radius: 10px;
+            width: 35%;
+            background: linear-gradient(90deg, var(--neon-green), var(--neon-blue));
+            border-radius: 5px;
             position: relative;
-            animation: progress-animation 2s infinite alternate, 
-                       color-shift 3s infinite alternate;
+            animation: progress-animation 4s infinite ease-in-out;
         }
         
         @keyframes progress-animation {
-            0% { width: 65%; }
-            100% { width: 68%; }
+            0% { width: 35%; }
+            50% { width: 38%; }
+            100% { width: 35%; }
         }
         
-        @keyframes color-shift {
-            0% { filter: hue-rotate(0deg); }
-            100% { filter: hue-rotate(20deg); }
-        }
-        
-        .cyber-grid {
+        .scanlines {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
-                linear-gradient(rgba(0, 255, 252, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 255, 252, 0.05) 1px, transparent 1px);
-            background-size: 50px 50px;
-            z-index: 1;
+            background: repeating-linear-gradient(
+                to bottom,
+                transparent,
+                transparent 3px,
+                rgba(0, 255, 157, 0.05) 3px,
+                rgba(0, 255, 157, 0.05) 4px
+            );
+            pointer-events: none;
+            z-index: 2;
         }
         
-        .glowing-circle {
+        .corner {
             position: absolute;
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            background: radial-gradient(circle, var(--neon-purple), transparent 70%);
-            filter: blur(30px);
-            animation: move-circle 15s infinite alternate;
-            opacity: 0.5;
+            width: 50px;
+            height: 50px;
+            border: 2px solid var(--neon-green);
+            pointer-events: none;
         }
         
-        @keyframes move-circle {
-            0% { transform: translate(-50%, -50%); }
-            25% { transform: translate(50%, -30%); }
-            50% { transform: translate(20%, 40%); }
-            75% { transform: translate(-30%, 30%); }
-            100% { transform: translate(-10%, -20%); }
+        .corner-tl {
+            top: 20px;
+            left: 20px;
+            border-right: none;
+            border-bottom: none;
+        }
+        
+        .corner-tr {
+            top: 20px;
+            right: 20px;
+            border-left: none;
+            border-bottom: none;
+        }
+        
+        .corner-bl {
+            bottom: 20px;
+            left: 20px;
+            border-right: none;
+            border-top: none;
+        }
+        
+        .corner-br {
+            bottom: 20px;
+            right: 20px;
+            border-left: none;
+            border-top: none;
         }
         
         .countdown {
-            font-size: 1.5rem;
-            margin-top: 1rem;
-            color: var(--neon-blue);
+            font-size: 1.8rem;
+            margin: 2rem 0;
+            background: linear-gradient(90deg, var(--neon-green), var(--neon-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 700;
         }
         
-        .social-icons {
-            margin-top: 2rem;
-        }
-        
-        .social-icons a {
-            color: white;
-            font-size: 1.5rem;
-            margin: 0 10px;
-            transition: color 0.3s;
-        }
-        
-        .social-icons a:hover {
-            color: var(--neon-blue);
-        }
-        
-        .binary-code {
+        .matrix-rain {
             position: absolute;
-            color: rgba(0, 255, 252, 0.2);
-            font-size: 0.8rem;
-            animation: scroll-up 20s linear infinite;
-            user-select: none;
-            z-index: 0;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+            opacity: 0.3;
         }
         
-        @keyframes scroll-up {
-            0% { transform: translateY(100vh); }
-            100% { transform: translateY(-100%); }
+        .matrix-column {
+            position: absolute;
+            top: 0;
+            width: 20px;
+            height: 100%;
+            color: var(--neon-green);
+            font-size: 18px;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            animation: matrix-fall linear infinite;
+        }
+        
+        @keyframes matrix-fall {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100vh); }
+        }
+        
+        .warning {
+            color: #ff5555;
+            font-weight: bold;
+            margin-top: 1rem;
+            animation: blink 1.5s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
         }
     </style>
 </head>
 <body>
-    <div class="cyber-grid"></div>
-    <div class="glowing-circle" style="top: 20%; left: 30%;"></div>
-    <div class="glowing-circle" style="top: 70%; left: 70%; animation-delay: 5s;"></div>
+    <div class="scanlines"></div>
+    <div class="corner corner-tl"></div>
+    <div class="corner corner-tr"></div>
+    <div class="corner corner-bl"></div>
+    <div class="corner corner-br"></div>
     
-    <div class="binary-code" style="left: 10%;">01001000 01110100 01101101 01101100 00100000 01000011 01110011 01110011</div>
-    <div class="binary-code" style="left: 25%; animation-delay: 3s;">01010011 01111001 01110011 01110100 01100101 01101101 00100000 01001101 01100001 01101001 01101110 01110100 01100101 01101110 01100001 01101110 01100011 01100101</div>
-    <div class="binary-code" style="left: 65%; animation-delay: 7s;">01000011 01111001 01100010 01100101 01110010 00100000 01000100 01100101 01110011 01101001 01100111 01101110</div>
-    <div class="binary-code" style="left: 80%; animation-delay: 10s;">01010011 01101001 01110100 01100101 00100000 01010111 01101001 01101100 01101100 00100000 01000010 01100101 00100000 01000010 01100001 01100011 01101011 00100000 01010011 01101111 01101111 01101110</div>
+    <div class="matrix-rain" id="matrixRain"></div>
     
     <div class="container">
-        <h1>نظام الصيانة السيبيراني</h1>
-        <p>الموقع حاليًا تحت التطوير والتحسين ضمن نظام الصيانة السيبيراني المتقدم. نحن نعمل على تحسين تجربتك وتقديم محتوى أكثر تطورًا.</p>
+        <h1>الموقع تحت الصيانة</h1>
+        <p>نحن نقوم حاليًا بإجراء تحديثات كبيرة على الموقع لتحسين تجربة المستخدم وإضافة ميزات جديدة.</p>
+        <p class="warning">مدة الصيانة قد تكون طويلة بسبب حجم التحديثات الجوهرية</p>
         
         <div class="progress-container">
             <div class="progress-bar"></div>
         </div>
         
-        <p>نسبة الإنجاز: <span id="progress-percentage">65%</span></p>
-        
         <div class="countdown">
-            <p>الوقت المتبقي: <span id="countdown">48:22:15</span></p>
+            <p>الوقت المتبقي: <span id="countdown">7 أيام 12:45:22</span></p>
         </div>
         
-        <div class="social-icons">
-            <a href="#" target="_blank">📱</a>
-            <a href="#" target="_blank">💻</a>
-            <a href="#" target="_blank">📧</a>
-            <a href="#" target="_blank">🔗</a>
-        </div>
+        <p>نعتذر للإزعاج ونشكركم على صبركم. سنعود أقوى وأفضل!</p>
     </div>
 
     <script>
-        // تحديث العداد التنازلي
+        // إنشاء تأثير المطر الرقمي (Matrix)
+        function createMatrixRain() {
+            const matrixRain = document.getElementById('matrixRain');
+            const chars = "01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン";
+            
+            for (let i = 0; i < 30; i++) {
+                const column = document.createElement('div');
+                column.className = 'matrix-column';
+                column.style.left = `${Math.random() * 100}%`;
+                column.style.animationDuration = `${5 + Math.random() * 15}s`;
+                column.style.animationDelay = `${Math.random() * 5}s`;
+                
+                let content = '';
+                for (let j = 0; j < 50; j++) {
+                    content += chars[Math.floor(Math.random() * chars.length)];
+                }
+                
+                column.textContent = content;
+                matrixRain.appendChild(column);
+            }
+        }
+        
+        // تحديث العداد التنازلي لمدة طويلة
         function updateCountdown() {
             const targetDate = new Date();
-            targetDate.setDate(targetDate.getDate() + 2); // إضافة يومين للتاريخ الحالي
+            targetDate.setDate(targetDate.getDate() + 7); // إضافة أسبوع للتاريخ الحالي
             
             const now = new Date();
             const diff = targetDate - now;
             
-            const hours = Math.floor(diff / (1000 * 60 * 60));
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((diff % (1000 * 60)) / 1000);
             
             document.getElementById('countdown').textContent = 
-                `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-        }
-        
-        // تحديث شريط التقدم بشكل عشوائي
-        function updateProgress() {
-            const progressBar = document.querySelector('.progress-bar');
-            const progressPercentage = document.getElementById('progress-percentage');
-            
-            let progress = 65;
-            const interval = setInterval(() => {
-                progress += Math.random() * 0.2;
-                if (progress >= 100) {
-                    progress = 100;
-                    clearInterval(interval);
-                }
-                
-                progressBar.style.width = `${progress}%`;
-                progressPercentage.textContent = `${Math.floor(progress)}%`;
-            }, 1000);
-        }
-        
-        // إنشاء أكواد ثنائية عشوائية
-        function createBinaryCodes() {
-            const container = document.body;
-            
-            for (let i = 0; i < 10; i++) {
-                const binary = document.createElement('div');
-                binary.className = 'binary-code';
-                binary.style.left = `${Math.random() * 100}%`;
-                binary.style.animationDelay = `${Math.random() * 15}s`;
-                
-                let binaryText = '';
-                for (let j = 0; j < 10; j++) {
-                    binaryText += Math.random() > 0.5 ? '1' : '0';
-                    if (j % 4 === 3) binaryText += ' ';
-                }
-                
-                binary.textContent = binaryText.trim();
-                container.appendChild(binary);
-            }
+                `${days} أيام ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
         }
         
         // بدء جميع الوظائف
         window.onload = function() {
+            createMatrixRain();
             updateCountdown();
             setInterval(updateCountdown, 1000);
-            
-            updateProgress();
-            createBinaryCodes();
         };
     </script>
 </body>
