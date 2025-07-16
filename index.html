@@ -1,25 +1,22 @@
 <!DOCTYPE html>
-< lang="ar" dir="rtl">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>هجمة - الدرع السيبراني ضد الاختراقات والابتزازات</title>
+    <title>صيانة مؤقتة - هجمة | الدرع السيبراني</title>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%2300FF00' d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z'/%3E%3C/svg%3E" type="image/svg+xml">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&family=Share+Tech+Mono&display=swap');
 
         :root {
-            --primary: #00ff00; /* أخضر نيون */
-            --secondary: #0066ff; /* أزرق سيبراني */
-            --accent: #ff00ff; /* بنفسجي/وردي للتأكيد */
-            --dark: #000000;
-            --light: #e0e0e0;
-            --dark-bg-alpha: rgba(0, 0, 0, 0.8);
-            --card-bg: rgba(0, 10, 20, 0.7);
-            --border-glow: rgba(0, 255, 255, 0.3);
-            --chat-bg: rgba(0, 5, 10, 0.95); /* خلفية نافذة الشات */
-            --chat-header: rgba(0, 50, 100, 0.9); /* خلفية رأس الشات */
-            --chat-input: rgba(0, 15, 30, 0.9); /* خلفية حقل الإدخال */
+            --primary-neon: #00FF00; /* أخضر نيون */
+            --secondary-blue: #00FFFF; /* أزرق سماوي/تركوازي نيون */
+            --accent-purple: #FF00FF; /* بنفسجي/وردي نيون */
+            --dark-background: #000000;
+            --dark-overlay: rgba(0, 0, 0, 0.85);
+            --text-light: #E0E0E0;
+            --text-glow: rgba(0, 255, 0, 0.7);
+            --border-glow: rgba(0, 255, 255, 0.5);
         }
 
         * {
@@ -27,1365 +24,237 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Tajawal', sans-serif;
-            scroll-behavior: smooth;
         }
 
         body {
-            background-color: var(--dark);
-            color: var(--light);
-            overflow-x: hidden;
+            background-color: var(--dark-background);
+            color: var(--text-light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+            /* Cyberpunk city background (simulated or via image if available) */
             background-image:
                 radial-gradient(circle at 10% 20%, rgba(0, 255, 0, 0.08) 0%, transparent 25%),
-                radial-gradient(circle at 90% 80%, rgba(0, 102, 255, 0.08) 0%, transparent 25%);
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            position: relative;
+                radial-gradient(circle at 90% 80%, rgba(0, 102, 255, 0.08) 0%, transparent 25%),
+                linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)),
+                url('https://source.unsplash.com/random/1920x1080/?cyberpunk,city,night,futuristic') no-repeat center center / cover; /* Placeholder for cyberpunk city image */
         }
 
-        /* Hacker Screen Effect */
-        .hacker-screen {
-            position: fixed;
+        /* Overlay for darkness and grid effect */
+        body::before {
+            content: '';
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
-            opacity: 0.1;
-            pointer-events: none;
-            overflow: hidden;
-            background-image: linear-gradient(rgba(0,255,0,0.02) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(0,255,0,0.02) 1px, transparent 1px);
+            background-image:
+                linear-gradient(to right, rgba(0,255,0,0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0,255,0,0.03) 1px, transparent 1px);
             background-size: 50px 50px;
+            z-index: 0;
         }
 
-        .hacker-screen span {
-            position: absolute;
-            color: var(--primary);
-            font-family: 'Share Tech Mono', monospace;
-            opacity: 0.8;
-            animation: matrix-fall linear infinite, fade-out 5s forwards;
-        }
-
-        @keyframes matrix-fall {
-            0% { transform: translateY(-100%); opacity: 0; }
-            5% { opacity: 0.8; }
-            100% { transform: translateY(100vh); opacity: 0; }
-        }
-        @keyframes fade-out {
-            0% { opacity: 0.8; }
-            100% { opacity: 0; }
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+        .maintenance-container {
+            background-color: var(--dark-overlay);
+            border: 2px solid var(--primary-neon);
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 0 50px var(--primary-neon); /* Glow effect */
+            max-width: 700px;
+            width: 90%;
+            z-index: 1; /* Above background */
+            animation: fadeIn 1.5s ease-out, glow-pulse 3s infinite alternate;
             position: relative;
-            z-index: 2; /* Ensure content is above hacker screen */
+            overflow: hidden; /* For inner glow/lines */
         }
 
-        /* Header & Navigation */
-        header {
-            padding: 20px 0;
-            border-bottom: 1px solid var(--primary);
-            background-color: var(--dark-bg-alpha);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            backdrop-filter: blur(5px);
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 28px;
-            font-weight: bold;
-            text-decoration: none;
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            text-shadow: 0 0 8px var(--primary);
-            position: relative;
-        }
-
-        .logo::before {
-            content: ">>_";
-            margin-left: 5px;
-            animation: blink-caret 1s step-end infinite;
-            color: var(--secondary);
-        }
-
-        @keyframes blink-caret {
-            from, to { border-color: transparent }
-            50% { border-color: var(--primary); }
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-        }
-
-        .nav-links li {
-            margin-right: 30px;
-        }
-
-        .nav-links a {
-            color: var(--light);
-            text-decoration: none;
-            font-size: 1.1em;
-            position: relative;
-            padding: 5px 0;
-            transition: color 0.3s;
-        }
-
-        .nav-links a::after {
+        /* Animated lines/circuitry inside the container */
+        .maintenance-container::before, .maintenance-container::after {
             content: '';
             position: absolute;
-            bottom: -5px;
+            background: linear-gradient(90deg, transparent, var(--secondary-blue), transparent);
+            opacity: 0.3;
+        }
+        .maintenance-container::before {
+            top: 10px;
             left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            transition: width 0.3s ease-out;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary);
-        }
-
-        .nav-links a:hover::after {
             width: 100%;
+            height: 2px;
+            animation: scan-line-h 5s infinite linear;
+        }
+        .maintenance-container::after {
+            right: 10px;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            animation: scan-line-v 5s infinite linear;
         }
 
-        /* Hero Section */
-        .hero {
-            height: calc(100vh - 90px); /* Adjust based on header height */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 0 20px;
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(0, 20, 40, 0.9)); /* خلفية متدرجة بديلة */
-            position: relative;
-            overflow: hidden;
-            color: var(--light);
-            text-shadow: 0 0 15px rgba(0, 255, 0, 0.7);
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 800px;
+        @keyframes glow-pulse {
+            0% { box-shadow: 0 0 50px var(--primary-neon); }
+            100% { box-shadow: 0 0 70px var(--secondary-blue); }
         }
 
-        .hero h1 {
+        @keyframes scan-line-h {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        @keyframes scan-line-v {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+
+        h1 {
             font-family: 'Share Tech Mono', monospace;
             font-size: 4.5em;
-            color: var(--primary);
-            margin-bottom: 20px;
-            line-height: 1.2;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            animation: glitch-text 2s infinite alternate;
+            color: var(--primary-neon);
+            margin-bottom: 25px;
+            text-shadow: 0 0 25px var(--primary-neon);
+            animation: text-glitch 2s infinite alternate, neon-flicker 1s infinite alternate;
+            letter-spacing: 3px;
         }
 
-        @keyframes glitch-text {
-            0% { text-shadow: 0 0 10px var(--primary); transform: translateX(0); }
-            20% { text-shadow: -2px -2px 10px var(--primary); transform: translateX(2px); }
-            40% { text-shadow: 2px 2px 10px var(--primary); transform: translateX(-2px); }
-            60% { text-shadow: -1px 1px 10px var(--primary); transform: translateX(1px); }
-            80% { text-shadow: 1px -1px 10px var(--primary); transform: translateX(-1px); }
-            100% { text-shadow: 0 0 10px var(--primary); transform: translateX(0); }
+        @keyframes text-glitch {
+            0% { text-shadow: 0 0 20px var(--primary-neon); transform: translateX(0); }
+            20% { text-shadow: -3px -3px 20px var(--accent-purple); transform: translateX(3px); }
+            40% { text-shadow: 3px 3px 20px var(--secondary-blue); transform: translateX(-3px); }
+            60% { text-shadow: -2px 2px 20px var(--primary-neon); transform: translateX(2px); }
+            80% { text-shadow: 2px -2px 20px var(--accent-purple); transform: translateX(-2px); }
+            100% { text-shadow: 0 0 20px var(--primary-neon); transform: translateX(0); }
         }
 
-        .hero p {
-            font-size: 1.5em;
-            margin-bottom: 40px;
-            color: var(--light);
-            max-width: 700px;
+        @keyframes neon-flicker {
+            0%, 18%, 22%, 25%, 53%, 57%, 100% {
+                text-shadow:
+                    0 0 5px var(--primary-neon),
+                    0 0 10px var(--primary-neon),
+                    0 0 20px var(--primary-neon),
+                    0 0 40px var(--primary-neon),
+                    0 0 80px var(--primary-neon);
+            }
+            20%, 24%, 55% {
+                text-shadow: none;
+            }
+        }
+
+        p {
+            font-size: 1.4em;
+            color: var(--text-light);
+            margin-bottom: 30px;
+            line-height: 1.8;
             opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .cta-button {
+        .contact-info {
+            margin-top: 40px;
+            border-top: 1px dashed var(--secondary-blue);
+            padding-top: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .contact-info span {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1.6em;
+            color: var(--secondary-blue);
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px var(--secondary-blue);
+        }
+
+        .contact-link {
             display: inline-block;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            color: var(--dark);
+            background: linear-gradient(90deg, var(--primary-neon), var(--accent-purple));
+            color: var(--dark-background);
             padding: 15px 35px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: bold;
             font-size: 1.2em;
             transition: all 0.3s ease;
-            box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.7);
             text-transform: uppercase;
             letter-spacing: 1px;
+            border: 1px solid var(--primary-neon);
         }
 
-        .cta-button:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 5px 25px rgba(0, 255, 255, 0.8);
-            background: linear-gradient(90deg, var(--secondary), var(--accent));
+        .contact-link:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 5px 35px rgba(0, 255, 255, 1);
+            background: linear-gradient(90deg, var(--secondary-blue), var(--primary-neon));
+            border-color: var(--secondary-blue);
         }
 
-        /* General Section Styling */
-        section {
-            padding: 80px 0;
-            border-bottom: 1px solid rgba(0, 255, 0, 0.1);
-            background-color: var(--dark-bg-alpha);
-        }
-
-        section:nth-child(even) {
-            background-color: rgba(0, 5, 10, 0.7);
-        }
-
-        .section-title {
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 3em;
-            color: var(--accent);
-            margin-bottom: 50px;
-            text-align: center;
-            position: relative;
-            display: block;
-            text-shadow: 0 0 10px var(--accent);
-        }
-
-        .section-title::after {
-            content: '>>_';
-            position: absolute;
-            right: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--primary);
-            opacity: 0.3;
-            font-size: 0.7em;
-            animation: blink-caret 1s step-end infinite;
-        }
-        .section-title::before {
-            content: '_<<';
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--secondary);
-            opacity: 0.3;
-            font-size: 0.7em;
-            animation: blink-caret 1s step-end infinite reverse;
-        }
-
-
-        /* Apps Section */
-        .apps-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 30px;
+        .note-text {
             margin-top: 30px;
-        }
-
-        .app-card {
-            background: var(--card-bg);
-            border: 1px solid var(--secondary);
-            border-radius: 8px;
-            padding: 25px;
-            text-align: center;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 10px rgba(0, 102, 255, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .app-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(0, 255, 0, 0.05), rgba(0, 102, 255, 0.05));
-            z-index: -1;
-        }
-
-        .app-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.5);
-            border-color: var(--primary);
-        }
-
-        .app-icon {
-            font-size: 3.5em;
-            margin-bottom: 15px;
-            color: var(--primary);
-            text-shadow: 0 0 10px var(--primary);
-        }
-
-        .app-card h3 {
-            color: var(--primary);
-            margin-bottom: 10px;
-            font-size: 1.6em;
-            text-transform: capitalize;
-        }
-
-        .app-card p {
             font-size: 1em;
-            margin-bottom: 20px;
-            color: var(--light);
-            line-height: 1.5;
-        }
-
-        .download-btn {
-            display: inline-block;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            color: var(--dark);
-            padding: 10px 25px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: opacity 0.3s, transform 0.3s;
-            text-transform: uppercase;
-            font-size: 0.9em;
-        }
-
-        .download-btn:hover {
-            opacity: 0.9;
-            transform: translateY(-2px);
-        }
-
-        /* Cybersecurity Tips Section */
-        .tips-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-        }
-
-        .tip-card {
-            background: var(--card-bg);
-            border: 1px solid var(--accent);
-            border-radius: 8px;
-            padding: 25px;
-            box-shadow: 0 0 10px rgba(255, 0, 255, 0.3);
-            transition: transform 0.3s ease, border-color 0.3s ease;
-        }
-
-        .tip-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--primary);
-            box-shadow: 0 8px 20px rgba(0, 255, 0, 0.4);
-        }
-
-        .tip-card h3 {
-            color: var(--primary);
-            margin-bottom: 15px;
-            font-size: 1.4em;
-            display: flex;
-            align-items: center;
-        }
-
-        .tip-card h3::before {
-            content: '>>';
-            color: var(--secondary);
-            margin-left: 10px;
+            color: var(--accent-purple);
+            opacity: 0.7;
             font-family: 'Share Tech Mono', monospace;
         }
-
-        .tip-card p {
-            font-size: 1em;
-            line-height: 1.6;
-            color: var(--light);
-        }
-
-        .warning {
-            background: rgba(255, 0, 0, 0.1);
-            border: 2px solid #ff0000;
-            padding: 25px;
-            border-radius: 8px;
-            margin-top: 50px;
-            text-align: center;
-            box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
-        }
-
-        .warning h3 {
-            color: #ff0000;
-            font-size: 2em;
-            margin-bottom: 15px;
-            text-shadow: 0 0 5px #ff0000;
-        }
-
-        .warning p {
-            color: var(--light);
-            font-size: 1.1em;
-            line-height: 1.6;
-        }
-
-        /* New Sections Styling */
-        .contact-info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .contact-card {
-            background: rgba(0, 15, 30, 0.8);
-            border: 1px solid var(--secondary);
-            border-radius: 10px;
-            padding: 30px;
-            text-align: center;
-            box-shadow: 0 0 15px rgba(0, 102, 255, 0.4);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .contact-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 25px rgba(0, 255, 255, 0.6);
-        }
-
-        .contact-card h3 {
-            color: var(--primary);
-            font-size: 1.8em;
-            margin-bottom: 15px;
-            text-shadow: 0 0 8px var(--primary);
-        }
-
-        .contact-card p {
-            color: var(--light);
-            font-size: 1.1em;
-            margin-bottom: 10px;
-        }
-
-        .contact-card a {
-            color: var(--accent);
-            text-decoration: none;
-            font-weight: bold;
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 1.1em;
-            transition: color 0.3s;
-        }
-
-        .contact-card a:hover {
-            color: var(--primary);
-            text-decoration: underline;
-        }
-
-        .scripting-section .script-example {
-            background: rgba(0, 25, 50, 0.9);
-            border: 1px solid var(--secondary);
-            border-left: 5px solid var(--primary);
-            border-radius: 8px;
-            padding: 25px;
-            margin-bottom: 30px;
-            box-shadow: 0 0 15px rgba(0, 102, 255, 0.3);
-        }
-
-        .scripting-section .script-example h4 {
-            color: var(--accent);
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 1.5em;
-            margin-bottom: 15px;
-        }
-
-        .scripting-section .script-example p {
-            font-size: 1em;
-            margin-bottom: 15px;
-            color: var(--light);
-        }
-
-        .scripting-section .script-example pre {
-            background-color: var(--dark);
-            color: var(--primary);
-            padding: 15px;
-            border-radius: 5px;
-            overflow-x: auto;
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 0.9em;
-            border: 1px dashed var(--primary);
-        }
-
-        /* About Section (Mohammed) */
-        .about-section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-
-        .about-section .profile-icon {
-            font-size: 8em;
-            color: var(--primary);
-            text-shadow: 0 0 20px var(--primary);
-            margin-bottom: 30px;
-            transition: transform 0.3s ease;
-        }
-
-        .about-section .profile-icon:hover {
-            transform: scale(1.1) rotate(5deg);
-        }
-
-        .about-section h3 {
-            font-family: 'Share Tech Mono', monospace;
-            color: var(--secondary);
-            font-size: 2.5em;
-            margin-bottom: 15px;
-            text-shadow: 0 0 10px var(--secondary);
-        }
-
-        .about-section p {
-            max-width: 700px;
-            font-size: 1.1em;
-            line-height: 1.7;
-            color: var(--light);
-        }
-
-        /* Contact Section (Modified to include specific contacts) */
-        .contact-form-wrapper {
-            background: var(--card-bg);
-            border: 1px solid var(--secondary);
-            border-radius: 8px;
-            padding: 40px;
-            max-width: 700px;
-            margin: 0 auto;
-            box-shadow: 0 0 20px rgba(0, 102, 255, 0.4);
-        }
-
-        .form-group {
-            margin-bottom: 25px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: var(--primary);
-            font-size: 1.1em;
-            text-align: right;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            background: rgba(0, 20, 40, 0.8);
-            border: 1px solid var(--secondary);
-            color: var(--light);
-            border-radius: 5px;
-            font-size: 1em;
-            transition: border-color 0.3s, box-shadow 0.3s;
-            font-family: 'Tajawal', sans-serif;
-            text-align: right; /* Ensure text is right-aligned for RTL */
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
-        }
-
-        .form-group textarea {
-            min-height: 150px;
-            resize: vertical;
-        }
-
-        .submit-btn {
-            display: block;
-            width: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            color: var(--dark);
-            border: none;
-            padding: 15px 30px;
-            font-weight: bold;
-            font-size: 1.2em;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
-        }
-
-        .submit-btn:hover {
-            opacity: 0.9;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 20px rgba(0, 255, 255, 0.6);
-            background: linear-gradient(90deg, var(--secondary), var(--accent));
-        }
-
-        #form-message {
-            margin-top: 20px;
-            color: var(--primary);
-            font-size: 1.1em;
-            font-weight: bold;
-            text-align: center;
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out;
-        }
-
-        #form-message.show {
-            opacity: 1;
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 30px 0;
-            color: var(--secondary);
-            font-size: 0.9em;
-            border-top: 1px solid var(--primary);
-            background-color: var(--dark-bg-alpha);
-            margin-top: auto; /* Push footer to bottom */
-        }
-
-        footer p {
-                margin-bottom: 5px;
-        }
-
-        footer a {
-            color: var(--primary);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        footer a:hover {
-            color: var(--accent);
-        }
-
-        /* Chatbot Styles */
-        .chatbot-toggle-button {
-            position: fixed;
-            bottom: 30px;
-            left: 30px;
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(45deg, var(--accent), var(--primary));
-            color: var(--dark);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 2.5em;
-            cursor: pointer;
-            box-shadow: 0 0 20px rgba(255, 0, 255, 0.7);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            z-index: 10000; /* Always on top */
-            animation: pulse-chat-button 2s infinite alternate;
-        }
-
-        .chatbot-toggle-button:hover {
-            transform: scale(1.08);
-            box-shadow: 0 0 30px rgba(255, 255, 0, 0.9);
-        }
-
-        @keyframes pulse-chat-button {
-            0% { box-shadow: 0 0 20px rgba(255, 0, 255, 0.7); }
-            100% { box-shadow: 0 0 35px rgba(0, 255, 255, 0.9); }
-        }
-
-        .chatbot-container {
-            position: fixed;
-            bottom: 110px; /* فوق زر الشات */
-            left: 20px;
-            width: 350px;
-            height: 500px;
-            background-color: var(--chat-bg);
-            border: 2px solid var(--secondary);
-            border-radius: 15px;
-            box-shadow: 0 0 30px rgba(0, 102, 255, 0.7);
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            z-index: 9999;
-            transform: scale(0.8);
-            opacity: 0;
-            pointer-events: none;
-            transition: all 0.3s ease-in-out;
-            transform-origin: bottom left;
-        }
-
-        .chatbot-container.active {
-            transform: scale(1);
-            opacity: 1;
-            pointer-events: all;
-        }
-
-        .chatbot-header {
-            background-color: var(--chat-header);
-            color: var(--primary);
-            padding: 15px;
-            font-size: 1.2em;
-            font-weight: bold;
-            text-align: center;
-            border-bottom: 1px solid var(--primary);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-family: 'Share Tech Mono', monospace;
-            text-shadow: 0 0 5px var(--primary);
-        }
-
-        .chatbot-header .close-btn {
-            background: none;
-            border: none;
-            color: var(--accent);
-            font-size: 1.5em;
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-
-        .chatbot-header .close-btn:hover {
-            color: red;
-        }
-
-        .chatbot-messages {
-            flex-grow: 1;
-            padding: 20px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            scrollbar-width: thin;
-            scrollbar-color: var(--primary) var(--dark);
-        }
-
-        .chatbot-messages::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        .chatbot-messages::-webkit-scrollbar-track {
-            background: var(--dark);
-            border-radius: 10px;
-        }
-
-        .chatbot-messages::-webkit-scrollbar-thumb {
-            background-color: var(--primary);
-            border-radius: 10px;
-            border: 2px solid var(--dark);
-        }
-
-        .message {
-            max-width: 80%;
-            padding: 10px 15px;
-            border-radius: 15px;
-            line-height: 1.5;
-            word-wrap: break-word;
-        }
-
-        .message.user {
-            background-color: var(--secondary);
-            color: var(--dark);
-            align-self: flex-end;
-            border-bottom-left-radius: 0;
-        }
-
-        .message.bot {
-            background-color: var(--card-bg);
-            border: 1px solid var(--primary);
-            color: var(--light);
-            align-self: flex-start;
-            border-bottom-right-radius: 0;
-        }
-
-        .chatbot-input-area {
-            display: flex;
-            padding: 15px;
-            border-top: 1px solid var(--primary);
-            background-color: var(--chat-input);
-        }
-
-        .chatbot-input-area input {
-            flex-grow: 1;
-            padding: 10px 15px;
-            border: 1px solid var(--secondary);
-            border-radius: 20px;
-            background-color: var(--dark);
-            color: var(--light);
-            font-size: 1em;
-            margin-left: 10px; /* ليتناسب مع RTL */
-            text-align: right;
-        }
-
-        .chatbot-input-area input:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
-        }
-
-        .chatbot-input-area button {
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            color: var(--dark);
-            border: none;
-            padding: 10px 20px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 1em;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 8px rgba(0, 255, 0, 0.4);
-        }
-
-        .chatbot-input-area button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
-        }
-
 
         /* Mobile Responsiveness */
         @media (max-width: 768px) {
-            .nav-links {
-                display: none; /* Hide for mobile, can add a hamburger menu */
+            .maintenance-container {
+                padding: 30px;
+                width: 95%;
             }
-
-            .logo {
-                font-size: 24px;
+            h1 {
+                font-size: 3em;
             }
-
-            .hero h1 {
-                font-size: 2.5em;
-            }
-
-            .hero p {
+            p {
                 font-size: 1.1em;
             }
-
-            .cta-button {
+            .contact-info span {
+                font-size: 1.3em;
+            }
+            .contact-link {
                 padding: 12px 25px;
                 font-size: 1em;
             }
+        }
 
-            .section-title {
-                font-size: 2em;
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2.2em;
             }
-
-            .section-title::before, .section-title::after {
-                display: none; /* Hide decorative arrows on small screens */
+            p {
+                font-size: 0.9em;
             }
-
-            .apps-grid, .tips-grid, .contact-info-grid {
-                grid-template-columns: 1fr;
+            .contact-info span {
+                font-size: 1.1em;
             }
-
-            .about-section h3 {
-                font-size: 2em;
-            }
-
-            .contact-form-wrapper {
-                padding: 25px;
-            }
-
-            .form-group label {
-                font-size: 1em;
-            }
-
-            .form-group input,
-            .form-group textarea {
-                padding: 10px;
-            }
-
-            .submit-btn {
-                padding: 12px 20px;
-                font-size: 1em;
-            }
-
-            /* Chatbot Mobile Adjustments */
-            .chatbot-toggle-button {
-                bottom: 20px;
-                left: 20px;
-                width: 60px;
-                height: 60px;
-                font-size: 2em;
-            }
-
-            .chatbot-container {
-                bottom: 90px;
-                left: 10px;
-                width: calc(100% - 20px); /* عرض كامل تقريبا */
-                height: 60vh; /* ارتفاع نسبي */
-            }
-
-            .message.user, .message.bot {
-                max-width: 90%;
+            .contact-link {
+                padding: 10px 20px;
+                font-size: 0.9em;
             }
         }
     </style>
 </head>
 <body>
-    <div class="hacker-screen" id="hackerScreen"></div>
-
-    <header>
-        <div class="container">
-            <nav>
-                <a href="#hero" class="logo">هجمة</a>
-                <ul class="nav-links">
-                    <li><a href="#hero">الرئيسية</a></li>
-                    <li><a href="#apps">تطبيقات الحماية</a></li>
-                    <li><a href="#advanced-tips">نصائح متقدمة</a></li>
-                    <li><a href="#anti-extortion">مكافحة الابتزاز</a></li>
-                    <li><a href="#scripting">سكربتات الحماية</a></li>
-                    <li><a href="#about">عن محمد</a></li>
-                    <li><a href="#contact">تواصل معنا</a></li>
-                </ul>
-            </nav>
+    <div class="maintenance-container">
+        <h1>[SYSTEM OFFLINE]</h1>
+        <p>عذراً، نظام "هجمة" يخضع حالياً لأعمال صيانة مكثفة وتحديثات أمنية حرجة.</p>
+        <p>نعمل بجد لضمان أقصى درجات الحماية والأداء عند عودتنا للخدمة.</p>
+        <div class="contact-info">
+            <span>للدعم الفني العاجل أو الاستفسارات:</span>
+            <span style="color: var(--primary-neon); font-size: 2em; text-shadow: 0 0 15px var(--primary-neon);">📞 0795375696</span>
+            <a href="tel:+962795375696" class="contact-link" style="margin-top: 20px;">اتصل بمحمد الآن</a>
         </div>
-    </header>
-
-    <main>
-        <section id="hero" class="hero">
-            <div class="hero-content">
-                <h1>درعك السيبراني ضد كل هجمة</h1>
-                <p>نحن نوفر لك الأدوات والمعرفة اللازمة لحماية بياناتك وأجهزتك من الاختراقات والابتزازات الرقمية. كن بأمان في عالم متصل.</p>
-                <a href="#apps" class="cta-button">ابدأ الحماية الآن</a>
-            </div>
-        </section>
-
-        ---
-
-        <section id="apps">
-            <div class="container">
-                <h2 class="section-title">تطبيقات الحماية</h2>
-                <p style="text-align: center; max-width: 800px; margin: 0 auto 50px; font-size: 1.1em; color: var(--light);">اختر من بين أفضل تطبيقات الحماية السيبرانية للهاتف والكمبيوتر. انقر على رابط التحميل المباشر لتأمين جهازك على الفور.</p>
-
-                <div class="apps-grid">
-                    <div class="app-card">
-                        <div class="app-icon">🛡️</div>
-                        <h3>Malwarebytes</h3>
-                        <p>يكشف ويزيل البرمجيات الخبيثة، برامج الفدية، والفيروسات بكفاءة عالية على جهازك.</p>
-                        <a href="https://downloads.malwarebytes.com/file/mb4" class="download-btn" target="_blank">تحميل للكمبيوتر</a>
-                        <a href="https://play.google.com/store/apps/details?id=org.malwarebytes.antimalware" class="download-btn" target="_blank" style="margin-top: 10px;">تحميل للأندرويد</a>
-                        <a href="https://apps.apple.com/us/app/malwarebytes-mobile-security/id1393081050" class="download-btn" target="_blank" style="margin-top: 10px;">تحميل للآيفون</a>
-                    </div>
-
-                    <div class="app-card">
-                        <div class="app-icon">💻</div>
-                        <h3>Bitdefender</h3>
-                        <p>حل أمان متكامل يوفر حماية متقدمة ضد جميع أنواع التهديدات السيبرانية.</p>
-                        <a href="https://www.bitdefender.com/Downloads/download-now.html" class="download-btn" target="_blank">تحميل للكمبيوتر</a>
-                        <a href="https://play.google.com/store/apps/details?id=com.bitdefender.security" class="download-btn" target="_blank" style="margin-top: 10px;">تحميل للأندرويد</a>
-                        <a href="https://apps.apple.com/us/app/bitdefender-mobile-security/id1112440620" class="download-btn" target="_blank" style="margin-top: 10px;">تحميل للآيفون</a>
-                    </div>
-
-                    <div class="app-card">
-                        <div class="app-icon">🔒</div>
-                        <h3>NordVPN</h3>
-                        <p>حماية خصوصيتك وتأمين اتصالك بالإنترنت عبر تشفير البيانات وإخفاء هويتك.</p>
-                        <a href="https://nordvpn.com/download/" class="download-btn" target="_blank">تحميل للكمبيوتر</a>
-                        <a href="https://play.google.com/store/apps/details?id=com.nordvpn.android" class="download-btn" target="_blank" style="margin-top: 10px;">تحميل للأندرويد</a>
-                        <a href="https://apps.apple.com/us/app/nordvpn-vpn-proxy-secure-vpn/id905953485" class="download-btn" target="_blank" style="margin-top: 10px;">تحميل للآيفون</a>
-                    </div>
-
-                    <div class="app-card">
-                        <div class="app-icon">🔑</div>
-                        <h3>KeePass</h3>
-                        <p>مدير كلمات مرور مجاني وآمن يساعدك على تخزين وتنظيم جميع كلمات المرور الخاصة بك.</p>
-                        <a href="https://keepass.info/download/index.html" class="download-btn" target="_blank">تحميل للكمبيوتر</a>
-                        <a href="https://play.google.com/store/apps/details?id=com.keepassdroid" class="download-btn" target="_blank" style="margin-top: 10px;">تحميل للأندرويد (KeePassDroid)</a>
-                        <a href="https://apps.apple.com/us/app/keepass-touch/id1454652250" class="download-btn" target="_blank" style="margin-top: 10px;">تحميل للآيفون (KeePass Touch)</a>
-                    </div>
-
-                    <div class="app-card">
-                        <div class="app-icon">📊</div>
-                        <h3>GlassWire</h3>
-                        <p>مراقبة نشاط الشبكة، اكتشاف التطبيقات المشبوهة، وحماية خصوصيتك على الإنترنت.</p>
-                        <a href="https://www.glasswire.com/download/" class="download-btn" target="_blank">تحميل للكمبيوتر</a>
-                    </div>
-
-                    <div class="app-card">
-                        <div class="app-icon">🚫</div>
-                        <h3>AdBlock Plus</h3>
-                        <p>أداة لمنع الإعلانات المزعجة والتتبع عبر الإنترنت لحماية خصوصيتك.</p>
-                        <a href="https://adblockplus.org/download" class="download-btn" target="_blank">تحميل للمتصفح</a>
-                        <a href="https://play.google.com/store/apps/details?id=org.adblockplus.browser" class="download-btn" target="_blank" style="margin-top: 10px;">تحميل للأندرويد (متصفح)</a>
-                        <a href="https://apps.apple.com/us/app/adblock-plus-for-safari/id1028913506" class="download-btn" target="_blank" style="margin-top: 10px;">تحميل للآيفون (Safari)</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        ---
-
-        <section id="advanced-tips">
-            <div class="container">
-                <h2 class="section-title">نصائح متقدمة للحماية من الاختراق والتهديد</h2>
-                <p style="text-align: center; max-width: 800px; margin: 0 auto 50px; font-size: 1.1em; color: var(--light);">لتعزيز دفاعاتك السيبرانية، إليك نصائح متعمقة تساعدك على فهم التهديدات وتجنبها بفعالية.</p>
-
-                <div class="tips-grid">
-                    <div class="tip-card">
-                        <h3>فهم الهندسة الاجتماعية</h3>
-                        <p>المخترقون يستغلون ضعف البشر أكثر من ضعف الأنظمة. كن حذرًا من أي طلبات غير متوقعة للمعلومات الشخصية، ولا تثق بالمكالمات أو الرسائل التي تدعي أنها من جهات رسمية دون التحقق المستقل.</p>
-                    </div>
-                    <div class="tip-card">
-                        <h3>تأمين الشبكة المنزلية</h3>
-                        <p>غير كلمة المرور الافتراضية لجهاز التوجيه (الراوتر) الخاص بك. استخدم تشفير WPA3 إن أمكن، وقم بفصل الأجهزة غير المستخدمة من الشبكة. فكر في استخدام شبكة ضيف منفصلة للزوار.</p>
-                    </div>
-                    <div class="tip-card">
-                        <h3>حماية بياناتك السحابية</h3>
-                        <p>لا تفترض أن الخدمات السحابية آمنة بشكل افتراضي. استخدم كلمات مرور قوية ومصادقة ثنائية، وفكر في تشفير الملفات الحساسة قبل رفعها إلى السحابة.</p>
-                    </div>
-                    <div class="tip-card">
-                        <h3>الوعي بالبرمجيات الخبيثة المتقدمة</h3>
-                        <p>تجاوز مجرد الفيروسات؛ كن على دراية ببرامج التجسس، برامج الفدية، وبرامج الجذور الخفية. قم بتثبيت برامج مكافحة فيروسات موثوقة وفحص جهازك بانتظام.</p>
-                    </div>
-                    <div class="tip-card">
-                        <h3>المسح الدوري للثغرات</h3>
-                        <p>استخدم أدوات لفحص نقاط الضعف في نظامك وتطبيقاتك. بعض الأدوات المجانية يمكن أن تساعد في اكتشاف الثغرات التي قد يستغلها المخترقون.</p>
-                    </div>
-                    <div class="tip-card">
-                        <h3>التعامل مع التهديدات الرقمية</h3>
-                        <p>في حال تلقيت تهديدًا، لا تستجب ولا تتفاعل. قم بحفظ جميع الأدلة (لقطات شاشة، رسائل). لا تحاول التفاوض أو دفع أي مبالغ. توجه مباشرة للجهات المختصة.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        ---
-
-        <section id="anti-extortion">
-            <div class="container">
-                <h2 class="section-title">مكافحة الابتزاز والتهديد الإلكتروني</h2>
-                <p style="text-align: center; max-width: 800px; margin: 0 auto 50px; font-size: 1.1em; color: var(--light);">إذا كنت تتعرض للابتزاز أو التهديد الإلكتروني، لا تتردد في طلب المساعدة. هذه هي جهات الاتصال الرسمية في بعض الدول العربية لمساعدتك.</p>
-
-                <div class="contact-info-grid">
-                    <div class="contact-card">
-                        <h3>الأردن</h3>
-                        <p>وحدة الجرائم الإلكترونية (إدارة البحث الجنائي)</p>
-                        <p>الخط الساخن: <a href="tel:+96265632200">+962 6 5632200</a></p>
-                        <p>بلاغات الوحدة: <a href="tel:190">190</a> (من داخل الأردن)</p>
-                        <p>الموقع الإلكتروني: <a href="https://psd.gov.jo/ar/node/610" target="_blank">مديرية الأمن العام</a></p>
-                    </div>
-                    <div class="contact-card">
-                        <h3>جمهورية مصر العربية</h3>
-                        <p>مكافحة جرائم الحاسبات وشبكات المعلومات (وزارة الداخلية)</p>
-                        <p>رقم الإبلاغ: <a href="tel:108">108</a> (الشرطة المتخصصة)</p>
-                        <p>الخط الساخن: <a href="tel:+20227921390">+20 2 27921390</a></p>
-                        <p>البريد الإلكتروني: <a href="mailto:administration@ict.gov.eg">administration@ict.gov.eg</a></p>
-                    </div>
-                    <div class="contact-card">
-                        <h3>المملكة العربية السعودية</h3>
-                        <p>النيابة العامة السعودية</p>
-                        <p>رقم البلاغات (الجريمة المعلوماتية): <a href="tel:199099">199099</a></p>
-                        <p>تطبيق "كلنا أمن" (للإبلاغ الفوري)</p>
-                        <p>الموقع الإلكتروني: <a href="https://www.pp.gov.sa/ar/node/722" target="_blank">النيابة العامة</a></p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        ---
-
-        <section id="scripting" class="scripting-section">
-            <div class="container">
-                <h2 class="section-title">برمجة سكربتات حماية لجهازك (بطريقة قانونية)</h2>
-                <p style="text-align: center; max-width: 800px; margin: 0 auto 50px; font-size: 1.1em; color: var(--light);">يمكنك تعزيز أمان جهازك عبر سكربتات بسيطة وقانونية تقوم بمهام أمنية روتينية. تعلم كيف تنشئها باستخدام لغة بايثون.</p>
-
-                <div class="script-example">
-                    <h4>1. سكربت فحص الملفات المشبوهة (Python)</h4>
-                    <p>هذا السكربت البسيط يمكنه البحث عن ملفات ذات امتدادات معينة تعتبر مشبوهة أو قديمة، وينبهك إليها. يمكن تطويره ليشمل فحص التوقيعات أو الاتصال بقواعد بيانات الفيروسات.</p>
-                    <pre>
-import os
-
-def scan_suspicious_files(directory, extensions_to_check=['.tmp', '.exe', '.bat']):
-    suspicious_files = []
-    print(f"Scanning directory: {directory}")
-    for root, _, files in os.walk(directory):
-        for file in files:
-            file_path = os.path.join(root, file)
-            if any(file.endswith(ext) for ext in extensions_to_check):
-                suspicious_files.append(file_path)
-    return suspicious_files
-
-if __name__ == "__main__":
-    target_directory = "C:\\Users\\YourUser\\Downloads" # غيّر هذا المسار
-    suspicious = scan_suspicious_files(target_directory)
-
-    if suspicious:
-        print("\n--- Suspicious Files Found ---")
-        for f in suspicious:
-            print(f)
-        print("\nReview these files carefully or delete if unknown.")
-    else:
-        print("\nNo suspicious files found in the specified directory.")
-                    </pre>
-                    <p>
-                        **كيف تستخدمه:**
-                        <ol style="margin-right: 20px; text-align: right; line-height: 1.6;">
-                            <li>انسخ الكود في ملف واحفظه باسم `scan_files.py`.</li>
-                            <li>قم بتعديل `target_directory` إلى المسار الذي تريد فحصه (مثال: `C:\\Users\\YourUser\\Desktop` أو `/home/youruser/downloads`).</li>
-                            <li>افتح موجه الأوامر (CMD) أو الطرفية (Terminal).</li>
-                            <li>اذهب إلى مسار الملف: `cd [المسار الذي حفظت فيه الملف]`</li>
-                            <li>شغل السكربت: `python scan_files.py`</li>
-                        </ol>
-                        **ملاحظة هامة:** هذا سكربت تعليمي أساسي. لا يعتمد عليه كحل أمان كامل!
-                    </p>
-                </div>
-
-                <div class="script-example">
-                    <h4>2. سكربت تنظيف الملفات المؤقتة (Python)</h4>
-                    <p>يقوم هذا السكربت بحذف الملفات المؤقتة التي لا فائدة منها، والتي قد تحتوي أحيانًا على بيانات حساسة أو تكون هدفًا للبرمجيات الخبيثة. يساعد في تحسين أداء جهازك.</p>
-                    <pre>
-import shutil
-import os
-
-def clean_temp_files(temp_dirs):
-    print("Starting temporary file cleanup...")
-    cleaned_count = 0
-    for directory in temp_dirs:
-        if os.path.exists(directory):
-            for item in os.listdir(directory):
-                item_path = os.path.join(directory, item)
-                try:
-                    if os.path.isfile(item_path):
-                        os.remove(item_path)
-                        cleaned_count += 1
-                    elif os.path.isdir(item_path):
-                        shutil.rmtree(item_path)
-                        cleaned_count += 1
-                except Exception as e:
-                    print(f"Could not delete {item_path}: {e}")
-            print(f"Cleaned: {directory}")
-        else:
-            print(f"Directory not found: {directory}")
-    print(f"\nCleanup finished. Total items removed: {cleaned_count}")
-
-if __name__ == "__main__":
-    # مسارات الملفات المؤقتة الشائعة (خاصة بويندوز، يمكن تعديلها لـ Linux/macOS)
-    temp_directories = [
-        os.path.join(os.environ.get('TEMP', ''), ''),
-        os.path.join(os.environ.get('TMP', ''), ''),
-        os.path.join(os.environ.get('WINDIR', ''), 'temp') # مسار temp الخاص بالويندوز
-    ]
-    clean_temp_files(temp_directories)
-                    </pre>
-                    <p>
-                        **كيف تستخدمه:**
-                        <ol style="margin-right: 20px; text-align: right; line-height: 1.6;">
-                            <li>احفظ الكود في ملف باسم `clean_temp.py`.</li>
-                            <li>شغل السكربت بنفس طريقة السكربت السابق: `python clean_temp.py`.</li>
-                        </ol>
-                        **تنبيه:** استخدم هذا السكربت بحذر. على الرغم من أنه يستهدف الملفات المؤقتة، إلا أنه لا يزال يتعامل مع حذف الملفات.
-                    </p>
-                </div>
-
-                <p style="text-align: center; margin-top: 40px; font-size: 1.1em; color: var(--accent);">
-                    هذه مجرد أمثلة بسيطة. عالم برمجة الحماية أوسع بكثير ويتطلب دراسة متعمقة.
-                    تذكر دائمًا استخدام هذه السكربتات بمسؤولية وعلى أجهزتك الخاصة فقط.
-                </p>
-            </div>
-        </section>
-
-        ---
-
-        <section id="about">
-            <div class="container">
-                <h2 class="section-title">القائم على الموقع: محمد</h2>
-                <div class="about-section">
-                    <div class="profile-icon">👤</div>
-                    <h3>محمد | خبير الأمن السيبراني</h3>
-                    <p>مرحباً بكم! أنا محمد، مهندس أمن سيبراني وشغوف بحماية الأفراد والشركات من التهديدات الرقمية. في عالم تتزايد فيه الاختراقات والابتزازات، أؤمن بأن المعرفة هي أقوى درع. قمت بإنشاء موقع "هجمة" ليكون مصدركم الموثوق لأحدث أدوات الحماية، وأهم النصائح الأمنية، وكل ما تحتاجونه للبقاء بأمان على الإنترنت.</p>
-                    <p>هدفي هو تمكينكم بالمعرفة والأدوات اللازمة لمواجهة تحديات الأمن السيبراني بثقة. لا تترددوا في استكشاف الموقع والتواصل معي إذا كان لديكم أي استفسارات.</p>
-                </div>
-            </div>
-        </section>
-
-        ---
-
-        <section id="contact">
-            <div class="container">
-                <h2 class="section-title">تواصل معنا</h2>
-                <p style="text-align: center; max-width: 800px; margin: 0 auto 50px; font-size: 1.1em; color: var(--light);">
-                    نحن هنا لمساعدتك. اختر طريقة التواصل المناسبة لمشكلتك:
-                </p>
-
-                <div class="contact-info-grid">
-                    <div class="contact-card">
-                        <h3>محمد (للمشاكل البسيطة والتقنية)</h3>
-                        <p>إذا كانت مشكلتك بسيطة، أو تحتاج مساعدة تقنية عامة، أو لديك استفسار، تواصل معي مباشرة.</p>
-                        <p>البريد الإلكتروني: <a href="mailto:mohammed.support@yourwebsite.com">mohammed.support@yourwebsite.com</a></p>
-                        <p>تويتر/X (خاص): <a href="https://twitter.com/your_mohammed_handle" target="_blank">@YourMohammedHandle</a></p>
-                    </div>
-                    <div class="contact-card" style="border-color: var(--accent);">
-                        <h3>مشاري (للمشاكل الكبيرة والخاصة جداً)</h3>
-                        <p>إذا كانت مشكلتك حساسة أو تتطلب خصوصية تامة ولا تريد لأحد أن يعرف تفاصيلها.</p>
-                        <p>البريد الإلكتروني السري: <a href="mailto:mishari.private@yourwebsite.com">mishari.private@yourwebsite.com</a></p>
-                        <p>تطبيق Signal (خاص جداً): <a href="tel:+12345678900">+1 234 567 8900</a> (رقم وهمي للتوضيح)</p>
-                    </div>
-                </div>
-
-                <p style="text-align: center; max-width: 800px; margin: 50px auto 30px; font-size: 1.1em; color: var(--light);">
-                    أو املأ النموذج أدناه وسنتواصل معك:
-                </p>
-
-                <div class="contact-form-wrapper">
-                    <form id="contactForm">
-                        <div class="form-group">
-                            <label for="name">الاسم الكامل</label>
-                            <input type="text" id="name" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="email">البريد الإلكتروني</label>
-                            <input type="email" id="email" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="subject">الموضوع</label>
-                            <input type="text" id="subject" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="message">رسالتك</label>
-                            <textarea id="message" required></textarea>
-                        </div>
-
-                        <button type="submit" class="submit-btn">إرسال الرسالة</button>
-                        <p id="form-message" class="form-message"></p>
-                    </form>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 هجمة - جميع الحقوق محفوظة.</p>
-            <p>تم التصميم بحب للحماية السيبرانية بواسطة <a href="#about">محمد</a>.</p>
-        </div>
-    </footer>
-
-    <div class="chatbot-toggle-button" id="chatbotToggle">
-        🤖
+        <p class="note-text">شكرًا لتفهمكم. سيعود الدرع السيبراني أقوى من ذي قبل.</p>
     </div>
-
-    <div class="chatbot-container" id="chatbotContainer">
-        <div class="chatbot-header">
-            مساعد "هجمة" الآلي
-            <button class="close-btn" id="chatbotCloseBtn">X</button>
-        </div>
-        <div class="chatbot-messages" id="chatbotMessages">
-            <div class="message bot">
-                مرحباً بك في "هجمة"! أنا مساعدك الآلي. كيف يمكنني مساعدتك اليوم؟ يمكنك أن تسأل عن:
-                <ul>
-                    <li>تطبيقات الحماية</li>
-                    <li>نصائح الاختراق</li>
-                    <li>أرقام مكافحة الابتزاز</li>
-                    <li>السكربتات</li>
-                    <li>معلومات عن محمد</li>
-                    <li>كيف أتواصل؟</li>
-                </ul>
-            </div>
-        </div>
-        <div class="chatbot-input-area">
-            <input type="text" id="chatbotInput" placeholder="اكتب سؤالك هنا..." dir="rtl">
-            <button id="chatbotSendBtn">إرسال</button>
-        </div>
-    </div>
-
-    <script>
-        // Hacker Screen Effect Logic (existing)
-        const hackerScreen = document.getElementById('hackerScreen');
-        const chars = "01ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?/";
-        const charPool = chars.split('');
-
-        function createRandomChar() {
-            const span = document.createElement('span');
-            span.textContent = charPool[Math.floor(Math.random() * charPool.length)];
-            span.style.left = `${Math.random() * 100}vw`;
-            span.style.fontSize = `${10 + Math.random() * 20}px`;
-            span.style.animationDuration = `${5 + Math.random() * 5}s`;
-            span.style.animationDelay = `${-Math.random() * 5}s`;
-            hackerScreen.appendChild(span);
-
-            span.addEventListener('animationend', () => {
-                span.remove();
-            });
-        }
-
-        setInterval(createRandomChar, 50);
-
-        // Contact Form Submission (existing)
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            const formMessage = document.getElementById('form-message');
-            formMessage.textContent = 'تم استلام رسالتك بنجاح. سيتم التواصل معك قريباً.';
-            formMessage.classList.add('show');
-            formMessage.style.color = 'var(--primary)';
-
-            setTimeout(() => {
-                this.reset();
-                formMessage.classList.remove('show');
-            }, 3000);
-        });
-
-        // --- Chatbot Logic (New) ---
-        const chatbotToggle = document.getElementById('chatbotToggle');
-        const chatbotContainer = document.getElementById('chatbotContainer');
-        const chatbotCloseBtn = document.getElementById('chatbotCloseBtn');
-        const chatbotMessages = document.getElementById('chatbotMessages');
-        const chatbotInput = document.getElementById('chatbotInput');
-        const chatbotSendBtn = document.getElementById('chatbotSendBtn');
-
-        // Toggle chatbot visibility
-        chatbotToggle.addEventListener('click', () => {
-            chatbotContainer.classList.toggle('active');
-        });
-
-        chatbotCloseBtn.addEventListener('click', () => {
-            chatbotContainer.classList.remove('active');
-        });
-
-        // Function to add a message to the chat
-        function addMessage(text, sender) {
-            const messageDiv = document.createElement('div');
-            messageDiv.classList.add('message', sender);
-            messageDiv.textContent = text;
-            chatbotMessages.appendChild(messageDiv);
-            chatbotMessages.scrollTop = chatbotMessages.scrollHeight; // Scroll to bottom
-        }
-
-        // Simple Chatbot Responses (Knowledge Base)
-        const chatbotResponses = {
-            "مرحبا": "أهلاً بك! كيف يمكنني مساعدتك؟",
-            "اهلا": "أهلاً بك! كيف يمكنني مساعدتك؟",
-            "كيف حالك": "أنا روبوت، حالي هو دائماً جاهز للمساعدة!",
-            "ما هي تطبيقات الحماية": "لدينا توصيات لأفضل تطبيقات الحماية مثل Malwarebytes، Bitdefender، NordVPN، KeePass، GlassWire، و AdBlock Plus. يمكنك تصفح قسم 'تطبيقات الحماية' للمزيد من التفاصيل.",
-            "نصائح الاختراق": "لدينا قسم كامل 'نصائح متقدمة للحماية من الاختراق والتهديد' يقدم إرشادات حول الهندسة الاجتماعية، تأمين الشبكة، حماية البيانات السحابية، والتعامل مع البرمجيات الخبيثة المتقدمة.",
-            "أرقام مكافحة الابتزاز": "يمكنك العثور على أرقام مكافحة الابتزاز في الأردن، مصر، والسعودية في قسم 'مكافحة الابتزاز والتهديد الإلكتروني'. لا تتردد في طلب المساعدة إذا كنت بحاجة إليها.",
-            "السكربتات": "يقدم موقعنا أمثلة لسكربتات بايثون بسيطة لتعزيز حماية جهازك بطرق قانونية، مثل فحص الملفات المشبوهة وتنظيف الملفات المؤقتة. تجدها في قسم 'برمجة سكربتات حماية'.",
-            "من هو محمد": "محمد هو مهندس أمن سيبراني وشغوف بحماية الأفراد والشركات. هو القائم على موقع 'هجمة' ويسعى لتمكين الزوار بالمعرفة والأدوات الأمنية. تفاصيل أكثر في قسم 'عن محمد'.",
-            "كيف أتواصل": "للتواصل، لديك عدة خيارات: يمكنك ملء نموذج الاتصال العام، أو التواصل مباشرة مع محمد للمشاكل البسيطة، أو مع مشاري للمشاكل الكبيرة والخاصة جداً. تفاصيل الاتصال في قسم 'تواصل معنا'."
-        };
-
-        function getBotResponse(userMessage) {
-            const normalizedMessage = userMessage.trim().toLowerCase();
-            for (const keyword in chatbotResponses) {
-                if (normalizedMessage.includes(keyword)) {
-                    return chatbotResponses[keyword];
-                }
-            }
-            return "آسف، لم أفهم سؤالك تماماً. هل يمكنك إعادة صياغته أو السؤال عن أحد المواضيع المذكورة (تطبيقات، نصائح، مكافحة الابتزاز، سكربتات، محمد، تواصل)؟";
-        }
-
-        // Handle sending messages
-        chatbotSendBtn.addEventListener('click', () => {
-            const userText = chatbotInput.value.trim();
-            if (userText) {
-                addMessage(userText, 'user');
-                chatbotInput.value = '';
-                setTimeout(() => {
-                    const botResponse = getBotResponse(userText);
-                    addMessage(botResponse, 'bot');
-                }, 500); // Simulate typing delay
-            }
-        });
-
-        // Allow sending message with Enter key
-        chatbotInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                chatbotSendBtn.click();
-            }
-        });
-    </script>
 </body>
 </html>
