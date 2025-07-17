@@ -3,274 +3,914 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الموقع تحت الصيانة</title>
+    <title>حصنك السيبراني - منطقة الخبراء</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap');
-        
-        :root {
-            --neon-green: #00ff9d;
-            --neon-blue: #00a1ff;
-            --dark-bg: #0a0a12;
-        }
-        
-        * {
+        /* --- التصميم السيبراني (الهاكر) الجبار --- */
+        @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;700&family=Share+Tech+Mono&display=swap');
+
+        body {
+            font-family: 'Share Tech Mono', monospace; /* خط تقني */
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+            background-color: #010101; /* أسود حالك */
+            color: #00ff00; /* أخضر نيون افتراضي */
+            line-height: 1.7;
+            overflow-x: hidden;
+            position: relative; /* للسماح بتأثيرات الخلفية المطلقة */
         }
-        
-        body {
-            font-family: 'Tajawal', sans-serif;
-            background-color: var(--dark-bg);
-            color: white;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background-image: 
-                radial-gradient(circle at 25% 25%, rgba(0, 255, 157, 0.05) 0%, transparent 50%),
-                radial-gradient(circle at 75% 75%, rgba(0, 161, 255, 0.05) 0%, transparent 50%);
+
+        /* تأثير شاشة الهاكر المتدفقة في الخلفية */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(0deg, #0a0a0a 0, #0a0a0a 1px, transparent 1px, transparent 10px),
+                repeating-linear-gradient(90deg, #0a0a0a 0, #0a0a0a 1px, transparent 1px, transparent 10px);
+            opacity: 0.1;
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        /* تأثير توهج خلفي مركز */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(0, 255, 0, 0.05) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* تأثير شاشة الهاكر المتدفقة - طبقة إضافية */
+        .hacker-flow-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -3; /* أبعد من الطبقات الأخرى */
             overflow: hidden;
+            pointer-events: none;
+            background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)); /* لضمان وضوح المحتوى */
         }
-        
-        .container {
+
+        .hacker-flow-background span {
+            position: absolute;
+            background: rgba(0, 255, 0, 0.1); /* لون الشفرة الخافتة */
+            animation: flowDown 15s linear infinite;
+            font-size: 1.2em;
+            color: rgba(0, 255, 0, 0.7);
+            text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+            white-space: nowrap;
+        }
+
+        @keyframes flowDown {
+            0% { transform: translateY(-100%); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+
+        header {
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #00ffff; /* أزرق سماوي نيون */
+            padding: 40px 0;
             text-align: center;
+            border-bottom: 2px solid #00ff00;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+            text-transform: uppercase;
+            position: relative; /* لضمان ظهور المحتوى فوق الخلفية */
+            z-index: 1;
+        }
+
+        header h1 {
+            font-family: 'Chakra Petch', sans-serif; /* خط جريء للعناوين */
+            font-size: 3.5em;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00;
+        }
+
+        header p {
+            font-size: 1.2em;
+            color: #00ffff;
+            text-shadow: 0 0 5px #00ffff;
+        }
+
+        /* تنسيق اسم محمد بالتاج في الهيدر */
+        .king-mohammad {
+            font-family: 'Chakra Petch', sans-serif;
+            font-size: 1.5em;
+            color: #ffcc00; /* لون ذهبي للتاج والاسم */
+            text-shadow: 0 0 10px #ffcc00, 0 0 20px rgba(255, 204, 0, 0.5);
+            margin-top: 20px;
+            display: block;
             position: relative;
-            z-index: 10;
-            padding: 3rem;
-            border: 1px solid var(--neon-green);
-            border-radius: 5px;
-            box-shadow: 0 0 30px var(--neon-green), 
-                        inset 0 0 20px var(--neon-green);
-            background-color: rgba(10, 10, 18, 0.9);
-            max-width: 800px;
-            margin: 0 auto;
-            animation: border-pulse 3s infinite alternate;
+            animation: pulseGlow 2s infinite alternate;
         }
-        
-        @keyframes border-pulse {
-            0% { box-shadow: 0 0 30px var(--neon-green), inset 0 0 20px var(--neon-green); }
-            100% { box-shadow: 0 0 50px var(--neon-blue), inset 0 0 30px var(--neon-blue); }
+        .king-mohammad span {
+            vertical-align: middle;
+            margin: 0 5px;
         }
-        
-        h1 {
-            font-size: 4rem;
-            margin-bottom: 2rem;
-            background: linear-gradient(90deg, var(--neon-green), var(--neon-blue));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            font-weight: 900;
-            letter-spacing: 2px;
+
+        @keyframes pulseGlow {
+            0% { opacity: 0.8; text-shadow: 0 0 8px #ffcc00, 0 0 15px rgba(255, 204, 0, 0.3); }
+            100% { opacity: 1; text-shadow: 0 0 12px #ffcc00, 0 0 25px rgba(255, 204, 0, 0.7); }
         }
-        
-        p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            line-height: 1.8;
-            color: #ccc;
+
+
+        nav {
+            background-color: #0a0a0a;
+            padding: 15px 0;
+            text-align: center;
+            border-bottom: 1px solid #333;
+            position: relative;
+            z-index: 1;
         }
-        
-        .progress-container {
-            width: 100%;
-            height: 10px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 5px;
-            margin: 3rem 0;
+
+        nav a {
+            color: #00ffff;
+            text-decoration: none;
+            padding: 12px 25px;
+            display: inline-block;
+            font-weight: bold;
+            transition: color 0.3s ease, background-color 0.3s ease, text-shadow 0.3s ease;
+            border-radius: 3px;
+            position: relative;
             overflow: hidden;
         }
-        
-        .progress-bar {
+
+        nav a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
             height: 100%;
-            width: 35%;
-            background: linear-gradient(90deg, var(--neon-green), var(--neon-blue));
-            border-radius: 5px;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        nav a:hover::before {
+            left: 100%;
+        }
+
+        nav a:hover {
+            background-color: #00ff00;
+            color: #010101;
+            text-shadow: none;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 40px auto;
+            background-color: rgba(10, 10, 10, 0.9);
+            padding: 50px;
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.3);
+            border: 1px solid #00ff00;
+            direction: rtl;
             position: relative;
-            animation: progress-animation 4s infinite ease-in-out;
+            z-index: 1; /* لضمان ظهور المحتوى فوق الخلفية */
         }
-        
-        @keyframes progress-animation {
-            0% { width: 35%; }
-            50% { width: 38%; }
-            100% { width: 35%; }
-        }
-        
-        .scanlines {
+
+        /* تأثير "غليتش" على الحاويات */
+        .container::before, .container::after {
+            content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: repeating-linear-gradient(
-                to bottom,
-                transparent,
-                transparent 3px,
-                rgba(0, 255, 157, 0.05) 3px,
-                rgba(0, 255, 157, 0.05) 4px
-            );
+            background: #00ff00;
+            box-shadow: 0 0 10px #00ff00;
+            opacity: 0.2;
             pointer-events: none;
-            z-index: 2;
+            animation: glitchEffect 0.5s infinite alternate;
         }
-        
-        .corner {
-            position: absolute;
-            width: 50px;
-            height: 50px;
-            border: 2px solid var(--neon-green);
-            pointer-events: none;
+        .container::before {
+            top: -2px; left: -2px; width: calc(100% + 4px); height: 2px;
         }
-        
-        .corner-tl {
-            top: 20px;
-            left: 20px;
-            border-right: none;
-            border-bottom: none;
+        .container::after {
+            bottom: -2px; right: -2px; width: 2px; height: calc(100% + 4px);
         }
-        
-        .corner-tr {
-            top: 20px;
-            right: 20px;
-            border-left: none;
-            border-bottom: none;
+
+        @keyframes glitchEffect {
+            0% { transform: translate(0); opacity: 0.2; }
+            20% { transform: translate(-2px, 2px); opacity: 0.3; }
+            40% { transform: translate(2px, -2px); opacity: 0.1; }
+            60% { transform: translate(1px, 1px); opacity: 0.4; }
+            80% { transform: translate(-1px, -1px); opacity: 0.2; }
+            100% { transform: translate(0); opacity: 0.2; }
         }
-        
-        .corner-bl {
-            bottom: 20px;
-            left: 20px;
-            border-right: none;
-            border-top: none;
+
+
+        h1, h2 {
+            font-family: 'Chakra Petch', sans-serif;
+            color: #00ffff;
+            border-bottom: 3px solid #ff00ff; /* بنفسجي نيون للخطوط */
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            text-shadow: 0 0 8px #ff00ff, 0 0 15px rgba(255, 0, 255, 0.5);
+            font-size: 2em;
         }
-        
-        .corner-br {
-            bottom: 20px;
-            right: 20px;
-            border-left: none;
-            border-top: none;
+
+        .section {
+            margin-bottom: 50px;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.6);
+            border-left: 5px solid #00ff00;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
+            position: relative;
         }
-        
-        .countdown {
-            font-size: 1.8rem;
-            margin: 2rem 0;
-            background: linear-gradient(90deg, var(--neon-green), var(--neon-blue));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            font-weight: 700;
+
+        .section p, .section ul {
+            color: #eee;
         }
-        
-        .matrix-rain {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+
+        .app-list li, .script-list li {
+            background-color: rgba(20, 20, 20, 0.8);
+            margin-bottom: 15px;
+            padding: 20px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 3px solid #00ffff;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .app-list li:hover, .script-list li:hover {
+            transform: translateX(-5px);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+        }
+
+        .app-list li a, .script-list li a {
+            background-color: #ff00ff; /* بنفسجي نيون */
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            text-shadow: 0 0 5px #000;
+        }
+
+        .app-list li a:hover, .script-list li a:hover {
+            background-color: #cc00cc;
+            box-shadow: 0 0 10px rgba(255, 0, 255, 0.6);
+        }
+
+        .team-member {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            background-color: rgba(20, 20, 20, 0.8);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #00ff00;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
+        }
+
+        .team-member img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin-left: 25px;
+            object-fit: cover;
+            border: 3px solid #00ffff;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+            transition: transform 0.3s ease;
+        }
+        .team-member img:hover {
+            transform: scale(1.05);
+        }
+
+        .team-member h3 {
+            color: #00ffff;
+            margin-top: 0;
+            margin-bottom: 8px;
+            font-family: 'Chakra Petch', sans-serif;
+            text-shadow: 0 0 5px #00ffff;
+        }
+        /* تنسيق التاج بجانب اسم محمد في قسم الفريق */
+        .team-member h3 .crown-emoji {
+            font-size: 0.9em; /* حجم أصغر للتاج داخل النص */
+            margin-right: 5px;
+            vertical-align: middle;
+            animation: pulseGlow 2s infinite alternate; /* نفس تأثير التوهج */
+        }
+
+
+        .team-member p {
+            color: #ccc;
+            font-size: 1em;
+        }
+
+        .chatbot-container {
+            background-color: rgba(10, 10, 10, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 40px;
+            box-shadow: inset 0 0 15px rgba(0, 255, 0, 0.3);
+            border: 1px solid #00ff00;
+        }
+
+        #chat-output {
+            height: 280px;
+            overflow-y: scroll;
+            border: 1px solid #00ff00;
+            padding: 15px;
+            background-color: #050505;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            color: #00ff00;
+            font-size: 0.95em;
+            line-height: 1.5;
+            white-space: pre-wrap; /* للحفاظ على التنسيق المسبق للرسائل */
+            word-break: break-word; /* لكسر الكلمات الطويلة */
+        }
+
+        #chat-output p strong {
+            color: #00ffff; /* لون مميز لاسم المرسل */
+            text-shadow: 0 0 3px #00ffff;
+        }
+
+        #chat-input {
+            width: calc(100% - 100px);
+            padding: 12px;
+            border: 1px solid #ff00ff;
+            border-radius: 5px;
+            margin-left: 15px;
+            background-color: #220022; /* بنفسجي داكن للحقل */
+            color: #00ff00;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1em;
+            box-shadow: 0 0 8px rgba(255, 0, 255, 0.4);
+        }
+
+        #chat-input:focus {
+            outline: none;
+            border-color: #00ff00;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.6);
+        }
+
+        #send-btn {
+            padding: 12px 25px;
+            background-color: #00ff00;
+            color: #010101;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            font-weight: bold;
+            text-transform: uppercase;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+            font-family: 'Chakra Petch', sans-serif;
+        }
+
+        #send-btn:hover {
+            background-color: #00cc00;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.8);
+        }
+
+        form label {
+            color: #00ffff;
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        form input[type="text"],
+        form input[type="email"],
+        form select,
+        form textarea {
+            width: calc(100% - 22px);
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #00ff00;
+            border-radius: 5px;
+            background-color: #1a1a1a;
+            color: #00ff00;
+            font-family: 'Share Tech Mono', monospace;
+            box-shadow: inset 0 0 5px rgba(0, 255, 0, 0.2);
+        }
+
+        form input:focus,
+        form select:focus,
+        form textarea:focus {
+            outline: none;
+            border-color: #00ffff;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        form button[type="submit"] {
+            background-color: #ff00ff;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
+            font-family: 'Chakra Petch', sans-serif;
+        }
+
+        form button[type="submit"]:hover {
+            background-color: #cc00cc;
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.8);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            background-color: #0a0a0a;
+            color: #555;
+            margin-top: 50px;
+            border-top: 2px solid #00ff00;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+            font-size: 0.9em;
+            position: relative;
+            z-index: 1;
+        }
+
+        footer a {
+            color: #00ffff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        footer a:hover {
+            color: #00ff00;
+        }
+
+        .disclaimer, .legal-warning {
+            background-color: rgba(255, 0, 0, 0.1); /* أحمر شفاف للتحذيرات */
+            border-left: 5px solid #ff0000; /* أحمر صارخ للحدود */
+            padding: 25px;
+            margin-top: 40px;
+            border-radius: 8px;
+            color: #ff5555;
+            font-size: 1.1em;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
+            position: relative;
             overflow: hidden;
             z-index: 1;
-            opacity: 0.3;
         }
-        
-        .matrix-column {
+
+        .disclaimer::before, .legal-warning::before {
+            content: '!!! ALERT !!!';
             position: absolute;
             top: 0;
-            width: 20px;
+            left: 0;
+            width: 100%;
             height: 100%;
-            color: var(--neon-green);
-            font-size: 18px;
-            writing-mode: vertical-rl;
-            text-orientation: mixed;
-            animation: matrix-fall linear infinite;
-        }
-        
-        @keyframes matrix-fall {
-            0% { transform: translateY(-100%); }
-            100% { transform: translateY(100vh); }
-        }
-        
-        .warning {
-            color: #ff5555;
+            background: rgba(255, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4em;
+            color: rgba(255, 0, 0, 0.1);
             font-weight: bold;
-            margin-top: 1rem;
-            animation: blink 1.5s infinite;
+            transform: rotate(-10deg);
+            z-index: -1;
+            pointer-events: none;
         }
-        
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+
+        .disclaimer h2, .legal-warning h2 {
+            color: #ff0000;
+            border-bottom: 2px solid #ff0000;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            text-shadow: 0 0 8px rgba(255, 0, 0, 0.6);
+        }
+
+        /* تنسيق كود بايثون */
+        .python-code {
+            background-color: #0a0a0a;
+            border: 1px solid #00ff00;
+            border-radius: 5px;
+            padding: 20px;
+            margin-top: 20px;
+            overflow-x: auto; /* للسماح بالتمرير الأفقي للكود الطويل */
+        }
+
+        .python-code pre {
+            margin: 0;
+            color: #00ff00;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+
+        .python-code .comment {
+            color: #666; /* لون التعليقات */
+        }
+        .python-code .keyword {
+            color: #00ffff; /* لون الكلمات المفتاحية */
+            font-weight: bold;
+        }
+        .python-code .string {
+            color: #ff00ff; /* لون النصوص */
+        }
+        .python-code .function {
+            color: #ffaa00; /* لون الدوال */
+        }
+        .python-code .number {
+            color: #aaaaff; /* لون الأرقام */
+        }
+
+        /* تنسيق قسم الأخبار الأمنية */
+        .threat-news-item {
+            background-color: rgba(20, 20, 20, 0.8);
+            margin-bottom: 25px;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 5px solid #ff00ff; /* بنفسجي نيون */
+            box-shadow: 0 0 10px rgba(255, 0, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .threat-news-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 15px rgba(255, 0, 255, 0.4);
+        }
+        .threat-news-item h3 {
+            color: #00ffff;
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-family: 'Chakra Petch', sans-serif;
+            text-shadow: 0 0 5px #00ffff;
+        }
+        .threat-news-item p {
+            color: #ccc;
+            font-size: 0.95em;
+        }
+        .threat-news-item .date {
+            font-size: 0.85em;
+            color: #888;
+            margin-top: 15px;
+            display: block;
+            text-align: left;
+        }
+        .threat-news-item a {
+            color: #00ff00;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .threat-news-item a:hover {
+            color: #ff00ff;
+        }
+
+        /* تحسينات للشاشات الصغيرة */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5em;
+            }
+            .container {
+                width: 95%;
+                padding: 20px;
+            }
+            nav a {
+                padding: 10px 15px;
+                font-size: 0.9em;
+            }
+            .team-member {
+                flex-direction: column;
+                text-align: center;
+            }
+            .team-member img {
+                margin: 0 0 15px 0;
+            }
+            #chat-input {
+                width: calc(100% - 70px);
+                margin-left: 10px;
+            }
+            #send-btn {
+                padding: 10px 15px;
+            }
+        }
+        .support-palestine {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            z-index: 1000; /* للتأكد من ظهوره فوق العناصر الأخرى */
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            display: flex; /* لعلم فلسطين */
+            align-items: center; /* لعلم فلسطين */
+            gap: 8px; /* مسافة بين النص والعلم */
+        }
+        .support-palestine img {
+            height: 20px;
+            vertical-align: middle;
+            filter: drop-shadow(0 0 3px rgba(255,255,255,0.5)); /* ظل خفيف للعلم */
         }
     </style>
 </head>
 <body>
-    <div class="scanlines"></div>
-    <div class="corner corner-tl"></div>
-    <div class="corner corner-tr"></div>
-    <div class="corner corner-bl"></div>
-    <div class="corner corner-br"></div>
-    
-    <div class="matrix-rain" id="matrixRain"></div>
-    
+
+    <div class="hacker-flow-background" id="hacker-flow"></div>
+    <script>
+        const hackerFlow = document.getElementById('hacker-flow');
+        const chars = '0123456789ABCDEF!@#$%^&*()_+-=[]{}|;:,.<>?/~`';
+        const numStreams = 50; 
+
+        function createStream() {
+            const stream = document.createElement('span');
+            stream.style.left = Math.random() * 100 + 'vw';
+            stream.style.animationDuration = (Math.random() * 10 + 5) + 's'; 
+            stream.style.opacity = Math.random() * 0.5 + 0.1; 
+            
+            let text = '';
+            const length = Math.floor(Math.random() * 30) + 10; 
+            for (let i = 0; i < length; i++) {
+                text += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            stream.textContent = text;
+            hackerFlow.appendChild(stream);
+
+            stream.addEventListener('animationend', () => {
+                stream.remove();
+                createStream(); 
+            });
+        }
+
+        for (let i = 0; i < numStreams; i++) {
+            setTimeout(createStream, Math.random() * 5000); 
+        }
+    </script>
+
+    <header>
+        <h1>حصنك السيبراني // نظام الدفاع</h1>
+        <p>مقاومة الاختراق | استعادة التحكم | حماية المستقبل</p>
+        <div class="king-mohammad">
+            <span>👑</span> محمد <span>👑</span>
+        </div>
+    </header>
+
+    <nav>
+        <a href="#home">الواجهة الرئيسية</a>
+        <a href="#threats">نشرات التهديدات</a>
+        <a href="#applications">بروتوكولات الحماية</a>
+        <a href="#scripts">ترسانة الأدوات</a>
+        <a href="#report">بلاغ عن تهديد</a>
+        <a href="#chatbot">المساعد الآلي</a>
+        <a href="#team">وحدة النخبة</a>
+    </nav>
+
     <div class="container">
-        <h1>الموقع تحت الصيانة</h1>
-        <p>نحن نقوم حاليًا بإجراء تحديثات كبيرة على الموقع لتحسين تجربة المستخدم وإضافة ميزات جديدة.</p>
-        <p class="warning">مدة الصيانة قد تكون طويلة بسبب حجم التحديثات الجوهرية</p>
-        
-        <div class="progress-container">
-            <div class="progress-bar"></div>
+        <section id="home" class="section">
+            <h2>مرحباً بك في المعقل الآمن</h2>
+            <p>نظامنا مصمم لحمايتك في بيئة رقمية متزايدة التعقيد والخطورة. هنا، تجد كل ما تحتاجه لتعزيز دفاعاتك ضد التهديدات المستمرة.</p>
+            <p>سواء كنت مستخدمًا فرديًا أو كيانًا كبيرًا، فإننا نوفر لك أحدث التكتيكات، والأدوات المشفرة، والمعرفة العميقة للبقاء خطوة واحدة أمام المتسللين.</p>
+        </section>
+
+        <section id="threats" class="section">
+            <h2>نشرات التهديدات السيبرانية العالمية</h2>
+            <p>تابع أحدث الاختراقات، الهجمات، والثغرات الأمنية التي تستهدف الكيانات والأفراد حول العالم. هذه النشرات يتم تحديثها بانتظام لتوفير أحدث المعلومات الدفاعية.</p>
+
+            <div class="threat-news-item">
+                <h3>اكتشاف ثغرة خطيرة في بروتوكولات الشبكة</h3>
+                <p>تم الإعلان عن ثغرة أمنية حرجة في البروتوكولات الأساسية المستخدمة في ملايين الأجهزة الشبكية. ينصح بالتحديث الفوري وإجراء فحوصات أمنية مكثفة. الثغرة تسمح للمهاجمين بالتحكم عن بعد في الأنظمة المتأثرة.</p>
+                <span class="date">تاريخ النشر: 17 يوليو 2025</span>
+                <p><a href="#">قراءة المزيد</a></p>
+            </div>
+
+            <div class="threat-news-item">
+                <h3>هجوم "برمجية الفدية" يستهدف مؤسسات مالية كبرى</h3>
+                <p>مجموعة من الهجمات المنسقة باستخدام برمجيات الفدية المتطورة أدت إلى تشفير بيانات حساسة في عدة بنوك وشركات استثمارية. الخسائر الأولية تقدر بملايين الدولارات. يرجى تفعيل النسخ الاحتياطي المشفر.</p>
+                <span class="date">تاريخ النشر: 15 يوليو 2025</span>
+                <p><a href="#">قراءة المزيد</a></p>
+            </div>
+
+            <div class="threat-news-item">
+                <h3>حملة "تصيد احتيالي" جديدة تستهدف موظفي الشركات عبر البريد الإلكتروني</h3>
+                <p>تحذر السلطات الأمنية من حملة تصيد احتيالي واسعة النطاق تستخدم رسائل بريد إلكتروني مزيفة لاستهداف موظفي الشركات الكبرى للحصول على بيانات الاعتماد. يجب توعية الموظفين بضرورة التحقق من هوية المرسل.</p>
+                <span class="date">تاريخ النشر: 12 يوليو 2025</span>
+                <p><a href="#">قراءة المزيد</a></p>
+            </div>
+
+            <p style="color: #00ffff; text-align: center; margin-top: 40px;">
+                للحصول على أحدث التحديثات، تابعنا بانتظام! سيتم إضافة المزيد من النشرات الأمنية فور توفرها.
+            </p>
+        </section>
+
+
+        <section id="applications" class="section">
+            <h2>ترسانة تطبيقات الحماية المشفرة</h2>
+            <p>اختر من بين أقوى تطبيقات الحماية الموصى بها، والمصممة لتوفير دفاع متعدد الطبقات لأجهزتك. انقر للانتقال إلى صفحة التنزيل الرسمية.</p>
+            <ul class="app-list">
+                <li>
+                    <span>**مكافح الفيروسات:** Bitdefender Total Security (إصدار تجريبي)</span>
+                    <a href="https://www.bitdefender.com/solutions/total-security.html" target="_blank">صفحة التنزيل</a>
+                </li>
+                <li>
+                    <span>**جدار الحماية المتقدم:** Comodo Firewall (مجاني)</span>
+                    <a href="https://www.comodo.com/home/internet-security/firewall.php" target="_blank">صفحة التنزيل</a>
+                </li>
+                <li>
+                    <span>**مدير كلمات المرور:** LastPass (إصدار مجاني)</span>
+                    <a href="https://www.lastpass.com/download" target="_blank">صفحة التنزيل</a>
+                </li>
+                <li>
+                    <span>**شبكة VPN آمنة:** ProtonVPN (إصدار مجاني)</span>
+                    <a href="https://protonvpn.com/download/" target="_blank">صفحة التنزيل</a>
+                </li>
+            </ul>
+        </section>
+
+        <section id="scripts" class="section">
+            <h2>أدوات الأتمتة الأمنية (السكربتات)</h2>
+            <p>مجموعة من السكربتات المتقدمة لتأمين الأنظمة، فحص الثغرات، وتحليل السجلات. هذه الأدوات مصممة للمستخدمين ذوي المعرفة التقنية العالية.</p>
+            
+            <h3>سكربت بايثون: فحص سلامة الملفات (MD5 Hash Checker)</h3>
+            <p>يقوم هذا السكربت بحساب قيمة تجزئة MD5 لملف معين، مما يساعد في التحقق من أن الملف لم يتم التلاعب به أو تعديله بعد تنزيله أو نقله. قم بنسخ الكود ولصقه في ملف `check_file_integrity.py` ثم شغله باستخدام `python check_file_integrity.py`.</p>
+            <div class="python-code">
+<pre><code><span class="comment"># -*- coding: utf-8 -*-</span>
+<span class="comment"># سكربت فحص سلامة الملفات باستخدام MD5 Hash</span>
+<span class="comment"># يستخدم للتحقق من أن الملف لم يتم تعديله</span>
+
+<span class="keyword">import</span> hashlib
+<span class="keyword">import</span> os
+
+<span class="function">def</span> <span class="function">calculate_md5</span>(file_path, chunk_size=<span class="number">8192</span>):
+    <span class="string">"""
+    يحسب قيمة تجزئة MD5 لملف معين.
+    :param file_path: مسار الملف.
+    :param chunk_size: حجم القطعة للقراءة (للملفات الكبيرة).
+    :return: قيمة MD5 كـسلسلة نصية سداسية عشرية، أو None إذا كان هناك خطأ.
+    """</span>
+    md5_hash = hashlib.<span class="function">md5</span>()
+    <span class="keyword">if not</span> os.path.<span class="function">exists</span>(file_path):
+        <span class="function">print</span>(<span class="string">f"خطأ: الملف غير موجود في المسار: {file_path}"</span>)
+        <span class="keyword">return</span> <span class="keyword">None</span>
+    
+    <span class="keyword">try</span>:
+        <span class="keyword">with</span> <span class="function">open</span>(file_path, <span class="string">'rb'</span>) <span class="keyword">as</span> f:
+            <span class="keyword">for</span> chunk <span class="keyword">in</span> <span class="function">iter</span>(<span class="function">lambda</span>: f.<span class="function">read</span>(chunk_size), b<span class="string">''</span>):
+                md5_hash.<span class="function">update</span>(chunk)
+        <span class="keyword">return</span> md5_hash.<span class="function">hexdigest</span>()
+    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:
+        <span class="function">print</span>(<span class="string">f"حدث خطأ أثناء قراءة الملف: {e}"</span>)
+        <span class="keyword">return</span> <span class="keyword">None</span>
+
+<span class="function">def</span> <span class="function">main</span>():
+    file_to_check = <span class="function">input</span>(<span class="string">"الرجاء إدخال مسار الملف للتحقق من سلامته: "</span>)
+    expected_md5 = <span class="function">input</span>(<span class="string">"الرجاء إدخال قيمة MD5 المتوقعة (إذا كانت لديك): "</span>).<span class="function">strip</span>()
+
+    calculated_md5 = <span class="function">calculate_md5</span>(file_to_check)
+
+    <span class="keyword">if</span> calculated_md5:
+        <span class="function">print</span>(<span class="string">f"\nقيمة MD5 المحسوبة للملف: {calculated_md5}"</span>)
+        <span class="keyword">if</span> expected_md5:
+            <span class="keyword">if</span> calculated_md5 == expected_md5:
+                <span class="function">print</span>(<span class="string">"تطابق القيم: سلامة الملف مؤكدة! ✅"</span>)
+            <span class="keyword">else</span>:
+                <span class="function">print</span>(<span class="string">"عدم تطابق القيم: قد يكون الملف قد تعرض للتعديل! ❌"</span>)
+        <span class="keyword">else</span>:
+            <span class="function">print</span>(<span class="string">"لم يتم توفير قيمة MD5 متوقعة للمقارنة."</span>)
+    <span class="keyword">else</span>:
+        <span class="function">print</span>(<span class="string">"لم نتمكن من حساب قيمة MD5 للملف."</span>)
+
+<span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:
+    <span class="function">main</span>()
+</code></pre>
+            </div>
+            <p style="color: #ff5555; font-size: 0.9em; margin-top: 20px;">**ملاحظة هامة:** هذا السكربت هو مثال توضيحي. لضمان أمان وفعالية أي سكربتات، تأكد دائمًا من فهمك الكامل لعملها، وقم بتنزيلها من مصادر موثوقة، وافحصها جيدًا قبل التنفيذ.</p>
+        </section>
+
+        <section id="report" class="section">
+            <h2>مركز تلقي البلاغات الأمنية</h2>
+            <p>أبلغ عن أي تهديد سيبراني فورًا: اختراق، ابتزاز، برمجيات خبيثة، أو أي نشاط مشبوه. بياناتك سرية للغاية وسيتم التعامل معها من قبل فريقنا المختص.</p>
+            <form action="submit_report.php" method="POST"> 
+                <p>
+                    <label for="name">معرف المستخدم (اختياري/مستعار):</label>
+                    <input type="text" id="name" name="name" placeholder="اسم مستعار للحماية">
+                </p>
+                <p>
+                    <label for="email">قناة الاتصال (بريد إلكتروني/جهة اتصال مشفرة):</label>
+                    <input type="email" id="email" name="email" required placeholder="بريدك الإلكتروني للتواصل">
+                </p>
+                <p>
+                    <label for="issue_type">فئة التهديد:</label>
+                    <select id="issue_type" name="issue_type" required>
+                        <option value="">-- تصنيف التهديد --</option>
+                        <option value="data_breach">اختراق بيانات</option>
+                        <option value="extortion">ابتزاز إلكتروني</option>
+                        <option value="ransomware">هجوم فدية (Ransomware)</option>
+                        <option value="phishing">تصيد احتيالي (Phishing)</option>
+                        <option value="malware">فيروسات/برمجيات خبيثة</option>
+                        <option value="other_threat">تهديد آخر (يرجى التوضيح)</option>
+                    </select>
+                </p>
+                <p>
+                    <label for="description">وصف تفصيلي للحادث (مع التواريخ والأوقات إن أمكن):</label>
+                    <textarea id="description" name="description" rows="10" required placeholder="يرجى تزويدنا بأكبر قدر ممكن من التفاصيل الفنية والزمنية."></textarea>
+                </p>
+                <button type="submit">إرسال التقرير المشفر</button>
+            </form>
+        </section>
+
+        <section id="chatbot" class="section">
+            <h2>وحدة الذكاء الاصطناعي للدعم الأمني</h2>
+            <p>اطرح على نظامنا الآلي أي استفسار يتعلق بالأمن السيبراني، تحليل الاختراقات، أو استراتيجيات الحماية. سيقدم لك بيانات ومعلومات فورية.</p>
+            <div class="chatbot-container">
+                <div id="chat-output">
+                    <p style="color: #00ffff;"><strong>AI_Unit:</strong> النظام جاهز لاستقبال استفساراتكم الأمنية. كيف يمكنني تحليل مشكلتك؟</p>
+                </div>
+                <div style="display: flex;">
+                    <input type="text" id="chat-input" placeholder="أدخل استفسارك هنا..." style="flex-grow: 1;">
+                    <button id="send-btn">تحليل</button>
+                </div>
+            </div>
+            <script>
+                document.getElementById('send-btn').addEventListener('click', function() {
+                    const input = document.getElementById('chat-input');
+                    const output = document.getElementById('chat-output');
+                    const userMessage = input.value.trim();
+
+                    if (userMessage) {
+                        output.innerHTML += `<p><strong>User:</strong> ${userMessage}</p>`;
+                        input.value = '';
+
+                        let botResponse = 'Error_Code_404: لم يتم العثور على بيانات مطابقة. يرجى إعادة صياغة الاستفسار أو طلب المساعدة من وحدة النخبة.';
+                        if (userMessage.includes('اختراق') || userMessage.includes('هاكر') || userMessage.includes('تهكير')) {
+                            botResponse = 'تحليل: لتعزيز الحماية ضد الاختراق، قم بتحديث جميع الأنظمة، استخدم كلمات مرور معقدة، وفعل المصادقة الثنائية. راقب حركة المرور المشبوهة باستمرار.';
+                        } else if (userMessage.includes('حماية') || userMessage.includes('أمان') || userMessage.includes('دفاع')) {
+                            botResponse = 'بروتوكول_الحماية_مفعل: للحفاظ على أعلى مستويات الأمان، استخدم تطبيقات VPN موثوقة، تجنب الروابط المشبوهة، وقم بتشفير بياناتك الحساسة.';
+                        } else if (userMessage.includes('ابتزاز') || userMessage.includes('فدية')) {
+                            botResponse = 'تحذير_ابتزاز: لا تستجب لطلبات الابتزاز. قم بتوثيق الأدلة فوراً، وافصل الأجهزة المصابة عن الشبكة، وتواصل مع السلطات المختصة أو فريق الدعم الفني لدينا.';
+                        } else if (userMessage.includes('مضاد فيروسات') || userMessage.includes('برامج خبيثة')) {
+                            botResponse = 'تحليل_برمجيات_خبيثة: تأكد من أن برنامج مكافحة الفيروسات محدث باستمرار، وقم بإجراء فحوصات كاملة للنظام بشكل دوري. تجنب تنزيل الملفات من مصادر غير موثوقة.';
+                        } else if (userMessage.includes('من أنت') || userMessage.includes('وظيفتك')) {
+                            botResponse = 'أنا وحدة الذكاء الاصطناعي للدعم الأمني، مهمتي هي تقديم معلومات سريعة وتحليلات أولية حول التهديدات السيبرانية واستراتيجيات الدفاع.';
+                        }
+
+                        setTimeout(() => {
+                            output.innerHTML += `<p style="color: #00ffff;"><strong>AI_Unit:</strong> ${botResponse}</p>`;
+                            output.scrollTop = output.scrollHeight; 
+                        }, 800);
+                    }
+                });
+
+                document.getElementById('chat-input').addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        document.getElementById('send-btn').click();
+                    }
+                });
+            </script>
+        </section>
+
+        <section id="team" class="section">
+            <h2>وحدة النخبة السيبرانية</h2>
+            <p>فريقنا يضم نخبة من خبراء الأمن السيبراني والمحللين المتخصصين، يعملون على مدار الساعة لضمان أمان مجتمعنا الرقمي.</p>
+            <div class="team-member">
+                <div>
+                    <h3>محمد <span class="crown-emoji">👑</span></h3>
+                    <p>المشرف الرئيسي | متخصص في الاختراق الأخلاقي والتحليل الجنائي الرقمي.</p>
+                </div>
+            </div>
+            <div class="team-member">
+                <div>
+                    <h3>الشبحي (Ghost)</h3>
+                    <p>عميل العمليات السرية | متخصص في الأمن السيبراني الخفي والدفاع عن البنية التحتية الحرجة.</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="disclaimer">
+            <h2>تحذير: إخلاء مسؤولية النظام</h2>
+            <p>المحتوى المقدم على هذا النظام هو لأغراض تعليمية وإرشادية بحتة. لا نضمن الحماية المطلقة ضد جميع التهديدات المتقدمة. استخدام أي أدوات أو معلومات يتم على مسؤوليتك الخاصة. حصنك السيبراني لا يتحمل مسؤولية أي أضرار أو خسائر ناتجة عن سوء استخدام المعلومات أو الأدوات.</p>
         </div>
-        
-        <div class="countdown">
-            <p>الوقت المتبقي: <span id="countdown">7 أيام 12:45:22</span></p>
+
+        <div class="legal-warning">
+            <h2>بروتوكول العقوبات القانونية</h2>
+            <p>أي محاولة غير مصرح بها لاختراق هذا النظام، أو استغلال ثغراته، أو التلاعب ببياناته، أو استخدام أي معلومات لأغراض غير قانونية (بما في ذلك القرصنة، الابتزاز، أو أي نشاط إجرامي) سيعرض مرتكبها للملاحقة القانونية الفورية والشديدة بموجب القوانين المحلية والدولية. يتم تتبع كل نشاط مشبوه بدقة والإبلاغ عنه لوكالات تطبيق القانون المختصة.</p>
         </div>
-        
-        <p>نعتذر للإزعاج ونشكركم على صبركم. سنعود أقوى وأفضل!</p>
     </div>
 
-    <script>
-        // إنشاء تأثير المطر الرقمي (Matrix)
-        function createMatrixRain() {
-            const matrixRain = document.getElementById('matrixRain');
-            const chars = "01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン";
-            
-            for (let i = 0; i < 30; i++) {
-                const column = document.createElement('div');
-                column.className = 'matrix-column';
-                column.style.left = `${Math.random() * 100}%`;
-                column.style.animationDuration = `${5 + Math.random() * 15}s`;
-                column.style.animationDelay = `${Math.random() * 5}s`;
-                
-                let content = '';
-                for (let j = 0; j < 50; j++) {
-                    content += chars[Math.floor(Math.random() * chars.length)];
-                }
-                
-                column.textContent = content;
-                matrixRain.appendChild(column);
-            }
-        }
-        
-        // تحديث العداد التنازلي لمدة طويلة
-        function updateCountdown() {
-            const targetDate = new Date();
-            targetDate.setDate(targetDate.getDate() + 7); // إضافة أسبوع للتاريخ الحالي
-            
-            const now = new Date();
-            const diff = targetDate - now;
-            
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-            
-            document.getElementById('countdown').textContent = 
-                `${days} أيام ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-        }
-        
-        // بدء جميع الوظائف
-        window.onload = function() {
-            createMatrixRain();
-            updateCountdown();
-            setInterval(updateCountdown, 1000);
-        };
-    </script>
+    <footer>
+        <p>&copy; 2025 حصنك السيبراني // جميع حقوق البروتوكولات والبيانات محفوظة.</p>
+        <p><a href="#">مصفوفة الخصوصية</a> | <a href="#">شفرة الاستخدام</a></p>
+    </footer>
+
+    <div class="support-palestine">
+        <span style="font-size: 1.2em;">نحن مع غزة</span>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/00/Flag_of_Palestine.svg" alt="علم فلسطين" style="height: 20px; vertical-align: middle;">
+    </div>
+
 </body>
 </html>
