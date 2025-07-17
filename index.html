@@ -20,7 +20,7 @@
             position: relative;
         }
 
-        /* تأثير شاشة الهاكر المتدفقة في الخلفية */
+        /* تأثير شاشة الهاكر المتدفقة في الخلفية - تم الإبقاء عليه جزئياً لتأثير الخطوط الشبكية */
         body::before {
             content: '';
             position: fixed;
@@ -36,7 +36,7 @@
             pointer-events: none;
         }
 
-        /* تأثير توهج خلفي مركز */
+        /* تأثير توهج خلفي مركز - تم الإبقاء عليه لإضافة عمق */
         body::after {
             content: '';
             position: fixed;
@@ -51,35 +51,7 @@
             pointer-events: none;
         }
 
-        /* تأثير شاشة الهاكر المتدفقة - طبقة إضافية */
-        .hacker-flow-background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -3;
-            overflow: hidden;
-            pointer-events: none;
-            background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9));
-        }
-
-        .hacker-flow-background span {
-            position: absolute;
-            background: rgba(0, 255, 0, 0.1);
-            animation: flowDown 15s linear infinite;
-            font-size: 1.2em;
-            color: rgba(0, 255, 0, 0.7);
-            text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
-            white-space: nowrap;
-        }
-
-        @keyframes flowDown {
-            0% { transform: translateY(-100%); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(100vh); opacity: 0; }
-        }
+        /* تم حذف كلاس .hacker-flow-background و JavaScript المتعلق به */
 
         /* رأس الصفحة */
         header {
@@ -92,7 +64,7 @@
             text-transform: uppercase;
             position: relative;
             z-index: 1;
-            overflow: hidden; /* لمنع محتوى التاج المتوهج من الخروج */
+            overflow: hidden;
         }
 
         header h1 {
@@ -100,9 +72,9 @@
             font-size: 3.5em;
             margin-bottom: 10px;
             text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00;
-            white-space: nowrap; /* لمنع كسر السطر في العناوين الكبيرة */
+            white-space: nowrap;
             overflow: hidden;
-            text-overflow: ellipsis; /* لإظهار "..." إذا كان النص طويلاً جدًا */
+            text-overflow: ellipsis;
         }
 
         header p {
@@ -140,10 +112,10 @@
             border-bottom: 1px solid #333;
             position: relative;
             z-index: 1;
-            display: flex; /* لجعل الروابط تتوزع بشكل أفضل */
-            flex-wrap: wrap; /* للسماح للروابط بالانتقال لسطر جديد إذا ضاقت المساحة */
-            justify-content: center; /* لتوسيط الروابط */
-            gap: 10px; /* مسافة بين الروابط */
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
         }
 
         nav a {
@@ -156,7 +128,7 @@
             border-radius: 3px;
             position: relative;
             overflow: hidden;
-            flex-shrink: 0; /* لمنع الروابط من الانكماش أكثر من اللازم */
+            flex-shrink: 0;
         }
 
         nav a::before {
@@ -183,18 +155,18 @@
 
         /* الحاوية الرئيسية للمحتوى */
         .container {
-            width: 95%; /* زيادة العرض على الشاشات الصغيرة */
+            width: 95%;
             max-width: 1200px;
             margin: 40px auto;
             background-color: rgba(10, 10, 10, 0.9);
-            padding: 30px; /* تقليل الحشوة على الشاشات الصغيرة */
+            padding: 30px;
             border-radius: 10px;
             box-shadow: 0 0 30px rgba(0, 255, 0, 0.3);
             border: 1px solid #00ff00;
             direction: rtl;
             position: relative;
             z-index: 1;
-            box-sizing: border-box; /* لضمان أن الحشوة والحدود لا تزيد عن العرض الكلي */
+            box-sizing: border-box;
         }
 
         /* تأثير "غليتش" على الحاويات */
@@ -232,7 +204,7 @@
             margin-bottom: 30px;
             text-shadow: 0 0 8px #ff00ff, 0 0 15px rgba(255, 0, 255, 0.5);
             font-size: 2em;
-            word-break: break-word; /* لكسر الكلمات الطويلة */
+            word-break: break-word;
         }
 
         .section {
@@ -256,15 +228,15 @@
             padding: 20px;
             border-radius: 8px;
             display: flex;
-            flex-direction: column; /* جعل العناصر تتكدس عموديًا على الجوال */
-            align-items: flex-start; /* محاذاة العناصر إلى البداية */
+            flex-direction: column;
+            align-items: flex-start;
             border-left: 3px solid #00ffff;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             box-sizing: border-box;
         }
 
         .app-list li span, .script-list li span {
-            margin-bottom: 10px; /* مسافة بين النص والزر على الجوال */
+            margin-bottom: 10px;
         }
 
         .app-list li:hover, .script-list li:hover {
@@ -281,8 +253,8 @@
             font-weight: bold;
             transition: background-color 0.3s ease, box-shadow 0.3s ease;
             text-shadow: 0 0 5px #000;
-            width: fit-content; /* ليأخذ الزر حجم المحتوى فقط */
-            align-self: flex-end; /* وضع الزر في نهاية السطر على اليمين */
+            width: fit-content;
+            align-self: flex-end;
         }
 
         .app-list li a:hover, .script-list li a:hover {
@@ -300,8 +272,8 @@
             border-radius: 8px;
             border: 1px solid #00ff00;
             box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
-            flex-wrap: wrap; /* للسماح للعناصر بالانتقال لسطر جديد */
-            justify-content: center; /* توسيط المحتوى */
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
         .team-member img {
@@ -313,7 +285,7 @@
             border: 3px solid #00ffff;
             box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
             transition: transform 0.3s ease;
-            flex-shrink: 0; /* منع الصورة من الانكماش */
+            flex-shrink: 0;
         }
         .team-member img:hover {
             transform: scale(1.05);
@@ -325,14 +297,14 @@
             margin-bottom: 8px;
             font-family: 'Chakra Petch', sans-serif;
             text-shadow: 0 0 5px #00ffff;
-            text-align: center; /* توسيط الاسم في وضع العمود */
-            width: 100%; /* ليأخذ الاسم كامل العرض */
+            text-align: center;
+            width: 100%;
         }
         .team-member p {
             color: #ccc;
             font-size: 1em;
-            text-align: center; /* توسيط الوصف في وضع العمود */
-            width: 100%; /* ليأخذ الوصف كامل العرض */
+            text-align: center;
+            width: 100%;
         }
 
         /* تنسيق التاج بجانب اسم محمد في قسم الفريق */
@@ -374,7 +346,7 @@
         }
 
         #chat-input {
-            width: calc(100% - 110px); /* Adjust width for button */
+            width: calc(100% - 110px);
             padding: 12px;
             border: 1px solid #ff00ff;
             border-radius: 5px;
@@ -384,7 +356,7 @@
             font-family: 'Share Tech Mono', monospace;
             font-size: 1em;
             box-shadow: 0 0 8px rgba(255, 0, 255, 0.4);
-            box-sizing: border-box; /* للتأكد من أن padding لا يزيد عن العرض المحدد */
+            box-sizing: border-box;
         }
 
         #chat-input:focus {
@@ -405,7 +377,7 @@
             text-transform: uppercase;
             box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
             font-family: 'Chakra Petch', sans-serif;
-            flex-shrink: 0; /* لمنع الزر من الانكماش */
+            flex-shrink: 0;
         }
 
         #send-btn:hover {
@@ -457,7 +429,7 @@
             transition: background-color 0.3s ease, box-shadow 0.3s ease;
             box-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
             font-family: 'Chakra Petch', sans-serif;
-            width: 100%; /* جعل الزر يأخذ عرض 100% على الجوال */
+            width: 100%;
             box-sizing: border-box;
         }
 
@@ -549,8 +521,8 @@
             font-family: 'Share Tech Mono', monospace;
             font-size: 0.9em;
             line-height: 1.4;
-            white-space: pre-wrap; /* لكسر السطور الطويلة داخل الكود */
-            word-break: break-all; /* لكسر الكلمات الطويلة جدا */
+            white-space: pre-wrap;
+            word-break: break-all;
         }
 
         .python-code .comment {
@@ -591,7 +563,7 @@
             margin-bottom: 10px;
             font-family: 'Chakra Petch', sans-serif;
             text-shadow: 0 0 5px #00ffff;
-            word-break: break-word; /* لكسر الكلمات الطويلة في العناوين */
+            word-break: break-word;
         }
         .threat-news-item p {
             color: #ccc;
@@ -629,7 +601,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            white-space: nowrap; /* لمنع كسر النص */
+            white-space: nowrap;
         }
         .support-palestine img {
             height: 20px;
@@ -640,40 +612,40 @@
         /* تحسينات للشاشات الصغيرة */
         @media (max-width: 768px) {
             header {
-                padding: 20px 0; /* تقليل الحشوة في الهيدر */
+                padding: 20px 0;
             }
             header h1 {
-                font-size: 2em; /* تصغير حجم العنوان الرئيسي */
+                font-size: 2em;
             }
             header p {
-                font-size: 1em; /* تصغير حجم الفقرة في الهيدر */
+                font-size: 1em;
             }
             .king-mohammad {
-                font-size: 1.2em; /* تصغير حجم اسم محمد بالتاج */
+                font-size: 1.2em;
                 margin-top: 10px;
             }
             
             nav {
-                flex-direction: column; /* جعل روابط التنقل عمودية */
-                gap: 5px; /* تقليل المسافة بين الروابط */
+                flex-direction: column;
+                gap: 5px;
                 padding: 10px 0;
             }
             nav a {
-                width: 90%; /* جعل الروابط تأخذ عرضًا شبه كامل */
-                margin: 0 auto; /* توسيط الروابط */
+                width: 90%;
+                margin: 0 auto;
                 padding: 10px 15px;
                 font-size: 0.9em;
                 text-align: center;
             }
 
             .container {
-                width: 98%; /* زيادة العرض لملء الشاشة تقريبًا */
-                padding: 15px; /* تقليل الحشوة الداخلية */
-                margin: 20px auto; /* تقليل الهامش العلوي والسفلي */
+                width: 98%;
+                padding: 15px;
+                margin: 20px auto;
             }
 
             h1, h2 {
-                font-size: 1.5em; /* تصغير حجم العناوين الداخلية */
+                font-size: 1.5em;
                 padding-bottom: 10px;
                 margin-bottom: 20px;
             }
@@ -688,18 +660,18 @@
             }
 
             .team-member {
-                flex-direction: column; /* جعل عناصر الفريق تتكدس عموديا */
+                flex-direction: column;
                 text-align: center;
             }
             .team-member img {
-                margin: 0 auto 15px auto; /* توسيط الصورة وتقليل الهامش السفلي */
+                margin: 0 auto 15px auto;
             }
             .team-member h3, .team-member p {
-                text-align: center; /* التأكد من توسيط النصوص */
+                text-align: center;
             }
 
             #chat-input {
-                width: calc(100% - 90px); /* تعديل عرض حقل الإدخال */
+                width: calc(100% - 90px);
                 margin-left: 10px;
             }
             #send-btn {
@@ -711,7 +683,7 @@
             form input[type="email"],
             form select,
             form textarea {
-                width: calc(100% - 10px); /* Adjust width to prevent horizontal scroll */
+                width: calc(100% - 10px);
             }
             form button[type="submit"] {
                 padding: 12px 20px;
@@ -723,20 +695,20 @@
                 font-size: 0.9em;
             }
             .disclaimer::before, .legal-warning::before {
-                font-size: 2em; /* تصغير حجم نص التنبيه في الخلفية */
+                font-size: 2em;
             }
             .threat-news-item h3 {
-                font-size: 1.1em; /* تصغير حجم عناوين الأخبار */
+                font-size: 1.1em;
             }
 
             .support-palestine {
-                font-size: 0.8em; /* تصغير حجم نص الدعم */
+                font-size: 0.8em;
                 padding: 8px 12px;
                 bottom: 10px;
                 left: 10px;
             }
             .support-palestine img {
-                height: 16px; /* تصغير حجم العلم */
+                height: 16px;
             }
         }
 
@@ -765,37 +737,6 @@
     </style>
 </head>
 <body>
-
-    <div class="hacker-flow-background" id="hacker-flow"></div>
-    <script>
-        const hackerFlow = document.getElementById('hacker-flow');
-        const chars = '0123456789ABCDEF!@#$%^&*()_+-=[]{}|;:,.<>?/~`';
-        const numStreams = 50; 
-
-        function createStream() {
-            const stream = document.createElement('span');
-            stream.style.left = Math.random() * 100 + 'vw';
-            stream.style.animationDuration = (Math.random() * 10 + 5) + 's'; 
-            stream.style.opacity = Math.random() * 0.5 + 0.1; 
-            
-            let text = '';
-            const length = Math.floor(Math.random() * 30) + 10; 
-            for (let i = 0; i < length; i++) {
-                text += chars.charAt(Math.floor(Math.random() * chars.length));
-            }
-            stream.textContent = text;
-            hackerFlow.appendChild(stream);
-
-            stream.addEventListener('animationend', () => {
-                stream.remove();
-                createStream(); 
-            });
-        }
-
-        for (let i = 0; i < numStreams; i++) {
-            setTimeout(createStream, Math.random() * 5000); 
-        }
-    </script>
 
     <header>
         <h1>حصنك السيبراني // نظام الدفاع</h1>
