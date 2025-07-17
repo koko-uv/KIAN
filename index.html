@@ -8,15 +8,16 @@
         /* --- التصميم السيبراني (الهاكر) الجبار --- */
         @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;700&family=Share+Tech+Mono&display=swap');
 
+        /* إعدادات أساسية للصفحة */
         body {
-            font-family: 'Share Tech Mono', monospace; /* خط تقني */
+            font-family: 'Share Tech Mono', monospace;
             margin: 0;
             padding: 0;
             background-color: #010101; /* أسود حالك */
             color: #00ff00; /* أخضر نيون افتراضي */
             line-height: 1.7;
-            overflow-x: hidden;
-            position: relative; /* للسماح بتأثيرات الخلفية المطلقة */
+            overflow-x: hidden; /* لمنع شريط التمرير الأفقي غير المرغوب فيه */
+            position: relative;
         }
 
         /* تأثير شاشة الهاكر المتدفقة في الخلفية */
@@ -41,8 +42,8 @@
             position: fixed;
             top: 50%;
             left: 50%;
-            width: 800px;
-            height: 800px;
+            width: 100vmin; /* استخدام vmin للتكيف مع أصغر بعد للشاشة */
+            height: 100vmin;
             background: radial-gradient(circle, rgba(0, 255, 0, 0.05) 0%, transparent 70%);
             transform: translate(-50%, -50%);
             border-radius: 50%;
@@ -57,15 +58,15 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -3; /* أبعد من الطبقات الأخرى */
+            z-index: -3;
             overflow: hidden;
             pointer-events: none;
-            background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)); /* لضمان وضوح المحتوى */
+            background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9));
         }
 
         .hacker-flow-background span {
             position: absolute;
-            background: rgba(0, 255, 0, 0.1); /* لون الشفرة الخافتة */
+            background: rgba(0, 255, 0, 0.1);
             animation: flowDown 15s linear infinite;
             font-size: 1.2em;
             color: rgba(0, 255, 0, 0.7);
@@ -80,23 +81,28 @@
             100% { transform: translateY(100vh); opacity: 0; }
         }
 
+        /* رأس الصفحة */
         header {
             background-color: rgba(0, 0, 0, 0.8);
-            color: #00ffff; /* أزرق سماوي نيون */
+            color: #00ffff;
             padding: 40px 0;
             text-align: center;
             border-bottom: 2px solid #00ff00;
             box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
             text-transform: uppercase;
-            position: relative; /* لضمان ظهور المحتوى فوق الخلفية */
+            position: relative;
             z-index: 1;
+            overflow: hidden; /* لمنع محتوى التاج المتوهج من الخروج */
         }
 
         header h1 {
-            font-family: 'Chakra Petch', sans-serif; /* خط جريء للعناوين */
+            font-family: 'Chakra Petch', sans-serif;
             font-size: 3.5em;
             margin-bottom: 10px;
             text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00;
+            white-space: nowrap; /* لمنع كسر السطر في العناوين الكبيرة */
+            overflow: hidden;
+            text-overflow: ellipsis; /* لإظهار "..." إذا كان النص طويلاً جدًا */
         }
 
         header p {
@@ -109,7 +115,7 @@
         .king-mohammad {
             font-family: 'Chakra Petch', sans-serif;
             font-size: 1.5em;
-            color: #ffcc00; /* لون ذهبي للتاج والاسم */
+            color: #ffcc00;
             text-shadow: 0 0 10px #ffcc00, 0 0 20px rgba(255, 204, 0, 0.5);
             margin-top: 20px;
             display: block;
@@ -126,7 +132,7 @@
             100% { opacity: 1; text-shadow: 0 0 12px #ffcc00, 0 0 25px rgba(255, 204, 0, 0.7); }
         }
 
-
+        /* قائمة التنقل */
         nav {
             background-color: #0a0a0a;
             padding: 15px 0;
@@ -134,6 +140,10 @@
             border-bottom: 1px solid #333;
             position: relative;
             z-index: 1;
+            display: flex; /* لجعل الروابط تتوزع بشكل أفضل */
+            flex-wrap: wrap; /* للسماح للروابط بالانتقال لسطر جديد إذا ضاقت المساحة */
+            justify-content: center; /* لتوسيط الروابط */
+            gap: 10px; /* مسافة بين الروابط */
         }
 
         nav a {
@@ -146,6 +156,7 @@
             border-radius: 3px;
             position: relative;
             overflow: hidden;
+            flex-shrink: 0; /* لمنع الروابط من الانكماش أكثر من اللازم */
         }
 
         nav a::before {
@@ -170,18 +181,20 @@
             box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
         }
 
+        /* الحاوية الرئيسية للمحتوى */
         .container {
-            width: 90%;
+            width: 95%; /* زيادة العرض على الشاشات الصغيرة */
             max-width: 1200px;
             margin: 40px auto;
             background-color: rgba(10, 10, 10, 0.9);
-            padding: 50px;
+            padding: 30px; /* تقليل الحشوة على الشاشات الصغيرة */
             border-radius: 10px;
             box-shadow: 0 0 30px rgba(0, 255, 0, 0.3);
             border: 1px solid #00ff00;
             direction: rtl;
             position: relative;
-            z-index: 1; /* لضمان ظهور المحتوى فوق الخلفية */
+            z-index: 1;
+            box-sizing: border-box; /* لضمان أن الحشوة والحدود لا تزيد عن العرض الكلي */
         }
 
         /* تأثير "غليتش" على الحاويات */
@@ -210,15 +223,16 @@
             100% { transform: translate(0); opacity: 0.2; }
         }
 
-
+        /* العناوين داخل الحاوية */
         h1, h2 {
             font-family: 'Chakra Petch', sans-serif;
             color: #00ffff;
-            border-bottom: 3px solid #ff00ff; /* بنفسجي نيون للخطوط */
+            border-bottom: 3px solid #ff00ff;
             padding-bottom: 15px;
             margin-bottom: 30px;
             text-shadow: 0 0 8px #ff00ff, 0 0 15px rgba(255, 0, 255, 0.5);
             font-size: 2em;
+            word-break: break-word; /* لكسر الكلمات الطويلة */
         }
 
         .section {
@@ -235,16 +249,22 @@
             color: #eee;
         }
 
+        /* قوائم التطبيقات والسكربتات */
         .app-list li, .script-list li {
             background-color: rgba(20, 20, 20, 0.8);
             margin-bottom: 15px;
             padding: 20px;
             border-radius: 8px;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            flex-direction: column; /* جعل العناصر تتكدس عموديًا على الجوال */
+            align-items: flex-start; /* محاذاة العناصر إلى البداية */
             border-left: 3px solid #00ffff;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .app-list li span, .script-list li span {
+            margin-bottom: 10px; /* مسافة بين النص والزر على الجوال */
         }
 
         .app-list li:hover, .script-list li:hover {
@@ -253,7 +273,7 @@
         }
 
         .app-list li a, .script-list li a {
-            background-color: #ff00ff; /* بنفسجي نيون */
+            background-color: #ff00ff;
             color: #fff;
             padding: 10px 20px;
             border-radius: 5px;
@@ -261,6 +281,8 @@
             font-weight: bold;
             transition: background-color 0.3s ease, box-shadow 0.3s ease;
             text-shadow: 0 0 5px #000;
+            width: fit-content; /* ليأخذ الزر حجم المحتوى فقط */
+            align-self: flex-end; /* وضع الزر في نهاية السطر على اليمين */
         }
 
         .app-list li a:hover, .script-list li a:hover {
@@ -268,6 +290,7 @@
             box-shadow: 0 0 10px rgba(255, 0, 255, 0.6);
         }
 
+        /* أعضاء الفريق */
         .team-member {
             display: flex;
             align-items: center;
@@ -277,6 +300,8 @@
             border-radius: 8px;
             border: 1px solid #00ff00;
             box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
+            flex-wrap: wrap; /* للسماح للعناصر بالانتقال لسطر جديد */
+            justify-content: center; /* توسيط المحتوى */
         }
 
         .team-member img {
@@ -288,6 +313,7 @@
             border: 3px solid #00ffff;
             box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
             transition: transform 0.3s ease;
+            flex-shrink: 0; /* منع الصورة من الانكماش */
         }
         .team-member img:hover {
             transform: scale(1.05);
@@ -299,21 +325,25 @@
             margin-bottom: 8px;
             font-family: 'Chakra Petch', sans-serif;
             text-shadow: 0 0 5px #00ffff;
+            text-align: center; /* توسيط الاسم في وضع العمود */
+            width: 100%; /* ليأخذ الاسم كامل العرض */
         }
-        /* تنسيق التاج بجانب اسم محمد في قسم الفريق */
-        .team-member h3 .crown-emoji {
-            font-size: 0.9em; /* حجم أصغر للتاج داخل النص */
-            margin-right: 5px;
-            vertical-align: middle;
-            animation: pulseGlow 2s infinite alternate; /* نفس تأثير التوهج */
-        }
-
-
         .team-member p {
             color: #ccc;
             font-size: 1em;
+            text-align: center; /* توسيط الوصف في وضع العمود */
+            width: 100%; /* ليأخذ الوصف كامل العرض */
         }
 
+        /* تنسيق التاج بجانب اسم محمد في قسم الفريق */
+        .team-member h3 .crown-emoji {
+            font-size: 0.9em;
+            margin-right: 5px;
+            vertical-align: middle;
+            animation: pulseGlow 2s infinite alternate;
+        }
+
+        /* قسم الشات بوت */
         .chatbot-container {
             background-color: rgba(10, 10, 10, 0.9);
             padding: 30px;
@@ -334,26 +364,27 @@
             color: #00ff00;
             font-size: 0.95em;
             line-height: 1.5;
-            white-space: pre-wrap; /* للحفاظ على التنسيق المسبق للرسائل */
-            word-break: break-word; /* لكسر الكلمات الطويلة */
+            white-space: pre-wrap;
+            word-break: break-word;
         }
 
         #chat-output p strong {
-            color: #00ffff; /* لون مميز لاسم المرسل */
+            color: #00ffff;
             text-shadow: 0 0 3px #00ffff;
         }
 
         #chat-input {
-            width: calc(100% - 100px);
+            width: calc(100% - 110px); /* Adjust width for button */
             padding: 12px;
             border: 1px solid #ff00ff;
             border-radius: 5px;
             margin-left: 15px;
-            background-color: #220022; /* بنفسجي داكن للحقل */
+            background-color: #220022;
             color: #00ff00;
             font-family: 'Share Tech Mono', monospace;
             font-size: 1em;
             box-shadow: 0 0 8px rgba(255, 0, 255, 0.4);
+            box-sizing: border-box; /* للتأكد من أن padding لا يزيد عن العرض المحدد */
         }
 
         #chat-input:focus {
@@ -374,6 +405,7 @@
             text-transform: uppercase;
             box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
             font-family: 'Chakra Petch', sans-serif;
+            flex-shrink: 0; /* لمنع الزر من الانكماش */
         }
 
         #send-btn:hover {
@@ -381,6 +413,7 @@
             box-shadow: 0 0 15px rgba(0, 255, 0, 0.8);
         }
 
+        /* تنسيق النماذج */
         form label {
             color: #00ffff;
             font-weight: bold;
@@ -401,6 +434,7 @@
             color: #00ff00;
             font-family: 'Share Tech Mono', monospace;
             box-shadow: inset 0 0 5px rgba(0, 255, 0, 0.2);
+            box-sizing: border-box;
         }
 
         form input:focus,
@@ -423,6 +457,8 @@
             transition: background-color 0.3s ease, box-shadow 0.3s ease;
             box-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
             font-family: 'Chakra Petch', sans-serif;
+            width: 100%; /* جعل الزر يأخذ عرض 100% على الجوال */
+            box-sizing: border-box;
         }
 
         form button[type="submit"]:hover {
@@ -430,6 +466,7 @@
             box-shadow: 0 0 20px rgba(255, 0, 255, 0.8);
         }
 
+        /* التذييل */
         footer {
             text-align: center;
             padding: 30px;
@@ -452,9 +489,10 @@
             color: #00ff00;
         }
 
+        /* التحذيرات القانونية وإخلاء المسؤولية */
         .disclaimer, .legal-warning {
-            background-color: rgba(255, 0, 0, 0.1); /* أحمر شفاف للتحذيرات */
-            border-left: 5px solid #ff0000; /* أحمر صارخ للحدود */
+            background-color: rgba(255, 0, 0, 0.1);
+            border-left: 5px solid #ff0000;
             padding: 25px;
             margin-top: 40px;
             border-radius: 8px;
@@ -464,6 +502,7 @@
             position: relative;
             overflow: hidden;
             z-index: 1;
+            box-sizing: border-box;
         }
 
         .disclaimer::before, .legal-warning::before {
@@ -500,7 +539,8 @@
             border-radius: 5px;
             padding: 20px;
             margin-top: 20px;
-            overflow-x: auto; /* للسماح بالتمرير الأفقي للكود الطويل */
+            overflow-x: auto;
+            box-sizing: border-box;
         }
 
         .python-code pre {
@@ -509,23 +549,25 @@
             font-family: 'Share Tech Mono', monospace;
             font-size: 0.9em;
             line-height: 1.4;
+            white-space: pre-wrap; /* لكسر السطور الطويلة داخل الكود */
+            word-break: break-all; /* لكسر الكلمات الطويلة جدا */
         }
 
         .python-code .comment {
-            color: #666; /* لون التعليقات */
+            color: #666;
         }
         .python-code .keyword {
-            color: #00ffff; /* لون الكلمات المفتاحية */
+            color: #00ffff;
             font-weight: bold;
         }
         .python-code .string {
-            color: #ff00ff; /* لون النصوص */
+            color: #ff00ff;
         }
         .python-code .function {
-            color: #ffaa00; /* لون الدوال */
+            color: #ffaa00;
         }
         .python-code .number {
-            color: #aaaaff; /* لون الأرقام */
+            color: #aaaaff;
         }
 
         /* تنسيق قسم الأخبار الأمنية */
@@ -534,9 +576,10 @@
             margin-bottom: 25px;
             padding: 20px;
             border-radius: 8px;
-            border-left: 5px solid #ff00ff; /* بنفسجي نيون */
+            border-left: 5px solid #ff00ff;
             box-shadow: 0 0 10px rgba(255, 0, 255, 0.2);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-sizing: border-box;
         }
         .threat-news-item:hover {
             transform: translateY(-3px);
@@ -548,6 +591,7 @@
             margin-bottom: 10px;
             font-family: 'Chakra Petch', sans-serif;
             text-shadow: 0 0 5px #00ffff;
+            word-break: break-word; /* لكسر الكلمات الطويلة في العناوين */
         }
         .threat-news-item p {
             color: #ccc;
@@ -570,34 +614,7 @@
             color: #ff00ff;
         }
 
-        /* تحسينات للشاشات الصغيرة */
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2.5em;
-            }
-            .container {
-                width: 95%;
-                padding: 20px;
-            }
-            nav a {
-                padding: 10px 15px;
-                font-size: 0.9em;
-            }
-            .team-member {
-                flex-direction: column;
-                text-align: center;
-            }
-            .team-member img {
-                margin: 0 0 15px 0;
-            }
-            #chat-input {
-                width: calc(100% - 70px);
-                margin-left: 10px;
-            }
-            #send-btn {
-                padding: 10px 15px;
-            }
-        }
+        /* عنصر "نحن مع غزة" */
         .support-palestine {
             position: fixed;
             bottom: 20px;
@@ -607,16 +624,143 @@
             padding: 10px 15px;
             border-radius: 5px;
             font-size: 0.9em;
-            z-index: 1000; /* للتأكد من ظهوره فوق العناصر الأخرى */
+            z-index: 1000;
             box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-            display: flex; /* لعلم فلسطين */
-            align-items: center; /* لعلم فلسطين */
-            gap: 8px; /* مسافة بين النص والعلم */
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap; /* لمنع كسر النص */
         }
         .support-palestine img {
             height: 20px;
             vertical-align: middle;
-            filter: drop-shadow(0 0 3px rgba(255,255,255,0.5)); /* ظل خفيف للعلم */
+            filter: drop-shadow(0 0 3px rgba(255,255,255,0.5));
+        }
+
+        /* تحسينات للشاشات الصغيرة */
+        @media (max-width: 768px) {
+            header {
+                padding: 20px 0; /* تقليل الحشوة في الهيدر */
+            }
+            header h1 {
+                font-size: 2em; /* تصغير حجم العنوان الرئيسي */
+            }
+            header p {
+                font-size: 1em; /* تصغير حجم الفقرة في الهيدر */
+            }
+            .king-mohammad {
+                font-size: 1.2em; /* تصغير حجم اسم محمد بالتاج */
+                margin-top: 10px;
+            }
+            
+            nav {
+                flex-direction: column; /* جعل روابط التنقل عمودية */
+                gap: 5px; /* تقليل المسافة بين الروابط */
+                padding: 10px 0;
+            }
+            nav a {
+                width: 90%; /* جعل الروابط تأخذ عرضًا شبه كامل */
+                margin: 0 auto; /* توسيط الروابط */
+                padding: 10px 15px;
+                font-size: 0.9em;
+                text-align: center;
+            }
+
+            .container {
+                width: 98%; /* زيادة العرض لملء الشاشة تقريبًا */
+                padding: 15px; /* تقليل الحشوة الداخلية */
+                margin: 20px auto; /* تقليل الهامش العلوي والسفلي */
+            }
+
+            h1, h2 {
+                font-size: 1.5em; /* تصغير حجم العناوين الداخلية */
+                padding-bottom: 10px;
+                margin-bottom: 20px;
+            }
+
+            .section {
+                padding: 15px;
+                margin-bottom: 30px;
+            }
+
+            .app-list li, .script-list li {
+                padding: 15px;
+            }
+
+            .team-member {
+                flex-direction: column; /* جعل عناصر الفريق تتكدس عموديا */
+                text-align: center;
+            }
+            .team-member img {
+                margin: 0 auto 15px auto; /* توسيط الصورة وتقليل الهامش السفلي */
+            }
+            .team-member h3, .team-member p {
+                text-align: center; /* التأكد من توسيط النصوص */
+            }
+
+            #chat-input {
+                width: calc(100% - 90px); /* تعديل عرض حقل الإدخال */
+                margin-left: 10px;
+            }
+            #send-btn {
+                padding: 10px 15px;
+                font-size: 0.9em;
+            }
+
+            form input[type="text"],
+            form input[type="email"],
+            form select,
+            form textarea {
+                width: calc(100% - 10px); /* Adjust width to prevent horizontal scroll */
+            }
+            form button[type="submit"] {
+                padding: 12px 20px;
+                font-size: 0.95em;
+            }
+
+            .disclaimer, .legal-warning {
+                padding: 15px;
+                font-size: 0.9em;
+            }
+            .disclaimer::before, .legal-warning::before {
+                font-size: 2em; /* تصغير حجم نص التنبيه في الخلفية */
+            }
+            .threat-news-item h3 {
+                font-size: 1.1em; /* تصغير حجم عناوين الأخبار */
+            }
+
+            .support-palestine {
+                font-size: 0.8em; /* تصغير حجم نص الدعم */
+                padding: 8px 12px;
+                bottom: 10px;
+                left: 10px;
+            }
+            .support-palestine img {
+                height: 16px; /* تصغير حجم العلم */
+            }
+        }
+
+        /* تحسينات إضافية للشاشات الصغيرة جداً (أقل من 480px) */
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+            .king-mohammad {
+                font-size: 1em;
+            }
+            nav a {
+                padding: 8px 10px;
+                font-size: 0.8em;
+            }
+            .container {
+                padding: 10px;
+            }
+            h1, h2 {
+                font-size: 1.3em;
+            }
+            .python-code pre {
+                font-size: 0.8em;
+            }
         }
     </style>
 </head>
@@ -908,8 +1052,8 @@
     </footer>
 
     <div class="support-palestine">
-        <span style="font-size: 1.2em;">نحن مع غزة</span>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/0/00/Flag_of_Palestine.svg" alt="علم فلسطين" style="height: 20px; vertical-align: middle;">
+        <span>نحن مع غزة</span>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/00/Flag_of_Palestine.svg" alt="علم فلسطين">
     </div>
 
 </body>
