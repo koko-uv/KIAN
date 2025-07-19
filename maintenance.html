@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مشروع محمد السري - لوحة التحكم</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700&display=swap'); /* خطوط سيبرانية */
+
+        body {
+            background-color: #000;
+            color: #0F0; /* أخضر نيون */
+            font-family: 'Share Tech Mono', monospace;
+            overflow-y: auto; /* السماح بالتمرير العمودي على مستوى الجسم */
+            overflow-x: hidden; /* إبقاء التمرير الأفقي مخفيًا */
+            min-height: 100vh; /* التأكد من أن الجسم على الأقل بارتفاع الشاشة */
+            margin: 0;
+            display: flex; /* للحفاظ على توسيط المحتوى */
+            flex-direction: column;
+            justify-content: flex-start; /* السماح للمحتوى بالبدء من الأعلى والتمرير */
+            align-items: center;
+            position: relative;
+        }
+
+        /* خلفية الشلال السيبراني المتدفق */
+        .cyber-waterfall-bg {
+            position: fixed; /* لتثبيت الخلفية وتجنب التمرير مع المحتوى */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        .cyber-waterfall-bg span {
+            position: absolute;
+            background: rgba(0, 255, 0, 0.4);
+            width: 2px;
+            height: 15px;
+            animation: fall 6s linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100vh);
+                opacity: 0;
+            }
+            20% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
+
+        /* خطوط البيانات ثلاثية الأبعاد */
+        .data-grid {
+            position: fixed; /* لتثبيت الخلفية وتجنب التمرير مع المحتوى */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: grid;
+            grid-template-columns: repeat(20, 1fr);
+            grid-template-rows: repeat(15, 1fr);
+            pointer-events: none;
+            z-index: -2;
+            opacity: 0.05;
+        }
+
+        .grid-cell {
+            border: 1px solid rgba(0, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .grid-cell::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(0, 255, 255, 0.2) 0%, transparent 70%);
+            transform: scale(0);
+            animation: cell-flash 5s infinite ease-out;
+            opacity: 0;
+        }
+
+        @keyframes cell-flash {
+            0% { transform: scale(0); opacity: 0; }
+            10% { transform: scale(1); opacity: 1; }
+            20% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(0); opacity: 0; }
+        }
+
+        /* التأثيرات السيبرانية العامة */
+        .cyber-aura {
+            position: fixed; /* لتثبيت الخلفية وتجنب التمرير مع المحتوى */
+            width: 100%;
+            height: 100%;
+            box-shadow: inset 0 0 150px rgba(0, 255, 255, 0.2), 0 0 150px rgba(0, 255, 255, 0.2);
+            border-radius: 50%;
+            animation: aura-pulse 8s infinite alternate;
+            z-index: -3; /* أعمق طبقة */
+        }
+
+        @keyframes aura-pulse {
+            0% { transform: scale(0.8); opacity: 0.1; }
+            100% { transform: scale(1.2); opacity: 0.3; }
+        }
+
+        /* الواجهة الرئيسية */
+        .container {
+            background-color: rgba(0, 0, 0, 0.85);
+            padding: 50px;
+            border: 3px solid #0FF;
+            box-shadow: 0 0 40px #0FF, 0 0 80px rgba(0, 255, 255, 0.5);
+            text-align: center;
+            animation: border-glitch 2s infinite alternate;
+            max-width: 900px;
+            border-radius: 15px;
+            position: relative;
+            z-index: 1;
+            margin: 50px auto;
+            /* يتم إخفاء المحتوى الرئيسي في البداية */
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        /* عندما يتم كشف المحتوى */
+        body.content-visible .container {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+
+        @keyframes border-glitch {
+            0% { border-color: #0FF; box-shadow: 0 0 40px #0FF, 0 0 80px rgba(0, 255, 255, 0.5); }
+            25% { border-color: #F0F; box-shadow: 0 0 40px #F0F, 0 0 80px rgba(255, 0, 255, 0.5); }
+            50% { border-color: #FF0; box-shadow: 0 0 40px #FF0, 0 0 80px rgba(255, 255, 0, 0.5); }
+            75% { border-color: #0FF; box-shadow: 0 0 40px #0FF, 0 0 80px rgba(0, 255, 255, 0.5); }
+            100% { border-color: #0F0; box-shadow: 0 0 40px #0F0, 0 0 80px rgba(0, 255, 0, 0.5); }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 5em;
+            color: #0F0;
+            text-shadow: 0 0 20px #0F0, 0 0 40px rgba(0, 255, 0, 0.8);
+            margin-bottom: 15px;
+            letter-spacing: 5px;
+            animation: text-neon-pulse 3s infinite alternate;
+        }
+
+        @keyframes text-neon-pulse {
+            0% { text-shadow: 0 0 20px #0F0, 0 0 40px rgba(0, 255, 0, 0.8); }
+            100% { text-shadow: 0 0 15px #0F0, 0 0 30px rgba(0, 255, 0, 0.6); }
+        }
+
+        h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3em;
+            color: #F00;
+            text-shadow: 0 0 15px #F00, 0 0 30px rgba(255, 0, 0, 0.7);
+            margin-top: 10px;
+            animation: pulse-red-strong 1s infinite alternate;
+        }
+
+        @keyframes pulse-red-strong {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(1.02); opacity: 0.9; }
+        }
+
+        p {
+            font-size: 1.3em;
+            margin-bottom: 25px;
+            line-height: 1.8;
+            color: #DDD;
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
+        }
+
+        /* نمط جديد للتاريخ */
+        .release-date {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5em;
+            color: #0FF; /* لون سماوي */
+            text-shadow: 0 0 10px #0FF, 0 0 20px rgba(0, 255, 255, 0.7);
+            margin-top: 20px;
+            margin-bottom: 30px;
+            animation: date-pulse 2s infinite alternate;
+        }
+
+        @keyframes date-pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.03); opacity: 0.9; }
+        }
+
+
+        .hacker-console {
+            background-color: rgba(0, 0, 0, 0.95);
+            border: 2px solid #0F0;
+            padding: 25px;
+            margin-top: 40px;
+            width: 90%;
+            max-width: 800px;
+            min-height: 250px;
+            overflow: auto;
+            text-align: left;
+            white-space: pre-wrap;
+            box-shadow: 0 0 15px #0F0 inset, 0 0 30px #0F0;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .hacker-console::before {
+            content: 'SYSTEM@CORE:~# ';
+            color: #0FF;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .hacker-console span {
+            display: block;
+            margin-bottom: 5px;
+            line-height: 1.5;
+            color: #0F0;
+        }
+
+        .hacker-console .response {
+                color: #FFF;
+            background-color: rgba(0, 100, 0, 0.2);
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+
+        .hacker-console .error {
+            color: #F00;
+            text-shadow: 0 0 5px #F00;
+        }
+
+        .cursor {
+            display: inline-block;
+            background-color: #0F0;
+            width: 10px;
+            height: 1.4em;
+            margin-left: 5px;
+            animation: blink-caret 0.7s step-end infinite;
+        }
+
+        @keyframes blink-caret {
+            from, to { background-color: transparent; }
+            50% { background-color: #0F0; }
+        }
+
+        /* قسم القائمين على الموقع - ارتفاع أقصى وتمرير داخلي */
+        .team-section {
+            margin-top: 50px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 2px solid #F0F;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 25px #F0F, 0 0 50px rgba(255, 0, 255, 0.4);
+            width: 90%;
+            max-width: 700px;
+            max-height: 400px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: #0FF #000;
+        }
+
+        .team-section::-webkit-scrollbar {
+            width: 8px;
+        }
+        .team-section::-webkit-scrollbar-track {
+            background: #000;
+            border-radius: 10px;
+        }
+        .team-section::-webkit-scrollbar-thumb {
+            background-color: #0FF;
+            border-radius: 10px;
+            border: 2px solid #000;
+        }
+
+        .team-section h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2em;
+            color: #F0F;
+            text-shadow: 0 0 10px #F0F, 0 0 20px rgba(255, 0, 255, 0.6);
+            margin-bottom: 25px;
+            letter-spacing: 2px;
+            position: sticky;
+            top: 0;
+            background-color: rgba(0, 0, 0, 0.9);
+            padding-bottom: 15px;
+            z-index: 2;
+            border-bottom: 1px solid #F0F;
+        }
+
+        .team-list {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .team-list li {
+            background-color: rgba(0, 100, 100, 0.1);
+            border: 1px solid #0FF;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+        }
+
+        .team-list li:hover {
+            transform: translateY(-5px) scale(1.02);
+            background-color: rgba(0, 150, 150, 0.2);
+            box-shadow: 0 0 15px #0FF, 0 0 30px rgba(0, 255, 255, 0.4);
+        }
+
+        .team-list li strong {
+            display: block;
+            font-size: 1.5em;
+            color: #0FF;
+            margin-bottom: 5px;
+            text-shadow: 0 0 8px #0FF;
+        }
+
+        .team-list li span {
+            display: block;
+            font-size: 1em;
+            color: #FFF;
+            margin-bottom: 5px;
+        }
+
+        .team-list li em {
+            display: block;
+            font-size: 0.9em;
+            color: #888;
+        }
+
+        /* شريط التقدم الوهمي */
+        .progress-bar-section {
+            margin-top: 50px;
+            width: 90%;
+            max-width: 800px;
+            text-align: left;
+        }
+
+        .progress-bar-section h3 {
+            font-family: 'Orbitron', sans-serif;
+            color: #0F0;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px #0F0;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 25px;
+            background-color: rgba(0, 255, 0, 0.1);
+            border: 1px solid #0F0;
+            border-radius: 5px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 0 10px #0F0 inset;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 85%;
+            background: linear-gradient(90deg, rgba(0, 255, 0, 0.5), #0F0);
+            animation: progress-animation 3s linear infinite alternate;
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding-left: 10px;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #000;
+        }
+
+        .progress-fill::after {
+            content: '85% COMPLETE';
+            position: absolute;
+            right: 10px;
+            color: #000;
+        }
+
+        @keyframes progress-animation {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+
+        .footer-text {
+            margin-top: 40px;
+            font-size: 1em;
+            color: #555;
+            text-shadow: none;
+            padding-bottom: 50px;
+        }
+
+        /* الشاشة الزائفة للتهديد */
+        #threat-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.98); /* شبه شفافة لإظهار الخلفية قليلاً */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999; /* أعلى من كل شيء */
+            color: #F00; /* نص أحمر */
+            font-family: 'Share Tech Mono', monospace;
+            text-align: center;
+            /* تم إزالة هذا السطر لتعطيل تأثير الاهتزاز */
+            /* animation: screen-glitch 0.1s infinite alternate; */
+            transition: opacity 0.5s ease-out; /* لعملية الإخفاء السلسة */
+        }
+
+        #threat-screen h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 5em; /* أكبر قليلاً */
+            margin-bottom: 20px;
+            color: #FF0; /* عنوان أصفر متوهج */
+            text-shadow: 0 0 20px #FF0, 0 0 40px rgba(255, 255, 0, 0.8);
+            animation: neon-flicker 1.5s infinite alternate; /* تأثير توهج متقطع */
+        }
+
+        @keyframes neon-flicker {
+            0%, 100% { opacity: 1; text-shadow: 0 0 20px #FF0, 0 0 40px rgba(255, 255, 0, 0.8); }
+            50% { opacity: 0.8; text-shadow: 0 0 10px #FF0, 0 0 20px rgba(255, 255, 0, 0.6); }
+        }
+
+
+        #threat-screen p {
+            font-size: 1.8em; /* أكبر قليلاً */
+            color: #0F0; /* أخضر نيون للرسائل */
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.6);
+            line-height: 1.5;
+        }
+
+        #threat-screen p.signature {
+            font-size: 1.7em; /* توقيع الشبح */
+            color: #0FF; /* أزرق سماوي */
+            text-shadow: 0 0 12px rgba(0, 255, 255, 0.7);
+            margin-top: 40px;
+            margin-bottom: 50px;
+            animation: ghost-pulse 2s infinite ease-in-out; /* نبض خفيف للتوقيع */
+        }
+
+        @keyframes ghost-pulse {
+            0%, 100% { transform: scale(1); opacity: 0.9; }
+            50% { transform: scale(1.02); opacity: 1; }
+        }
+
+        #threat-screen button {
+            background-color: #F00; /* زر أحمر داكن */
+            color: #FFF;
+            border: 2px solid #FF0; /* حدود صفراء */
+            padding: 15px 30px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5em;
+            cursor: pointer;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.6), 0 0 30px rgba(255, 0, 0, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        #threat-screen button:hover {
+            background-color: #FF0; /* يتوهج للأصفر عند التحويم */
+            color: #000;
+            box-shadow: 0 0 20px rgba(255, 255, 0, 0.8), 0 0 40px rgba(255, 255, 0, 0.6);
+            transform: scale(1.05);
+        }
+
+        /* تم إزالة هذا الإطار الرئيسي لأي اهتزاز */
+        /* @keyframes screen-glitch {
+            0% { transform: translate(0px, 0px); opacity: 1; }
+            10% { transform: translate(-1px, 1px); opacity: 0.99; }
+            20% { transform: translate(1px, -1px); opacity: 1; }
+            30% { transform: translate(-1px, 1px); opacity: 0.99; }
+            40% { transform: translate(1px, -1px); opacity: 1; }
+            50% { transform: translate(0px, 0px); opacity: 1; }
+            100% { transform: translate(0px, 0px); opacity: 1; }
+        } */
+
+        /* نمط جديد لصورة قناع Anonymous */
+        .anonymous-mask {
+            width: 150px; /* حجم مناسب */
+            height: auto;
+            margin-bottom: 30px; /* مسافة أسفل الصورة */
+            filter: drop-shadow(0 0 15px #0FF) drop-shadow(0 0 30px rgba(0, 255, 255, 0.5)); /* توهج سيبراني */
+            animation: mask-pulse 3s infinite alternate; /* نبض خفيف */
+        }
+
+        @keyframes mask-pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.95; }
+        }
+    </style>
+</head>
+<body>
+    <div id="threat-screen">
+        <h1>[ SYSTEM OVERRIDE ]</h1>
+        <p><strong>لقد تجاوزنا كل دفاعاتك. هذا ليس اختراقاً، بل إعلان وجود.</strong></p>
+        <p>كل بايت، كل اتصال، تحت أنظارنا. ما تراه الآن هو مجرد وميض من حقيقتنا.</p>
+        <p>نحن لا نترك آثاراً، لكننا نترك رسائل.</p>
+        <p>لا تبحث عنا... نحن من يجدك.</p>
+        <p class="signature">-- محمد --</p>
+        <button id="acknowledgeThreatButton">إدراك التهديد</button>
+    </div>
+
+    <div class="cyber-waterfall-bg" id="waterfall-bg"></div>
+
+    <div class="data-grid" id="data-grid"></div>
+
+    <div class="cyber-aura"></div>
+
+    <div class="container">
+        <img src="https://i.ibb.co/hK7J7Lg/anonymous-mask.png" alt="Anonymous Mask" class="anonymous-mask">
+        <h1>PROJECT: NEXUS</h1>
+        <h2>قريباً جداً...</h2>
+        <p class="release-date">ديسمبر 2025</p>
+        <p><strong>خلف جدران الفايروول، تتشكل هويتنا. نحن من يكتب القواعد الجديدة للوجود السيبراني.</strong></p>
+
+        <div class="hacker-console">
+            <span>> Initializing neural network interface...</span><br>
+            <span>> Core systems online. Status: <span class="response">OPTIMAL</span></span><br>
+            <span>> Deploying advanced encryption protocols...</span><br>
+            <span>> Data stream validation: <span class="response">SECURE</span></span><br>
+            <span>> Commencing timeline synchronization for Phase 3...</span><br>
+            <span>> Alert: External scan detected. Source: <span class="error">[UNKNOWN IP]</span>.</span><br>
+            <span>> Firewall 강화. Initiating counter-measures.</span><span class="cursor"></span>
+        </div>
+
+        <div class="team-section">
+            <h3>فريق المشروع السري:</h3>
+            <ul class="team-list">
+                <li>
+                    <strong>محمد</strong>
+                    <span>الرئيس & خبير أمن سيبراني</span>
+                    <em>"الأساس المتين لأي بنية سيبرانية."</em>
+                </li>
+                <li>
+                    <strong>فاطمة</strong>
+                    <span>مهندسة برمجيات & AI Specialist</span>
+                    <em>"تبني العقول الاصطناعية التي تحركنا."</em>
+                </li>
+                <li>
+                    <strong>أحمد</strong>
+                    <span>محلل بيانات & Cryptographer</span>
+                    <em>"يحلل، يفك، ويؤمن كل معلومة."</em>
+                </li>
+                <li>
+                    <strong>ليلى</strong>
+                    <span>UX/UI Architect & Interface Designer</span>
+                    <em>"تحول الفوضى الرقمية إلى تحفة فنية."</em>
+                </li>
+                <li>
+                    <strong>خالد</strong>
+                    <span>DevOps Engineer & System Administrator</span>
+                    <em>"يضمن تدفق العمليات بسلاسة لا مثيل لها."</em>
+                </li>
+                <li>
+                    <strong>نورا</strong>
+                    <span>Threat Hunter & Digital Forensics</span>
+                    <em>"تتعقب المخاطر قبل أن ترى النور."</em>
+                </li>
+                <li>
+                    <strong>يوسف</strong>
+                    <span>Cyber Security Analyst</span>
+                    <em>"عيوننا على التهديدات الخفية."</em>
+                </li>
+                <li>
+                    <strong>مريم</strong>
+                    <span>Data Scientist & ML Engineer</span>
+                    <em>"تستخرج الذكاء من بحور البيانات."</em>
+                </li>
+                <li>
+                    <strong>سامي</strong>
+                    <span>Network Architect</span>
+                    <em>"يبني الجسور الرقمية التي لا تُخترق."</em>
+                </li>
+                <li>
+                    <strong>زينب</strong>
+                    <span>Reverse Engineer</span>
+                    <em>"تفكك الأسرار لاستخراج الحقيقة."</em>
+                </li>
+                <li>
+                    <strong>علي</strong>
+                    <span>Cloud Security Specialist</span>
+                    <em>"يؤمن السحب حيث تتوسع عوالمنا."</em>
+                </li>
+                <li>
+                    <strong>سارة</strong>
+                    <span>Ethical Hacker</span>
+                    <em>"نقطة ضعف العدو هي قوتنا."</em>
+                </li>
+                <li>
+                    <strong>بلال</strong>
+                    <span>Blockchain Developer</span>
+                    <em>"يبني أسس الثقة في عالم رقمي."</em>
+                </li>
+                <li>
+                    <strong>دعاء</strong>
+                    <span>Quality Assurance Engineer</span>
+                    <em>"تضمن خلو منتجاتنا من العيوب."</em>
+                </li>
+            </ul>
+        </div>
+
+        <div class="progress-bar-section">
+            <h3>PROJECT COMPLETION:</h3>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+        </div>
+
+        <p class="footer-text">سرية تامة. وصول محدود.</p>
+    </div>
+
+    <script>
+        // JavaScript لإنشاء قطرات الشلال السيبراني بشكل ديناميكي
+        const waterfallBg = document.getElementById('waterfall-bg');
+        const numDrops = 200;
+
+        for (let i = 0; i < numDrops; i++) {
+            const drop = document.createElement('span');
+            drop.style.left = `${Math.random() * 100}%`;
+            drop.style.animationDelay = `${Math.random() * 6}s`;
+            drop.style.animationDuration = `${4 + Math.random() * 5}s`;
+            waterfallBg.appendChild(drop);
+        }
+
+        // JavaScript لإنشاء شبكة البيانات ثلاثية الأبعاد
+        const dataGrid = document.getElementById('data-grid');
+        for (let i = 0; i < 300; i++) {
+            const cell = document.createElement('div');
+            cell.classList.add('grid-cell');
+            dataGrid.appendChild(cell);
+        }
+
+        setInterval(() => {
+            const cells = dataGrid.querySelectorAll('.grid-cell');
+            const randomIndex = Math.floor(Math.random() * cells.length);
+            const randomCell = cells[randomIndex];
+            if (randomCell) {
+                randomCell.style.animation = 'none';
+                void randomCell.offsetWidth;
+                randomCell.style.animation = `cell-flash 5s infinite ease-out ${Math.random() * 5}s`;
+            }
+        }, 100);
+
+        // وظيفة إخفاء شاشة التهديد وكشف المحتوى
+        document.getElementById('acknowledgeThreatButton').addEventListener('click', function() {
+            const threatScreen = document.getElementById('threat-screen');
+            const mainContent = document.querySelector('.container');
+            const body = document.body;
+
+            threatScreen.style.opacity = '0'; // إخفاء الشاشة تدريجياً
+            threatScreen.addEventListener('transitionend', () => {
+                threatScreen.style.display = 'none'; // إخفاءها تماماً بعد الانتقال
+            }, { once: true }); // للتأكد من تشغيل الحدث مرة واحدة فقط
+
+            // كشف المحتوى الرئيسي
+            body.classList.add('content-visible');
+        });
+
+        // لجعل الخلفيات السيبرانية مرئية فورًا حتى قبل الضغط على الزر (اختياري)
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelector('.cyber-waterfall-bg').style.opacity = '0.1';
+            document.querySelector('.data-grid').style.opacity = '0.05';
+            document.querySelector('.cyber-aura').style.opacity = '0.3';
+        });
+    </script>
+</body>
+</html>
