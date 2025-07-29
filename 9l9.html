@@ -3,138 +3,257 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نظام أبو كيان السيبراني</title>
+    <title>HAJMA - تحت الصيانة</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔒</text></svg>">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap');
+        
+        :root {
+            --neon-green: #0aff9d;
+            --neon-pink: #ff0a9d;
+            --neon-blue: #0a9dff;
+            --dark-bg: #0a0a1a;
+        }
         
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Tajawal', sans-serif;
-            background-color: #000;
-            color: #0f0;
+            font-family: 'Share Tech Mono', 'Tajawal', monospace;
+            background-color: var(--dark-bg);
+            color: var(--neon-green);
             overflow: hidden;
             height: 100vh;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            position: relative;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(10, 255, 157, 0.03) 0%, transparent 20%),
+                radial-gradient(circle at 80% 70%, rgba(10, 157, 255, 0.03) 0%, transparent 20%);
         }
         
-        .cyber-border {
+        .container {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            padding: 40px;
+            border: 1px solid var(--neon-green);
+            border-radius: 5px;
+            background-color: rgba(10, 10, 26, 0.9);
+            box-shadow: 0 0 20px rgba(10, 255, 157, 0.3),
+                        0 0 40px rgba(10, 157, 255, 0.2);
+            max-width: 800px;
+            animation: pulse 3s infinite alternate;
+            backdrop-filter: blur(5px);
+        }
+        
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(10, 255, 157, 0.7);
+            font-weight: 900;
+            letter-spacing: 2px;
+            background: linear-gradient(90deg, var(--neon-green), var(--neon-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            color: var(--neon-pink);
+            text-shadow: 0 0 5px rgba(255, 10, 157, 0.5);
+        }
+        
+        p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        
+        .cyber-design {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            border: 4px solid #0f0;
-            box-shadow: 0 0 15px #0f0, inset 0 0 15px #0f0;
-            z-index: -1;
-            animation: pulse 2s infinite alternate;
+            z-index: 1;
+            opacity: 0.5;
         }
         
-        .cyber-grid {
+        .contact-section {
+            margin-top: 40px;
+            border-top: 1px dashed var(--neon-green);
+            padding-top: 20px;
+        }
+        
+        .contact-title {
+            color: var(--neon-pink);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        .contact-options {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .contact-card {
+            background-color: rgba(10, 10, 26, 0.7);
+            border: 1px solid var(--neon-blue);
+            padding: 15px 20px;
+            border-radius: 5px;
+            min-width: 200px;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(10, 157, 255, 0.3);
+        }
+        
+        .contact-card h3 {
+            color: var(--neon-green);
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        
+        .contact-link {
+            color: var(--neon-blue);
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 10px;
+            border-bottom: 1px dashed var(--neon-blue);
+            transition: all 0.3s ease;
+        }
+        
+        .contact-link:hover {
+            color: var(--neon-pink);
+            text-shadow: 0 0 5px rgba(255, 10, 157, 0.5);
+            border-bottom-color: var(--neon-pink);
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 20px rgba(10, 255, 157, 0.3),
+                            0 0 40px rgba(10, 157, 255, 0.2);
+            }
+            100% {
+                box-shadow: 0 0 30px rgba(10, 255, 157, 0.5),
+                            0 0 50px rgba(10, 157, 255, 0.4),
+                            0 0 20px rgba(255, 10, 157, 0.3);
+            }
+        }
+        
+        .grid {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background-image: 
-                linear-gradient(rgba(0, 255, 0, 0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 255, 0, 0.1) 1px, transparent 1px);
-            background-size: 30px 30px;
-            z-index: -1;
-        }
-        
-        .cyber-header {
-            font-size: 3.5rem;
-            font-weight: 900;
-            text-shadow: 0 0 10px #0f0, 0 0 20px #0f0;
-            margin-bottom: 1rem;
-            animation: glitch 1s linear infinite;
-            position: relative;
-            text-align: center;
-        }
-        
-        .cyber-subheader {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #0f0;
-            text-shadow: 0 0 5px #0f0;
-            margin-bottom: 2rem;
-            position: relative;
-            text-align: center;
-        }
-        
-        .cyber-status {
-            font-size: 2rem;
-            color: #f00;
-            text-shadow: 0 0 10px #f00;
-            margin-bottom: 3rem;
-            animation: blink 1s step-end infinite;
-            text-align: center;
-        }
-        
-        .cyber-team {
-            font-size: 1.2rem; /* تم تصغير الخط ليتناسب مع القائمة */
-            color: #0ff;
-            text-shadow: 0 0 5px #0ff;
-            margin-top: 2rem;
-            border-top: 2px dashed #0f0;
-            padding-top: 1rem;
-            text-align: center;
-            width: 80%; /* زيادة العرض لاستيعاب القائمة */
-            max-width: 900px;
-            overflow-y: auto; /* لإضافة تمرير إذا كانت القائمة طويلة */
-            max-height: 25vh; /* تحديد أقصى ارتفاع */
-        }
-
-        .team-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            text-align: right; /* محاذاة النص لليمين للقائمة */
-        }
-
-        .team-member {
-            margin-bottom: 0.5rem;
-            padding-right: 10px;
-            border-right: 2px solid #0f0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .team-member span:first-child {
-            font-weight: bold;
-            color: #0f0;
-        }
-
-        .team-member span:last-child {
-            font-size: 0.9em;
-            color: #0ff;
+                linear-gradient(rgba(10, 255, 157, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(10, 255, 157, 0.1) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 0;
         }
         
         .binary-code {
             position: absolute;
-            color: rgba(0, 255, 0, 0.3);
+            color: rgba(10, 255, 157, 0.15);
             font-size: 0.8rem;
             animation: scroll 20s linear infinite;
-            z-index: -1;
+            font-family: 'Share Tech Mono', monospace;
+        }
+        
+        .hacker-terminal {
+            position: absolute;
+            width: 300px;
+            height: 200px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 1px solid var(--neon-green);
+            bottom: 20px;
+            right: 20px;
+            padding: 10px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--neon-green);
+            overflow: hidden;
+            z-index: 3;
+        }
+        
+        .terminal-line {
+            animation: typing 3s steps(40) infinite;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 2px solid var(--neon-green);
+            margin-bottom: 5px;
+        }
+        
+        @keyframes scroll {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-100%); }
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        /* تأثيرات السيبرانية الإضافية */
+        .scanline {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            text-align: center;
-            white-space: pre-wrap;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                transparent 0%,
+                rgba(10, 255, 157, 0.05) 50%,
+                transparent 100%
+            );
+            animation: scan 8s linear infinite;
             pointer-events: none;
+            z-index: 1;
         }
         
-        @keyframes pulse {
-            0% { box-shadow: 0 0 15px #0f0, inset 0 0 15px #0f0; }
-            100% { box-shadow: 0 0 25px #0f0, inset 0 0 25px #0f0; }
+        @keyframes scan {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
         }
         
-        @keyframes glitch {
+        .glitch {
+            position: relative;
+        }
+        
+        .glitch::before, .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.8;
+        }
+        
+        .glitch::before {
+            color: var(--neon-blue);
+            z-index: -1;
+            animation: glitch-effect 3s infinite;
+        }
+        
+        .glitch::after {
+            color: var(--neon-pink);
+            z-index: -2;
+            animation: glitch-effect 2s infinite reverse;
+        }
+        
+        @keyframes glitch-effect {
             0% { transform: translate(0); }
             20% { transform: translate(-3px, 3px); }
             40% { transform: translate(-3px, -3px); }
@@ -142,259 +261,73 @@
             80% { transform: translate(3px, -3px); }
             100% { transform: translate(0); }
         }
-        
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-        
-        @keyframes scroll {
-            0% { transform: translateY(100%); }
-            100% { transform: translateY(-100%); }
-        }
-        
-        .terminal {
-            background-color: rgba(0, 20, 0, 0.7);
-            border: 2px solid #0f0;
-            padding: 1.5rem;
-            width: 70%;
-            max-width: 800px;
-            box-shadow: 0 0 20px #0f0;
-            position: relative;
-            text-align: left;
-        }
-        
-        .terminal::before {
-            content: "";
-            position: absolute;
-            top: -5px;
-            left: -5px;
-            right: -5px;
-            bottom: -5px;
-            border: 1px solid #0f0;
-            pointer-events: none;
-            animation: pulse 2s infinite alternate;
-        }
-
-        .terminal-line {
-            display: flex;
-            align-items: center;
-            margin-bottom: 0.5rem;
-        }
-
-        .terminal-prompt {
-            color: #0ff;
-            margin-right: 0.5rem;
-        }
-
-        .terminal-input {
-            background: transparent;
-            border: none;
-            color: #0f0;
-            flex-grow: 1;
-            font-family: 'Tajawal', monospace;
-            font-size: 1rem;
-            outline: none;
-            caret-color: #0f0;
-        }
-
-        .terminal-output {
-            color: #0f0;
-            white-space: pre-wrap;
-        }
-
-        .typing-effect::after {
-            content: '|';
-            animation: caret-blink 0.7s infinite;
-        }
-
-        @keyframes caret-blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
     </style>
 </head>
 <body>
-    <div class="cyber-border"></div>
-    <div class="cyber-grid"></div>
+    <div class="grid"></div>
+    <div class="scanline"></div>
     
-    <div class="binary-code" id="binaryCode">
+    <div class="cyber-design">
+        <!-- Binary code animation -->
+        <div class="binary-code" style="left: 5%; top: 0;">
+            01001000 01000001 01001010 01001101 01000001 00100000<br>
+            01010011 01011001 01010011 01010100 01000101 01001101<br>
+            00100000 01010101 01001110 01000100 01000101 01010010<br>
+            00100000 01001101 01000001 01001001 01001110 01010100<br>
+            01000101 01001110 01000001 01001110 01000011 01000101<br>
+            01001000 01000001 01001010 01001101 01000001 00100000<br>
+            01010011 01011001 01010011 01010100 01000101 01001101<br>
+            00100000 01010101 01001110 01000100 01000101 01010010<br>
+            00100000 01001101 01000001 01001001 01001110 01010100<br>
+            01000101 01001110 01000001 01001110 01000011 01000101<br>
         </div>
-    
-    <h1 class="cyber-header">نظام أبو كيان السيبراني</h1>
-    <p class="cyber-subheader">مرحبًا بك في الواجهة الآمنة</p>
-    <div class="cyber-status">فحص النظام...</div>
-
-    <div class="terminal">
-        <div class="terminal-output" id="terminalOutput"></div>
-        <div class="terminal-line">
-            <span class="terminal-prompt">ابوكيان@نظام:~$</span>
-            <input type="text" class="terminal-input" id="terminalInput" autofocus>
+        <div class="binary-code" style="left: 65%; top: 0; animation-delay: 5s;">
+            01000011 01001111 01001110 01010100 01000001 01000011<br>
+            01010100 00100000 01001101 01001111 01001000 01000001<br>
+            01001101 01001101 01000101 01000100 00100000 01001111<br>
+            01010010 00100000 01010100 01000101 01000001 01001101<br>
+            01000011 01001111 01001110 01010100 01000001 01000011<br>
+            01010100 00100000 01001101 01001111 01001000 01000001<br>
+            01001101 01001101 01000101 01000100 00100000 01001111<br>
+            01010010 00100000 01010100 01000101 01000001 01001101<br>
         </div>
     </div>
-
-    <div class="cyber-team">
-        <h3 style="margin-bottom: 1rem; color: #0f0;">فريق المطورين: فريق محمد</h3>
-        <ul class="team-list" id="teamList">
-            </ul>
-    </div>
-
-    <script>
-        // دالة لإنشاء كود باينري عشوائي
-        function generateBinaryCode(length) {
-            let code = '';
-            for (let i = 0; i < length; i++) {
-                code += Math.round(Math.random()) + ' ';
-            }
-            return code;
-        }
-
-        // ملء الخلفية بالكود الباينري
-        const binaryCodeElement = document.getElementById('binaryCode');
-        let fullBinaryString = '';
-        for (let i = 0; i < 50; i++) { // زيادة عدد الأسطر لملء الشاشة
-            fullBinaryString += generateBinaryCode(100) + '\n'; // زيادة طول السطر
-        }
-        binaryCodeElement.textContent = fullBinaryString;
-
-        // تأثير الكتابة في الطرفية
-        const terminalOutput = document.getElementById('terminalOutput');
-        const terminalInput = document.getElementById('terminalInput');
-        const statusElement = document.querySelector('.cyber-status');
-
-        const introMessages = [
-            "جاري تهيئة الاتصال المشفر...",
-            "تحقق من بيانات الاعتماد...",
-            "الوصول مسموح. مرحباً بك في نظام أبو كيان.",
-            "للمساعدة، اكتب 'help'."
-        ];
-        let messageIndex = 0;
-
-        function typeMessage(message, callback) {
-            let i = 0;
-            const p = document.createElement('p');
-            p.classList.add('typing-effect');
-            terminalOutput.appendChild(p);
-            const typingInterval = setInterval(() => {
-                if (i < message.length) {
-                    p.textContent += message.charAt(i);
-                    i++;
-                    terminalOutput.scrollTop = terminalOutput.scrollHeight;
-                } else {
-                    clearInterval(typingInterval);
-                    p.classList.remove('typing-effect');
-                    if (callback) {
-                        setTimeout(callback, 500);
-                    }
-                }
-            }, 50);
-        }
-
-        function startIntro() {
-            if (messageIndex < introMessages.length) {
-                typeMessage(introMessages[messageIndex], () => {
-                    messageIndex++;
-                    startIntro();
-                });
-            } else {
-                statusElement.textContent = "النظام جاهز.";
-                terminalInput.focus();
-            }
-        }
-
-        // محاكاة الأوامر الطرفية
-        terminalInput.addEventListener('keydown', function(event) {
-            if (event.key === 'Enter') {
-                const command = terminalInput.value.trim();
-                terminalInput.value = '';
+    
+    <div class="container">
+        <h1 class="glitch" data-text="HAJMA">HAJMA</h1>
+        <h2>الموقع تحت الصيانة</h2>
+        
+        <p>
+            نظام HAJMA قيد التطوير والترقية حالياً. نحن نقوم بتنفيذ تحسينات أمنية ووظيفية لضمان تجربة أفضل.
+        </p>
+        
+        <div class="contact-section">
+            <div class="contact-title">للتواصل في حالات الطوارئ:</div>
+            
+            <div class="contact-options">
+                <div class="contact-card">
+                    <h3>محمد</h3>
+                    <p>المسؤول المباشر</p>
+                    <a href="https://m.me/" class="contact-link">تواصل عبر المسنجر</a>
+                </div>
                 
-                const commandLine = document.createElement('p');
-                commandLine.textContent = `ابوكيان@نظام:~$ ${command}`;
-                terminalOutput.appendChild(commandLine);
-
-                processCommand(command);
-                terminalOutput.scrollTop = terminalOutput.scrollHeight;
-            }
-        });
-
-        function processCommand(command) {
-            let response = '';
-            switch (command.toLowerCase()) {
-                case 'help':
-                    response = "الأوامر المتاحة:\n- status: عرض حالة النظام.\n- clear: مسح الطرفية.\n- about: معلومات عن نظام أبو كيان.\n- team: عرض فريق المطورين.";
-                    break;
-                case 'status':
-                    response = "حالة النظام: فعال بالكامل. جميع الوحدات تعمل بشكل طبيعي.";
-                    statusElement.textContent = "النظام فعال.";
-                    statusElement.style.color = "#0f0";
-                    statusElement.style.textShadow = "0 0 10px #0f0";
-                    break;
-                case 'clear':
-                    terminalOutput.innerHTML = '';
-                    response = "الطرفية تم مسحها.";
-                    break;
-                case 'about':
-                    response = "نظام أبو كيان هو نظام أمان سيبراني متقدم مصمم لحماية البيانات الحساسة وتوفير بيئة رقمية آمنة.";
-                    break;
-                case 'team':
-                    response = "فريق المطورين:\n" + teamMembers.map(member => `- ${member.name} (${member.role})`).join('\n');
-                    break;
-                case '':
-                    response = "";
-                    break;
-                default:
-                    response = `خطأ: الأمر '${command}' غير معروف. اكتب 'help' لعرض الأوامر المتاحة.`;
-            }
-            if (response) {
-                typeMessage(response);
-            }
-        }
-
-        // قائمة فريق المطورين
-        const teamMembers = [
-            { name: "محمد الشريف", role: "قائد الفريق / مهندس نظام" },
-            { name: "فاطمة الزهراء", role: "متخصصة واجهات أمامية" },
-            { name: "أحمد الحارثي", role: "مطور أمان خلفي" },
-            { name: "ليلى عبد الرحمن", role: "مصممة تجربة مستخدم (UX)" },
-            { name: "خالد منصور", role: "مهندس أمن سيبراني" },
-            { name: "سارة إبراهيم", role: "مطورة قواعد بيانات" },
-            { name: "علياء فوزي", role: "محللة تهديدات أمنية" },
-            { name: "بدر الدين صقر", role: "مطور API" },
-            { name: "ريان المالكي", role: "مهندس بنية تحتية" },
-            { name: "جمال الدين عمر", role: "مهندس أتمتة (DevOps)" },
-            { name: "نادية فؤاد", role: "متخصصة ضمان جودة (QA)" },
-            { name: "سيف الدين القاضي", role: "مطور JavaScript" },
-            { name: "نور العلي", role: "محللة واجهة المستخدم" },
-            { name: "يوسف النجار", role: "مهندس أداء النظام" },
-            { name: "هدى القاسم", role: "محللة بيانات أمنية" },
-            { name: "عمران هاشم", role: "مهندس تشفير" },
-            { name: "مريم الشامي", role: "متخصصة أمن شبكات" },
-            { name: "زينب عادل", role: "مدققة أمان" },
-            { name: "مصطفى الكرمي", role: "مستجيب للحوادث" },
-            { name: "سناء جابر", role: "مديرة خوادم" },
-            { name: "طارق السعدي", role: "مهندس سحابة" },
-            { name: "رامي بشارة", role: "مسؤول أنظمة Linux" },
-            { name: "وائل كمال", role: "كاتب تقني" },
-            { name: "دانة سالم", role: "محللة أنظمة" },
-            { name: "عبد الله المحمدي", role: "مطور Python" }
-        ];
-
-        // دالة لملء قائمة الفريق في HTML
-        function populateTeamList() {
-            const teamListElement = document.getElementById('teamList');
-            teamMembers.forEach(member => {
-                const li = document.createElement('li');
-                li.classList.add('team-member');
-                li.innerHTML = `<span>${member.name}</span><span>${member.role}</span>`;
-                teamListElement.appendChild(li);
-            });
-        }
-
-        // بدء رسائل الترحيب عند تحميل الصفحة وملء قائمة الفريق
-        window.onload = () => {
-            startIntro();
-            populateTeamList();
-        };
-    </script>
+                <div class="contact-card">
+                    <h3>فريق الدعم</h3>
+                    <p>الفنيون والمطورون</p>
+                    <a href="https://m.me/" class="contact-link">تواصل مع الفريق</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="hacker-terminal">
+        <div class="terminal-line">$ sudo service hajma stop</div>
+        <div class="terminal-line">$ systemctl disable hajma.service</div>
+        <div class="terminal-line">$ cd /var/www/hajma</div>
+        <div class="terminal-line">$ git pull origin master</div>
+        <div class="terminal-line">$ npm install --production</div>
+        <div class="terminal-line">$ systemctl enable hajma.service</div>
+        <div class="terminal-line">$ sudo service hajma start</div>
+    </div>
 </body>
 </html>
