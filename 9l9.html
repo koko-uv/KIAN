@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام أبو كيان السيبراني</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap');
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Tajawal', sans-serif;
+            background-color: #000;
+            color: #0f0;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        
+        .cyber-border {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 4px solid #0f0;
+            box-shadow: 0 0 15px #0f0, inset 0 0 15px #0f0;
+            z-index: -1;
+            animation: pulse 2s infinite alternate;
+        }
+        
+        .cyber-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 255, 0, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 0, 0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+            z-index: -1;
+        }
+        
+        .cyber-header {
+            font-size: 3.5rem;
+            font-weight: 900;
+            text-shadow: 0 0 10px #0f0, 0 0 20px #0f0;
+            margin-bottom: 1rem;
+            animation: glitch 1s linear infinite;
+            position: relative;
+            text-align: center;
+        }
+        
+        .cyber-subheader {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #0f0;
+            text-shadow: 0 0 5px #0f0;
+            margin-bottom: 2rem;
+            position: relative;
+            text-align: center;
+        }
+        
+        .cyber-status {
+            font-size: 2rem;
+            color: #f00;
+            text-shadow: 0 0 10px #f00;
+            margin-bottom: 3rem;
+            animation: blink 1s step-end infinite;
+            text-align: center;
+        }
+        
+        .cyber-team {
+            font-size: 1.2rem; /* تم تصغير الخط ليتناسب مع القائمة */
+            color: #0ff;
+            text-shadow: 0 0 5px #0ff;
+            margin-top: 2rem;
+            border-top: 2px dashed #0f0;
+            padding-top: 1rem;
+            text-align: center;
+            width: 80%; /* زيادة العرض لاستيعاب القائمة */
+            max-width: 900px;
+            overflow-y: auto; /* لإضافة تمرير إذا كانت القائمة طويلة */
+            max-height: 25vh; /* تحديد أقصى ارتفاع */
+        }
+
+        .team-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: right; /* محاذاة النص لليمين للقائمة */
+        }
+
+        .team-member {
+            margin-bottom: 0.5rem;
+            padding-right: 10px;
+            border-right: 2px solid #0f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .team-member span:first-child {
+            font-weight: bold;
+            color: #0f0;
+        }
+
+        .team-member span:last-child {
+            font-size: 0.9em;
+            color: #0ff;
+        }
+        
+        .binary-code {
+            position: absolute;
+            color: rgba(0, 255, 0, 0.3);
+            font-size: 0.8rem;
+            animation: scroll 20s linear infinite;
+            z-index: -1;
+            width: 100%;
+            text-align: center;
+            white-space: pre-wrap;
+            pointer-events: none;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 15px #0f0, inset 0 0 15px #0f0; }
+            100% { box-shadow: 0 0 25px #0f0, inset 0 0 25px #0f0; }
+        }
+        
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-3px, 3px); }
+            40% { transform: translate(-3px, -3px); }
+            60% { transform: translate(3px, 3px); }
+            80% { transform: translate(3px, -3px); }
+            100% { transform: translate(0); }
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
+        @keyframes scroll {
+            0% { transform: translateY(100%); }
+            100% { transform: translateY(-100%); }
+        }
+        
+        .terminal {
+            background-color: rgba(0, 20, 0, 0.7);
+            border: 2px solid #0f0;
+            padding: 1.5rem;
+            width: 70%;
+            max-width: 800px;
+            box-shadow: 0 0 20px #0f0;
+            position: relative;
+            text-align: left;
+        }
+        
+        .terminal::before {
+            content: "";
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border: 1px solid #0f0;
+            pointer-events: none;
+            animation: pulse 2s infinite alternate;
+        }
+
+        .terminal-line {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .terminal-prompt {
+            color: #0ff;
+            margin-right: 0.5rem;
+        }
+
+        .terminal-input {
+            background: transparent;
+            border: none;
+            color: #0f0;
+            flex-grow: 1;
+            font-family: 'Tajawal', monospace;
+            font-size: 1rem;
+            outline: none;
+            caret-color: #0f0;
+        }
+
+        .terminal-output {
+            color: #0f0;
+            white-space: pre-wrap;
+        }
+
+        .typing-effect::after {
+            content: '|';
+            animation: caret-blink 0.7s infinite;
+        }
+
+        @keyframes caret-blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="cyber-border"></div>
+    <div class="cyber-grid"></div>
+    
+    <div class="binary-code" id="binaryCode">
+        </div>
+    
+    <h1 class="cyber-header">نظام أبو كيان السيبراني</h1>
+    <p class="cyber-subheader">مرحبًا بك في الواجهة الآمنة</p>
+    <div class="cyber-status">فحص النظام...</div>
+
+    <div class="terminal">
+        <div class="terminal-output" id="terminalOutput"></div>
+        <div class="terminal-line">
+            <span class="terminal-prompt">ابوكيان@نظام:~$</span>
+            <input type="text" class="terminal-input" id="terminalInput" autofocus>
+        </div>
+    </div>
+
+    <div class="cyber-team">
+        <h3 style="margin-bottom: 1rem; color: #0f0;">فريق المطورين: فريق محمد</h3>
+        <ul class="team-list" id="teamList">
+            </ul>
+    </div>
+
+    <script>
+        // دالة لإنشاء كود باينري عشوائي
+        function generateBinaryCode(length) {
+            let code = '';
+            for (let i = 0; i < length; i++) {
+                code += Math.round(Math.random()) + ' ';
+            }
+            return code;
+        }
+
+        // ملء الخلفية بالكود الباينري
+        const binaryCodeElement = document.getElementById('binaryCode');
+        let fullBinaryString = '';
+        for (let i = 0; i < 50; i++) { // زيادة عدد الأسطر لملء الشاشة
+            fullBinaryString += generateBinaryCode(100) + '\n'; // زيادة طول السطر
+        }
+        binaryCodeElement.textContent = fullBinaryString;
+
+        // تأثير الكتابة في الطرفية
+        const terminalOutput = document.getElementById('terminalOutput');
+        const terminalInput = document.getElementById('terminalInput');
+        const statusElement = document.querySelector('.cyber-status');
+
+        const introMessages = [
+            "جاري تهيئة الاتصال المشفر...",
+            "تحقق من بيانات الاعتماد...",
+            "الوصول مسموح. مرحباً بك في نظام أبو كيان.",
+            "للمساعدة، اكتب 'help'."
+        ];
+        let messageIndex = 0;
+
+        function typeMessage(message, callback) {
+            let i = 0;
+            const p = document.createElement('p');
+            p.classList.add('typing-effect');
+            terminalOutput.appendChild(p);
+            const typingInterval = setInterval(() => {
+                if (i < message.length) {
+                    p.textContent += message.charAt(i);
+                    i++;
+                    terminalOutput.scrollTop = terminalOutput.scrollHeight;
+                } else {
+                    clearInterval(typingInterval);
+                    p.classList.remove('typing-effect');
+                    if (callback) {
+                        setTimeout(callback, 500);
+                    }
+                }
+            }, 50);
+        }
+
+        function startIntro() {
+            if (messageIndex < introMessages.length) {
+                typeMessage(introMessages[messageIndex], () => {
+                    messageIndex++;
+                    startIntro();
+                });
+            } else {
+                statusElement.textContent = "النظام جاهز.";
+                terminalInput.focus();
+            }
+        }
+
+        // محاكاة الأوامر الطرفية
+        terminalInput.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                const command = terminalInput.value.trim();
+                terminalInput.value = '';
+                
+                const commandLine = document.createElement('p');
+                commandLine.textContent = `ابوكيان@نظام:~$ ${command}`;
+                terminalOutput.appendChild(commandLine);
+
+                processCommand(command);
+                terminalOutput.scrollTop = terminalOutput.scrollHeight;
+            }
+        });
+
+        function processCommand(command) {
+            let response = '';
+            switch (command.toLowerCase()) {
+                case 'help':
+                    response = "الأوامر المتاحة:\n- status: عرض حالة النظام.\n- clear: مسح الطرفية.\n- about: معلومات عن نظام أبو كيان.\n- team: عرض فريق المطورين.";
+                    break;
+                case 'status':
+                    response = "حالة النظام: فعال بالكامل. جميع الوحدات تعمل بشكل طبيعي.";
+                    statusElement.textContent = "النظام فعال.";
+                    statusElement.style.color = "#0f0";
+                    statusElement.style.textShadow = "0 0 10px #0f0";
+                    break;
+                case 'clear':
+                    terminalOutput.innerHTML = '';
+                    response = "الطرفية تم مسحها.";
+                    break;
+                case 'about':
+                    response = "نظام أبو كيان هو نظام أمان سيبراني متقدم مصمم لحماية البيانات الحساسة وتوفير بيئة رقمية آمنة.";
+                    break;
+                case 'team':
+                    response = "فريق المطورين:\n" + teamMembers.map(member => `- ${member.name} (${member.role})`).join('\n');
+                    break;
+                case '':
+                    response = "";
+                    break;
+                default:
+                    response = `خطأ: الأمر '${command}' غير معروف. اكتب 'help' لعرض الأوامر المتاحة.`;
+            }
+            if (response) {
+                typeMessage(response);
+            }
+        }
+
+        // قائمة فريق المطورين
+        const teamMembers = [
+            { name: "محمد الشريف", role: "قائد الفريق / مهندس نظام" },
+            { name: "فاطمة الزهراء", role: "متخصصة واجهات أمامية" },
+            { name: "أحمد الحارثي", role: "مطور أمان خلفي" },
+            { name: "ليلى عبد الرحمن", role: "مصممة تجربة مستخدم (UX)" },
+            { name: "خالد منصور", role: "مهندس أمن سيبراني" },
+            { name: "سارة إبراهيم", role: "مطورة قواعد بيانات" },
+            { name: "علياء فوزي", role: "محللة تهديدات أمنية" },
+            { name: "بدر الدين صقر", role: "مطور API" },
+            { name: "ريان المالكي", role: "مهندس بنية تحتية" },
+            { name: "جمال الدين عمر", role: "مهندس أتمتة (DevOps)" },
+            { name: "نادية فؤاد", role: "متخصصة ضمان جودة (QA)" },
+            { name: "سيف الدين القاضي", role: "مطور JavaScript" },
+            { name: "نور العلي", role: "محللة واجهة المستخدم" },
+            { name: "يوسف النجار", role: "مهندس أداء النظام" },
+            { name: "هدى القاسم", role: "محللة بيانات أمنية" },
+            { name: "عمران هاشم", role: "مهندس تشفير" },
+            { name: "مريم الشامي", role: "متخصصة أمن شبكات" },
+            { name: "زينب عادل", role: "مدققة أمان" },
+            { name: "مصطفى الكرمي", role: "مستجيب للحوادث" },
+            { name: "سناء جابر", role: "مديرة خوادم" },
+            { name: "طارق السعدي", role: "مهندس سحابة" },
+            { name: "رامي بشارة", role: "مسؤول أنظمة Linux" },
+            { name: "وائل كمال", role: "كاتب تقني" },
+            { name: "دانة سالم", role: "محللة أنظمة" },
+            { name: "عبد الله المحمدي", role: "مطور Python" }
+        ];
+
+        // دالة لملء قائمة الفريق في HTML
+        function populateTeamList() {
+            const teamListElement = document.getElementById('teamList');
+            teamMembers.forEach(member => {
+                const li = document.createElement('li');
+                li.classList.add('team-member');
+                li.innerHTML = `<span>${member.name}</span><span>${member.role}</span>`;
+                teamListElement.appendChild(li);
+            });
+        }
+
+        // بدء رسائل الترحيب عند تحميل الصفحة وملء قائمة الفريق
+        window.onload = () => {
+            startIntro();
+            populateTeamList();
+        };
+    </script>
+</body>
+</html>
